@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pulian.mall.persist.mapper.UserInfoMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.UserInfoMapper" >
+  
+    <id column="id" property="id" jdbcType="INTEGER" />   
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="passWrod" property="passWrod" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="cardType" property="cardType" jdbcType="VARCHAR" />
+    <result column="cardNo" property="cardNo" jdbcType="VARCHAR" />
+    <result column="weChatNo" property="weChatNo" jdbcType="VARCHAR" />
+    <result column="settlementBank" property="settlementBank" jdbcType="VARCHAR" />
+    <result column="bank_address" property="bankAddress" jdbcType="VARCHAR" />   
+    <result column="bankNo" property="bankNo" jdbcType="VARCHAR" />
+    <result column="bank_serialNo" property="bankSerialNo" jdbcType="VARCHAR" />
+    <result column="vip_level" property="vipLevel" jdbcType="VARCHAR" />
+    <result column="frozen_status" property="frozenStatus" jdbcType="VARCHAR" />
+    <result column="active_status" property="activeStatus" jdbcType="VARCHAR" /> 
+    <result column="disable" property="disable" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />  
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
