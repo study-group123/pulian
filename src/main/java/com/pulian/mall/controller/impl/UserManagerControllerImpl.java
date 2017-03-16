@@ -16,7 +16,7 @@ import com.pulian.mall.request.UserManagerRequest;
 public class UserManagerControllerImpl {
 
 	private static final Log log = LogFactory.getLog(UserManagerControllerImpl.class);
-
+    dddd
 	
 	@RequestMapping("/toUserManager")
 	public String toUserLogin(Model model,HttpServletRequest request, HttpServletResponse response) {
