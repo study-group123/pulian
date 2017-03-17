@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.request.UserManagerRequest;
@@ -61,7 +62,13 @@ public class LoginController {
 		}
 		return resultMap;
 	}
-
+	
+	
+  @RequestMapping(value="/index8888",method=RequestMethod.GET)     
+  public String getFirstPage(Model model) {    
+      model.addAttribute("name", "王大锤");
+	  return "index";
+  }  
 	
 }
 
