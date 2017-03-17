@@ -25,7 +25,8 @@
     <!-- 针对freemarker的视图配置 -->    
    <bean id="viewResolver"    
        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">    
-       <property name="cache" value="false" />    
+       <property name="cache" value="false" /> 
+	   <property name="suffix" value=".ftl" />   
        <property name="contentType" value="text/html;charset=UTF-8"></property>    
        <property name="requestContextAttribute" value="request" />    
        <property name="exposeSpringMacroHelpers" value="true" />    
