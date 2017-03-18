@@ -10,20 +10,26 @@ import com.pulian.mall.util.YesOrNoEnum;
 
 public class UserInfoDto extends BaseDto{
 
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4521312738131068246L;
+
+	private int userId;//主键
 	 
-	 private String name;//真实姓名
+	 private String userName;//真实姓名
 	 
-	 private String phone;//电话
+	 private String userPhone;//电话
 	 
-	 private String code;//电话
+	 private String userCode;//电话
 	 
-	 private String account;//账号
+	 private String userAccount;//账号
 	 
 	 private String passWord;//密码
 	 
-	 private AreasEnum area;//所属大区
+	 private AreasEnum userArea;//所属大区
 	 
-	 private String address;//详细地址
+	 private String userAddress;//详细地址
 	 
 	 private CardTypeEnum cardType;//证件类型
 	 
@@ -45,7 +51,7 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private YesOrNoEnum activeStatus;//是否激活
 	 
-	 private YesOrNoEnum disable;//是否销户
+	 private YesOrNoEnum userDisable;//是否销户
 	 
 	 private Long parentId;//父id
 	 
@@ -53,40 +59,45 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private List<UserInfoDto> sons;//直属子
 
-	public String getName() {
-		return name;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getCode() {
-		return code;
+	public String getUserPhone() {
+		return userPhone;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getUserCode() {
+		return userCode;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
-	
-	
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
 
 	public String getPassWord() {
 		return passWord;
@@ -96,20 +107,20 @@ public class UserInfoDto extends BaseDto{
 		this.passWord = passWord;
 	}
 
-	public AreasEnum getArea() {
-		return area;
+	public AreasEnum getUserArea() {
+		return userArea;
 	}
 
-	public void setArea(AreasEnum area) {
-		this.area = area;
+	public void setUserArea(AreasEnum userArea) {
+		this.userArea = userArea;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getUserAddress() {
+		return userAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
 	}
 
 	public CardTypeEnum getCardType() {
@@ -192,12 +203,12 @@ public class UserInfoDto extends BaseDto{
 		this.activeStatus = activeStatus;
 	}
 
-	public YesOrNoEnum getDisable() {
-		return disable;
+	public YesOrNoEnum getUserDisable() {
+		return userDisable;
 	}
 
-	public void setDisable(YesOrNoEnum disable) {
-		this.disable = disable;
+	public void setUserDisable(YesOrNoEnum userDisable) {
+		this.userDisable = userDisable;
 	}
 
 	public Long getParentId() {
@@ -223,6 +234,8 @@ public class UserInfoDto extends BaseDto{
 	public void setSons(List<UserInfoDto> sons) {
 		this.sons = sons;
 	}
+
+	 
 	 
 	 
 	 

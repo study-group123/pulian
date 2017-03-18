@@ -1,26 +1,29 @@
 
-CREATE TABLE `user` (                 
-        id int(11) NOT NULL,              
-        user_name varchar(128) DEFAULT NULL, 
-        user_code varchar(128) DEFAULT NULL, 
-	account varchar(128) DEFAULT NULL, 
-	phone varchar(64) DEFAULT NULL, 
-	pass_word varchar(256) DEFAULT NULL, 
-	user_area varchar(128) DEFAULT NULL, 
-	address varchar(256) DEFAULT NULL,
-	card_type varchar(64) DEFAULT NULL, 
-	card_no varchar(128) DEFAULT NULL, 
-	we_chat_no varchar(128) DEFAULT NULL, 
-	settlement_bank varchar(128) DEFAULT NULL, 
-	bank_address varchar(256) DEFAULT NULL, 
-	bank_no varchar(128) DEFAULT NULL, 
-	bank_serial_no varchar(128) DEFAULT NULL, 
-	vip_level varchar(128) DEFAULT NULL, 
-	frozen_status varchar(64) DEFAULT NULL, 
-       active_status varchar(64) DEFAULT NULL, 
-	user_disable varchar(64) DEFAULT NULL, 
-        parentId int(11) NOT NULL,   
-          PRIMARY KEY (`id`)                  
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8  
+CREATE TABLE `t_user` (                                                   
+          `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',    
+          `user_name` varchar(128) DEFAULT NULL COMMENT '真实用户名',        
+          `user_code` varchar(128) DEFAULT NULL COMMENT '用户code',             
+          `account` varchar(128) DEFAULT NULL COMMENT '账号',                   
+          `phone` varchar(64) DEFAULT NULL COMMENT '电话',                      
+          `pass_word` varchar(256) DEFAULT NULL COMMENT '密码',                 
+          `user_area` varchar(128) DEFAULT NULL COMMENT '所属区域',           
+          `address` varchar(256) DEFAULT NULL COMMENT '用户地址',             
+          `card_type` varchar(64) DEFAULT NULL COMMENT '证件类型',            
+          `card_no` varchar(128) DEFAULT NULL COMMENT '证件号',                
+          `we_chat_no` varchar(128) DEFAULT NULL COMMENT '微信号',             
+          `settlement_bank` varchar(128) DEFAULT NULL COMMENT '结算银行',     
+          `bank_address` varchar(256) DEFAULT NULL COMMENT '银行详细地址',  
+          `bank_no` varchar(128) DEFAULT NULL COMMENT '银行卡号',             
+          `bank_serial_no` varchar(128) DEFAULT NULL COMMENT '联行号',         
+          `vip_level` varchar(128) DEFAULT NULL COMMENT '用户等级',           
+          `frozen_status` varchar(64) DEFAULT NULL COMMENT '冻结状态',        
+          `active_status` varchar(64) DEFAULT NULL COMMENT '激活状态',        
+          `user_disable` varchar(64) DEFAULT NULL COMMENT '是否销户',         
+          `parentId` int(11) NOT NULL COMMENT '父id',                            
+          `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',       
+          `create_id` int(11) DEFAULT NULL COMMENT '创建人',                   
+          `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',       
+          `update_id` int(11) DEFAULT NULL COMMENT '更新人',                   
+          PRIMARY KEY (`user_id`)                                                 
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8   
 ----------------------------------------------------------------------

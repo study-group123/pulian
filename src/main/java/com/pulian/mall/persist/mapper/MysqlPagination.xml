@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MYSQL">
+  <!-- <sql id="ORACLE.paginationStart">
+    <![CDATA[
+   select * from (select row_.*, rownum rownum_ from (
+  ]]>
+  </sql>
+
+  <sql id="ORACLE.paginationEnd">
+    <![CDATA[
+   )row_  ) where rownum_ >= #{startRow} and  rownum_ <= #{endRow}
+  ]]>
+  </sql> -->
+  <!-- limit #{startRow}, (#{endRow}-#{startRow}+1) -->
+  <sql id="MYSQL.pagination">
+    <![CDATA[
+     
+     limit ${startRow-1} ,${endRow-(startRow-1)}
+  ]]>
+  </sql>
+  
+</mapper>

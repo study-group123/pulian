@@ -47,10 +47,11 @@ public class LoginController {
 		
 		Map<String,Object> resultMap = new HashMap<String ,Object>();
 		
-		String account = userManagerRequest.getUserInfoDto().getAccount();
+		String account = userManagerRequest.getUserInfoDto().getUserAccount();
 		String pwd = userManagerRequest.getUserInfoDto().getPassWord();
 		if(StringUtils.isEmpty(account) || StringUtils.isEmpty(pwd)){
 			resultMap.put("", "请填写用户名和密码");
+			log.error("请填写用户名和密码");
 			return resultMap;
 		}
 		

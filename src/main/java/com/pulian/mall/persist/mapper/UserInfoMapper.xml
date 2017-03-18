@@ -5,29 +5,113 @@
 
   <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.UserInfoMapper" >
   
-    <id column="id" property="id" jdbcType="INTEGER" />   
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
-    <result column="account" property="account" jdbcType="VARCHAR" />
-    <result column="passWrod" property="passWrod" jdbcType="VARCHAR" />
-    <result column="area" property="area" jdbcType="VARCHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="cardType" property="cardType" jdbcType="VARCHAR" />
-    <result column="cardNo" property="cardNo" jdbcType="VARCHAR" />
-    <result column="weChatNo" property="weChatNo" jdbcType="VARCHAR" />
-    <result column="settlementBank" property="settlementBank" jdbcType="VARCHAR" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />   
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="pass_word" property="passWrod" jdbcType="VARCHAR" />
+    <result column="user_area" property="userArea" jdbcType="VARCHAR" />
+    <result column="address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="we_chat_no" property="weChatNo" jdbcType="VARCHAR" />
+    <result column="settlement_bank" property="settlementBank" jdbcType="VARCHAR" />
     <result column="bank_address" property="bankAddress" jdbcType="VARCHAR" />   
-    <result column="bankNo" property="bankNo" jdbcType="VARCHAR" />
-    <result column="bank_serialNo" property="bankSerialNo" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="bank_serial_no" property="bankSerialNo" jdbcType="VARCHAR" />
     <result column="vip_level" property="vipLevel" jdbcType="VARCHAR" />
     <result column="frozen_status" property="frozenStatus" jdbcType="VARCHAR" />
     <result column="active_status" property="activeStatus" jdbcType="VARCHAR" /> 
-    <result column="disable" property="disable" jdbcType="VARCHAR" />
+    <result column="user_disable" property="userDisable" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="VARCHAR" />  
     <result column="creater_id" property="createrId" jdbcType="INTEGER" />
     <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <sql id="queryColumns">
+  	user_id, user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
+  	settlement_bank, bank_address, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
+  	parent_id, creater_id, updater_id, create_time, update_time
+  </sql>
+  <sql id="insertColumns">
+  	 user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
+  	settlement_bank, bank_address, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
+  	parent_id, creater_id, updater_id, create_time, update_time
+  </sql>
+  
+  <insert id="insert"  parameterType="ccom.pulian.mall.dto.UserInfoDto" >
+		insert into t_user
+		(<include refid="insertColumns" />
+		)
+		values
+		(
+		#{userName,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR},
+		#{userCode,jdbcType=VARCHAR},
+		#{userAccount,jdbcType=VARCHAR},
+		#{passWord,jdbcType=VARCHAR},
+		#{userArea,jdbcType=VARCHAR},
+		#{userAddress,jdbcType=VARCHAR},
+		#{cardType,jdbcType=VARCHAR},
+		#{cardNo,jdbcType=VARCHAR},
+		#{weChatNo,jdbcType=VARCHAR},
+		#{settlementBank,jdbcType=VARCHAR},
+		#{bankAddress,jdbcType=VARCHAR},
+		#{bankNo,jdbcType=VARCHAR},
+		#{bankSerialNo,jdbcType=VARCHAR},
+		#{vipLevel,jdbcType=VARCHAR},
+		#{frozenStatus,jdbcType=VARCHAR},
+		#{activeStatus,jdbcType=VARCHAR},
+		#{userDisable,jdbcType=VARCHAR},
+		#{parentId,jdbcType=INTEGER},
+		#{createrId,jdbcType=INTEGER},
+		#{updaterId,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<select id="queryUserInfo" resultMap="BaseResultMap">
+   
+	     select
+	     <include refid="queryColumns" />
+	     from t_user t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>	
+	           ORDER BY voi.create_time desc
+     <include refid="MYSQL.pagination" />
+   </select>
+	<sql id="conditions">
+		<if test="condition.userId != null and condition.userId != ''">
+			AND t.user_id = #{condition.userId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.userName != null and condition.userName != ''">
+			AND t.user_name = #{condition.userName,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.userAccount != null and condition.userAccount != null and condition.userAccount != ''">
+			AND t.account = #{condition.userAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.passWord != null and condition.passWord != null and condition.passWord!= ''">
+			AND t.pass_word = #{condition.passWord,jdbcType=DECIMAL}
+		</if>
+		<if test="condition.userCode != null and condition.userCode != null and condition.userCode != ''">
+			AND t.user_code = #{condition.userCode,jdbcType=DECIMAL}
+		</if>
+		<if test="condition.vipLevel != null andcondition.vipLevel != null and condition.vipLevel != ''">
+			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.frozenStatus != null andcondition.frozenStatus != null and condition.frozenStatus != ''">
+			AND t.frozen_status = #{condition.frozenStatus,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.activeStatus != null andcondition.activeStatus != null and condition.activeStatus != ''">
+			AND t.active_status = #{condition.activeStatus,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.userDisable != null andcondition.userDisable != null and condition.userDisable != ''">
+			AND t.user_disable = #{condition.userDisable,jdbcType=VARCHAR}
+		</if>
+	</sql>
 </mapper>
