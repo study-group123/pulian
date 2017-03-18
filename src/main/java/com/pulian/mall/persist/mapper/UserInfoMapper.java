@@ -15,5 +15,7 @@ public interface UserInfoMapper {
     
      BaseResult updateUserInfo(UserManagerRequest userManagerRequest);
 
+	int count(UserManagerRequest userManagerRequest);
+
 
 }

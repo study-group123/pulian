@@ -53,7 +53,7 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private YesOrNoEnum userDisable;//是否销户
 	 
-	 private Long parentId;//父id
+	 private int parentId;//父id
 	 
 	 private UserInfoDto parent;//父对象
 	 
@@ -211,11 +211,11 @@ public class UserInfoDto extends BaseDto{
 		this.userDisable = userDisable;
 	}
 
-	public Long getParentId() {
+	public int getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(Long parentId) {
+	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
 

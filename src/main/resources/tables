@@ -1,5 +1,5 @@
 
-CREATE TABLE `t_user` (                                                   
+ CREATE TABLE `t_user` (                                                   
           `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',    
           `user_name` varchar(128) DEFAULT NULL COMMENT '真实用户名',        
           `user_code` varchar(128) DEFAULT NULL COMMENT '用户code',             
@@ -19,11 +19,11 @@ CREATE TABLE `t_user` (
           `frozen_status` varchar(64) DEFAULT NULL COMMENT '冻结状态',        
           `active_status` varchar(64) DEFAULT NULL COMMENT '激活状态',        
           `user_disable` varchar(64) DEFAULT NULL COMMENT '是否销户',         
-          `parentId` int(11) NOT NULL COMMENT '父id',                            
+          `parent_id` int(11) NOT NULL COMMENT '父id',                            
           `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',       
           `create_id` int(11) DEFAULT NULL COMMENT '创建人',                   
           `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',       
           `update_id` int(11) DEFAULT NULL COMMENT '更新人',                   
           PRIMARY KEY (`user_id`)                                                 
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8   
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8     
 ----------------------------------------------------------------------

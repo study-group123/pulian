@@ -30,11 +30,17 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  
+  
   <sql id="queryColumns">
   	user_id, user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
   	settlement_bank, bank_address, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
   	parent_id, creater_id, updater_id, create_time, update_time
   </sql>
+  
+  
+  
   <sql id="insertColumns">
   	 user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
   	settlement_bank, bank_address, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
@@ -72,9 +78,26 @@
 		#{updateTime,jdbcType=TIMESTAMP}
 		)
 	</insert>
+	
+	
+	
+	<select id="count" resultType="java.lang.Integer">
+       select count(*) from (
+      select 
+	     <include refid="queryColumns" />
+	     from t_user t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>)t1)t2	
+	</select>
+	
+	
+	
 	<select id="queryUserInfo" resultMap="BaseResultMap">
    
-	     select
+	     select 
 	     <include refid="queryColumns" />
 	     from t_user t
 	     <where>
@@ -85,9 +108,15 @@
 	           ORDER BY voi.create_time desc
      <include refid="MYSQL.pagination" />
    </select>
+   
+   
+   
 	<sql id="conditions">
 		<if test="condition.userId != null and condition.userId != ''">
 			AND t.user_id = #{condition.userId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.parentId != null and condition.parentId != ''">
+			AND t.parent_id = #{condition.parentId,jdbcType=INTEGER}
 		</if>
 		<if test="condition.userName != null and condition.userName != ''">
 			AND t.user_name = #{condition.userName,jdbcType=VARCHAR}
@@ -114,4 +143,22 @@
 			AND t.user_disable = #{condition.userDisable,jdbcType=VARCHAR}
 		</if>
 	</sql>
+	
+	
+	<!--  --> 
+	<update id="updateByUserId">
+		update t_user 
+		<set>
+			<if test="condition.userPhone != null and condition.userPhone != '' ">
+				phone = #{condition.userPhone},
+			</if>
+			update_time = #{condition.updateTime,jdbcType=VARCHAR},
+			update_id = #{condition.updateId,jdbcType=VARCHAR}
+		</set>
+		<where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>
+   </update>
 </mapper>

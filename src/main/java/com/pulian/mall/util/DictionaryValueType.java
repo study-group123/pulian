@@ -1,12 +1,10 @@
 package com.pulian.mall.util;
 
-public enum YesOrNoEnum {
-   YES("是"),
-   NO("否");
-   
+public enum DictionaryValueType {
+   USERCODE("用户code");
    private String cnName;
    
-   private YesOrNoEnum(String cnName){
+   private DictionaryValueType(String cnName){
 	   this.cnName = cnName;
    }
 
