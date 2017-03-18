@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.AreasEnum;
@@ -72,24 +71,7 @@ public class UserManagerControllerImpl {
 	}
 
 	public static void main(String[] args) {
-		UserManagerRequest userInfoDto = new UserManagerRequest();
-		userInfoDto.setActiveStatus(YesOrNoEnum.YES);
-		userInfoDto.setBankAddress("银行地址");
-		userInfoDto.setUserName("用户名");
-		//userInfoDto.setUserCode(CodeUtil.getCode(userInfoDto.getUserArea()));
-		userInfoDto.setBankNo("bankno");
-		userInfoDto.setBankSerialNo("banksno");
-		userInfoDto.setSettlementBank("settlementBank");
-		//userInfoDto.setUserAccount("账号");
-		userInfoDto.setPassWord(MD5util.EncoderPwdByMd5("666666"));
-		userInfoDto.setCardType(CardTypeEnum.ID);
-		userInfoDto.setParentId(999);
-		userInfoDto.setFrozenStatus(YesOrNoEnum.NO);
-		userInfoDto.setUserDisable(YesOrNoEnum.NO);
-		userInfoDto.setVipLevel(VipLevelEnum.SILVER);
-		userInfoDto.setUserArea(AreasEnum.HB);
-		userInfoDto.setUserAddress("用户地址");
-		saveUser(userInfoDto,null,null,null);
+		
 		
 		
 	}

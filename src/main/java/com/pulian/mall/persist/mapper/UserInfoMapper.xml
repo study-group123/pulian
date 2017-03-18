@@ -47,7 +47,7 @@
   	parent_id, creater_id, updater_id, create_time, update_time
   </sql>
   
-  <insert id="insert"  parameterType="ccom.pulian.mall.dto.UserInfoDto" >
+  <insert id="insert"  parameterType="com.pulian.mall.dto.UserInfoDto" >
 		insert into t_user
 		(<include refid="insertColumns" />
 		)

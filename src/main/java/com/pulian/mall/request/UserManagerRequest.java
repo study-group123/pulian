@@ -1,6 +1,5 @@
 package com.pulian.mall.request;
 
-import java.util.List;
 
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.util.AreasEnum;
@@ -11,7 +10,7 @@ import com.pulian.mall.util.YesOrNoEnum;
 public class UserManagerRequest {
 
 	
-    private UserInfoDto userInfoDto;
+    private UserInfoDto userInfoDto = new UserInfoDto();
     
     private String parentCode;
     
