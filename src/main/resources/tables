@@ -1,0 +1,26 @@
+
+CREATE TABLE `user` (                 
+        id int(11) NOT NULL,              
+        user_name varchar(128) DEFAULT NULL, 
+        user_code varchar(128) DEFAULT NULL, 
+	account varchar(128) DEFAULT NULL, 
+	phone varchar(64) DEFAULT NULL, 
+	pass_word varchar(256) DEFAULT NULL, 
+	user_area varchar(128) DEFAULT NULL, 
+	address varchar(256) DEFAULT NULL,
+	card_type varchar(64) DEFAULT NULL, 
+	card_no varchar(128) DEFAULT NULL, 
+	we_chat_no varchar(128) DEFAULT NULL, 
+	settlement_bank varchar(128) DEFAULT NULL, 
+	bank_address varchar(256) DEFAULT NULL, 
+	bank_no varchar(128) DEFAULT NULL, 
+	bank_serial_no varchar(128) DEFAULT NULL, 
+	vip_level varchar(128) DEFAULT NULL, 
+	frozen_status varchar(64) DEFAULT NULL, 
+       active_status varchar(64) DEFAULT NULL, 
+	user_disable varchar(64) DEFAULT NULL, 
+        parentId int(11) NOT NULL,   
+          PRIMARY KEY (`id`)                  
+
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8  
+----------------------------------------------------------------------
