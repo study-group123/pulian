@@ -1,5 +1,7 @@
 package com.pulian.mall.test;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -32,12 +34,20 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		//request.setUserAccount("账号");
 		request.setPassWord(MD5util.EncoderPwdByMd5("666666"));
 		request.setCardType(CardTypeEnum.ID);
+		request.setCardNo("cardno");
+		request.setUserPhone("phone");
 		request.setParentId(999);
+		request.setParentCode("HB4506");
 		request.setFrozenStatus(YesOrNoEnum.NO);
 		request.setUserDisable(YesOrNoEnum.NO);
 		request.setVipLevel(VipLevelEnum.SILVER);
 		request.setUserArea(AreasEnum.HB);
 		request.setUserAddress("用户地址");
+		request.setWeChatNo("wechatno");
+		request.setCreateTime(new Date());
+		request.setUpdateTime(new Date());
+		request.setUpdaterId(10);
+		request.setCreaterId(10);
 		userManagerControllerImpl.saveUser(request,null,null,null);
 	 }  
 }

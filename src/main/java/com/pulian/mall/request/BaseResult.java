@@ -4,13 +4,25 @@ import com.pulian.mall.util.YesOrNoEnum;
 
 public class  BaseResult{
 
-	private YesOrNoEnum successStatus;
+	private YesOrNoEnum successStatus = YesOrNoEnum.YES;
 	
 	private String message;
-	
-	
-	public static void main(String[] args) {
 
+	public YesOrNoEnum getSuccessStatus() {
+		return successStatus;
 	}
 
+	public void setSuccessStatus(YesOrNoEnum successStatus) {
+		this.successStatus = successStatus;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
 }

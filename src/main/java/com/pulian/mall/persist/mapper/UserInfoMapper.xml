@@ -90,7 +90,7 @@
 			<if test="condition != null">
 				<include refid="conditions"></include>	
 			</if>
-		 </where>)t1)t2	
+		 </where>)t1	
 	</select>
 	
 	
@@ -121,25 +121,25 @@
 		<if test="condition.userName != null and condition.userName != ''">
 			AND t.user_name = #{condition.userName,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.userAccount != null and condition.userAccount != null and condition.userAccount != ''">
+		<if test="condition.userAccount != null  and condition.userAccount != ''">
 			AND t.account = #{condition.userAccount,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.passWord != null and condition.passWord != null and condition.passWord!= ''">
+		<if test="condition.passWord != null  and condition.passWord!= ''">
 			AND t.pass_word = #{condition.passWord,jdbcType=DECIMAL}
 		</if>
-		<if test="condition.userCode != null and condition.userCode != null and condition.userCode != ''">
+		<if test="condition.userCode != null  and condition.userCode != ''">
 			AND t.user_code = #{condition.userCode,jdbcType=DECIMAL}
 		</if>
-		<if test="condition.vipLevel != null andcondition.vipLevel != null and condition.vipLevel != ''">
+		<if test="condition.vipLevel != null ">
 			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.frozenStatus != null andcondition.frozenStatus != null and condition.frozenStatus != ''">
+		<if test="condition.frozenStatus != null and condition.frozenStatus != ''">
 			AND t.frozen_status = #{condition.frozenStatus,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.activeStatus != null andcondition.activeStatus != null and condition.activeStatus != ''">
+		<if test="condition.activeStatus != null  and condition.activeStatus != ''">
 			AND t.active_status = #{condition.activeStatus,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.userDisable != null andcondition.userDisable != null and condition.userDisable != ''">
+		<if test="condition.userDisable != null  and condition.userDisable != ''">
 			AND t.user_disable = #{condition.userDisable,jdbcType=VARCHAR}
 		</if>
 	</sql>

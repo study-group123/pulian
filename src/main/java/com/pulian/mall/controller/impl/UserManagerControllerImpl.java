@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.AreasEnum;
@@ -39,21 +41,22 @@ public class UserManagerControllerImpl {
 	}
 	
 	@RequestMapping("/saveUser")
-	public String saveUser(UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
-		
+	@ResponseBody
+	public BaseResult saveUser(UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+		BaseResult baseResult = new BaseResult();
 		try{
 			
 			//查询当前用户开过的银卡数
 			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
 			
 			buildSaveUserRequest(userManagerRequest,silverSons);
-			userManagerService.saveUserInfo(userManagerRequest);
+			baseResult = userManagerService.saveUserInfo(userManagerRequest);
 		}catch(Exception e){
-			
 			log.error("save user failed",e);
+			baseResult.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
-		return "";
+		return baseResult;
 	}
 	
 	@RequestMapping("/toSaveUser")

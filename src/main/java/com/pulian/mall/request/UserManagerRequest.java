@@ -1,6 +1,8 @@
 package com.pulian.mall.request;
 
 
+import java.util.Date;
+
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.util.AreasEnum;
 import com.pulian.mall.util.CardTypeEnum;
@@ -194,7 +196,37 @@ public class UserManagerRequest {
 		this.userInfoDto.setParentId(parentId);
 	}
 	 
+	public Date getCreateTime() {
+		return this.userInfoDto.getCreateTime();
+	}
 
+	public void setCreateTime(Date createTime) {
+		this.userInfoDto.setCreateTime(createTime);
+	}
+
+	public Date getUpdateTime() {
+		return this.userInfoDto.getUpdateTime();
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.userInfoDto.setUpdateTime(updateTime);
+	}
+
+	public int getCreaterId() {
+		return this.userInfoDto.getCreaterId();
+	}
+
+	public void setCreaterId(int createrId) {
+		this.userInfoDto.setCreaterId(createrId);
+	}
+
+	public int getUpdaterId() {
+		return this.userInfoDto.getUpdaterId();
+	}
+
+	public void setUpdaterId(int updaterId) {
+		this.userInfoDto.setUpdaterId(updaterId);
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
