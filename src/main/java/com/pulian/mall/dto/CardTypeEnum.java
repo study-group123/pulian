@@ -1,4 +1,4 @@
-package com.pulian.mall.util;
+package com.pulian.mall.dto;
 
 public enum CardTypeEnum {
    PASSPORT("护照"),

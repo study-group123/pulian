@@ -1,7 +1,5 @@
 package com.pulian.mall.dto;
 
-import com.pulian.mall.util.YesOrNoEnum;
-
 public class ApprovalDto extends BaseDto{
 	
        private Long applicantId;//申请人

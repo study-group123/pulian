@@ -3,11 +3,11 @@ package com.pulian.mall.request;
 
 import java.util.Date;
 
+import com.pulian.mall.dto.AreasEnum;
+import com.pulian.mall.dto.CardTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
-import com.pulian.mall.util.AreasEnum;
-import com.pulian.mall.util.CardTypeEnum;
-import com.pulian.mall.util.VipLevelEnum;
-import com.pulian.mall.util.YesOrNoEnum;
+import com.pulian.mall.dto.VipLevelEnum;
+import com.pulian.mall.dto.YesOrNoEnum;
 
 public class UserManagerRequest {
 

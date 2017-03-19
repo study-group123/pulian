@@ -1,5 +1,7 @@
 package com.pulian.mall.util;
 
+import com.pulian.mall.dto.AreasEnum;
+
 public class CodeUtil {
 
 	//生成四位随机数

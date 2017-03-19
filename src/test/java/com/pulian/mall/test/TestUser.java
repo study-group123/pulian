@@ -2,25 +2,37 @@ package com.pulian.mall.test;
 
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.testng.annotations.Test;
 
+import com.pulian.mall.controller.impl.LoginControllerImpl;
 import com.pulian.mall.controller.impl.UserManagerControllerImpl;
+import com.pulian.mall.dto.AreasEnum;
+import com.pulian.mall.dto.CardTypeEnum;
+import com.pulian.mall.dto.VipLevelEnum;
+import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.UserManagerRequest;
-import com.pulian.mall.util.AreasEnum;
-import com.pulian.mall.util.CardTypeEnum;
 import com.pulian.mall.util.MD5util;
-import com.pulian.mall.util.VipLevelEnum;
-import com.pulian.mall.util.YesOrNoEnum;
-
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)  
 @ContextConfiguration(locations = {"classpath:spring.xml","classpath:spring-servlet.xml","classpath:spring-mybatis.xml"})
 public class TestUser extends AbstractTestNGSpringContextTests{
 
+	 private static final Log log = LogFactory.getLog(TestUser.class);
+	 
 	 @Autowired  
 	 private UserManagerControllerImpl userManagerControllerImpl;  
-	   
+	 @Autowired
+	 private LoginControllerImpl   loginControllerImpl;
+	 
+	 
+	 @Rollback(false)
 	 @Test  
 	 public void testSaveUser(){  
 		UserManagerRequest request = new UserManagerRequest();
@@ -49,5 +61,18 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		request.setUpdaterId(10);
 		request.setCreaterId(10);
 		userManagerControllerImpl.saveUser(request,null,null,null);
+	 }  
+	 
+	 @Rollback(false)
+	 @Test  
+	 public void testUserLogin(){  
+		UserManagerRequest request = new UserManagerRequest();
+		
+		request.setUserCode("HB4506000001");
+		
+		request.setUserAccount("账号");
+		request.setPassWord(MD5util.EncoderPwdByMd5("666666"));
+		
+		loginControllerImpl.userLogin(null, request, null, null);
 	 }  
 }

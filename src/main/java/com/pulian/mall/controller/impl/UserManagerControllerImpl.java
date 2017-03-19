@@ -1,7 +1,5 @@
 package com.pulian.mall.controller.impl;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,17 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
-import com.pulian.mall.util.AreasEnum;
-import com.pulian.mall.util.CardTypeEnum;
 import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.DateUtils;
 import com.pulian.mall.util.FirstLetterUtil;
-import com.pulian.mall.util.MD5util;
-import com.pulian.mall.util.VipLevelEnum;
-import com.pulian.mall.util.YesOrNoEnum;
 
 @Controller
 @RequestMapping("/user")
@@ -34,14 +28,6 @@ public class UserManagerControllerImpl {
 	@Autowired
 	private UserManagerServiceImpl userManagerService;
 	
-	
-	
-	@RequestMapping("/toUserManager")
-	public String toUserLogin(Model model,HttpServletRequest request, HttpServletResponse response) {
-		
-	     
-		return "";
-	}
 	
 	@RequestMapping("/saveUser")
 	@ResponseBody
@@ -72,7 +58,7 @@ public class UserManagerControllerImpl {
 	
 	private void buildSaveUserRequest(UserManagerRequest request, int silverSons) {
 	
-		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(silverSons));
+		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
 		request.setUserAccount(FirstLetterUtil.getFirstLetter(request.getUserName())+"_"+request.getUserCode());
 		request.setCreateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
 		request.setUpdateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));

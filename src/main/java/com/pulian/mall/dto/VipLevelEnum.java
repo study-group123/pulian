@@ -1,4 +1,4 @@
-package com.pulian.mall.util;
+package com.pulian.mall.dto;
 
 public enum VipLevelEnum {
    SYSTEM("系统管理员"),

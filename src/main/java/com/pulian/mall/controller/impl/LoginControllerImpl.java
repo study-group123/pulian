@@ -1,8 +1,6 @@
 package com.pulian.mall.controller.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,20 +15,22 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.YesOrNoEnum;
+import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
+import com.pulian.mall.util.MD5util;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginControllerImpl {
 
 	@Autowired
 	private UserManagerServiceImpl userManagerService;
 	
-	private static final Log log = LogFactory.getLog(LoginController.class);
+	private static final Log log = LogFactory.getLog(LoginControllerImpl.class);
 	/**
 	 * 进入主页
 	 */
@@ -43,29 +43,35 @@ public class LoginController {
 	
 	@RequestMapping("/userLogin")
 	@ResponseBody
-	public Map<String,Object> searchUserLogin(Model model,UserManagerRequest userManagerRequest,HttpServletRequest request,HttpServletResponse response) {
+	public BaseResultT<UserInfoDto> userLogin(Model model,UserManagerRequest userManagerRequest,HttpServletRequest request,HttpServletResponse response) {
 		
-		Map<String,Object> resultMap = new HashMap<String ,Object>();
-		
-		String account = userManagerRequest.getUserInfoDto().getUserAccount();
+		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
+		String code = userManagerRequest.getUserInfoDto().getUserCode();
+		//String account = userManagerRequest.getUserInfoDto().getUserAccount();
 		String pwd = userManagerRequest.getUserInfoDto().getPassWord();
-		if(StringUtils.isEmpty(account) || StringUtils.isEmpty(pwd)){
-			resultMap.put("", "请填写用户名和密码");
+		if(StringUtils.isEmpty(code) || StringUtils.isEmpty(pwd)){
+			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 			log.error("请填写用户名和密码");
-			return resultMap;
+			return baseResultT;
 		}
-		
+		buildQueryUserRequest(userManagerRequest);
 		List<UserInfoDto> result = userManagerService.queryUserInfo(userManagerRequest);
 		if(!CollectionUtils.isEmpty(result)){
-			resultMap.put("userInfo", result.get(0));
+			baseResultT.setResult(result.get(0));
 		}else{
-			resultMap.put("message", "用户名或者密码错误");
+			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
+			baseResultT.setMessage("用户名或者密码错误");
 		}
-		return resultMap;
+		return baseResultT;
 	}
 	
 	
-  @RequestMapping(value="/index8888",method=RequestMethod.GET)     
+  private void buildQueryUserRequest(UserManagerRequest request) {
+	  request.setPassWord(MD5util.EncoderPwdByMd5(request.getPassWord()));
+		
+   }
+
+  @RequestMapping(value="/testIndex",method=RequestMethod.GET)     
   public String getFirstPage(Model model) {    
       model.addAttribute("name", "王大锤");
 	  return "index";

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.pulian.mall.controller.impl.UserManagerControllerImpl;
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.UserInfoMapper;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.UserManagerRequest;
-import com.pulian.mall.util.YesOrNoEnum;
 
 @Service
 public class UserManagerServiceImpl {

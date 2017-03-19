@@ -2,11 +2,6 @@ package com.pulian.mall.dto;
 
 import java.util.List;
 
-import com.pulian.mall.util.AreasEnum;
-import com.pulian.mall.util.CardTypeEnum;
-import com.pulian.mall.util.VipLevelEnum;
-import com.pulian.mall.util.YesOrNoEnum;
-
 
 public class UserInfoDto extends BaseDto{
 

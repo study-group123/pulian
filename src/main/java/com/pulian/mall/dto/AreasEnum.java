@@ -1,4 +1,4 @@
-package com.pulian.mall.util;
+package com.pulian.mall.dto;
 
 public enum AreasEnum {
    HD1("华东大区1"),
