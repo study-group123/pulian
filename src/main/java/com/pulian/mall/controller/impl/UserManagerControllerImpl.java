@@ -1,5 +1,7 @@
 package com.pulian.mall.controller.impl;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,7 @@ import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.AreasEnum;
 import com.pulian.mall.util.CardTypeEnum;
 import com.pulian.mall.util.CodeUtil;
+import com.pulian.mall.util.DateUtils;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
 import com.pulian.mall.util.VipLevelEnum;
@@ -52,7 +55,7 @@ public class UserManagerControllerImpl {
 			buildSaveUserRequest(userManagerRequest,silverSons);
 			baseResult = userManagerService.saveUserInfo(userManagerRequest);
 		}catch(Exception e){
-			log.error("save user failed",e);
+			log.error("UserManagerControllerImpl.saveUser",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
@@ -71,6 +74,8 @@ public class UserManagerControllerImpl {
 	
 		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(silverSons));
 		request.setUserAccount(FirstLetterUtil.getFirstLetter(request.getUserName())+"_"+request.getUserCode());
+		request.setCreateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
+		request.setUpdateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
 	}
 
 	public static void main(String[] args) {

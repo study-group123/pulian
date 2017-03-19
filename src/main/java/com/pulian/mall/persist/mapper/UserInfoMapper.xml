@@ -47,35 +47,35 @@
   	parent_id, creater_id, updater_id, create_time, update_time
   </sql>
   
-  <insert id="insert"  parameterType="com.pulian.mall.dto.UserInfoDto" >
+  <insert id="saveUserInfo"  parameterType="com.pulian.mall.dto.UserInfoDto" >
 		insert into t_user
 		(<include refid="insertColumns" />
 		)
 		values
 		(
-		#{userName,jdbcType=VARCHAR},
-		#{userPhone,jdbcType=VARCHAR},
-		#{userCode,jdbcType=VARCHAR},
-		#{userAccount,jdbcType=VARCHAR},
-		#{passWord,jdbcType=VARCHAR},
-		#{userArea,jdbcType=VARCHAR},
-		#{userAddress,jdbcType=VARCHAR},
-		#{cardType,jdbcType=VARCHAR},
-		#{cardNo,jdbcType=VARCHAR},
-		#{weChatNo,jdbcType=VARCHAR},
-		#{settlementBank,jdbcType=VARCHAR},
-		#{bankAddress,jdbcType=VARCHAR},
-		#{bankNo,jdbcType=VARCHAR},
-		#{bankSerialNo,jdbcType=VARCHAR},
-		#{vipLevel,jdbcType=VARCHAR},
-		#{frozenStatus,jdbcType=VARCHAR},
-		#{activeStatus,jdbcType=VARCHAR},
-		#{userDisable,jdbcType=VARCHAR},
-		#{parentId,jdbcType=INTEGER},
-		#{createrId,jdbcType=INTEGER},
-		#{updaterId,jdbcType=INTEGER},
-		#{createTime,jdbcType=TIMESTAMP},
-		#{updateTime,jdbcType=TIMESTAMP}
+		#{condition.userName,jdbcType=VARCHAR},
+		#{condition.userPhone,jdbcType=VARCHAR},
+		#{condition.userCode,jdbcType=VARCHAR},
+		#{condition.userAccount,jdbcType=VARCHAR},
+		#{condition.passWord,jdbcType=VARCHAR},
+		#{condition.userArea,jdbcType=VARCHAR},
+		#{condition.userAddress,jdbcType=VARCHAR},
+		#{condition.cardType,jdbcType=VARCHAR},
+		#{condition.cardNo,jdbcType=VARCHAR},
+		#{condition.weChatNo,jdbcType=VARCHAR},
+		#{condition.settlementBank,jdbcType=VARCHAR},
+		#{condition.bankAddress,jdbcType=VARCHAR},
+		#{condition.bankNo,jdbcType=VARCHAR},
+		#{condition.bankSerialNo,jdbcType=VARCHAR},
+		#{condition.vipLevel,jdbcType=VARCHAR},
+		#{condition.frozenStatus,jdbcType=VARCHAR},
+		#{condition.activeStatus,jdbcType=VARCHAR},
+		#{condition.userDisable,jdbcType=VARCHAR},
+		#{condition.parentId,jdbcType=INTEGER},
+		#{condition.createrId,jdbcType=INTEGER},
+		#{condition.updaterId,jdbcType=INTEGER},
+		#{condition.createTime,jdbcType=TIMESTAMP},
+		#{condition.updateTime,jdbcType=TIMESTAMP}
 		)
 	</insert>
 	
