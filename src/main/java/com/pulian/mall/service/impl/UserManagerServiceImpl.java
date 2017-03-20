@@ -25,7 +25,7 @@ public class UserManagerServiceImpl {
 	public List<UserInfoDto> queryUserInfo(UserManagerRequest userManagerRequest){
 		List<UserInfoDto> userList = new ArrayList<UserInfoDto>();
 		try{
-			userList = userInfoMapper.queryUserInfo(userManagerRequest);
+			userList = userInfoMapper.queryUserInfo(userManagerRequest.getUserInfoDto());
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.queryUserInfo",e);
 		}
@@ -36,7 +36,7 @@ public class UserManagerServiceImpl {
     public BaseResult saveUserInfo(UserManagerRequest userManagerRequest){
     	BaseResult baseResult = new BaseResult();
     	try{
-    		userInfoMapper.saveUserInfo(userManagerRequest);
+    		userInfoMapper.saveUserInfo(userManagerRequest.getUserInfoDto());
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.saveUserInfo",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
@@ -48,7 +48,7 @@ public class UserManagerServiceImpl {
     public BaseResult updateUserByUserId(UserManagerRequest userManagerRequest){
     	BaseResult baseResult = new BaseResult();
     	try{
-    		userInfoMapper.updateUserByUserId(userManagerRequest);
+    		userInfoMapper.updateUserByUserId(userManagerRequest.getUserInfoDto());
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.updateUserInfo",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
@@ -69,8 +69,7 @@ public class UserManagerServiceImpl {
 		
 		UserManagerRequest queryRequest = new UserManagerRequest();
 		queryRequest.setUserInfoDto(queryDto);
-		userInfoMapper.count(queryRequest);
-		return userInfoMapper.count(queryRequest);
+		return userInfoMapper.count(queryRequest.getUserInfoDto());
 	}
 
 }

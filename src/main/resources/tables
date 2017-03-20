@@ -1,29 +1,53 @@
+#使用前阅读
+建议使用windows服务器
+---------------------------------------------------------------------------
+# 更新数据库登入密码
+UPDATE mysql.user SET Password = PASSWORD('root') WHERE user = 'root';
 
- CREATE TABLE `t_user` (                                                   
-          `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',    
-          `user_name` varchar(128) DEFAULT NULL COMMENT '真实用户名',        
-          `user_code` varchar(128) DEFAULT NULL COMMENT '用户code',             
-          `account` varchar(128) DEFAULT NULL COMMENT '账号',                   
-          `phone` varchar(64) DEFAULT NULL COMMENT '电话',                      
-          `pass_word` varchar(256) DEFAULT NULL COMMENT '密码',                 
-          `user_area` varchar(128) DEFAULT NULL COMMENT '所属区域',           
-          `address` varchar(256) DEFAULT NULL COMMENT '用户地址',             
-          `card_type` varchar(64) DEFAULT NULL COMMENT '证件类型',            
-          `card_no` varchar(128) DEFAULT NULL COMMENT '证件号',                
-          `we_chat_no` varchar(128) DEFAULT NULL COMMENT '微信号',             
-          `settlement_bank` varchar(128) DEFAULT NULL COMMENT '结算银行',     
-          `bank_address` varchar(256) DEFAULT NULL COMMENT '银行详细地址',  
-          `bank_no` varchar(128) DEFAULT NULL COMMENT '银行卡号',             
-          `bank_serial_no` varchar(128) DEFAULT NULL COMMENT '联行号',         
-          `vip_level` varchar(128) DEFAULT NULL COMMENT '用户等级',           
-          `frozen_status` varchar(64) DEFAULT NULL COMMENT '冻结状态',        
-          `active_status` varchar(64) DEFAULT NULL COMMENT '激活状态',        
-          `user_disable` varchar(64) DEFAULT NULL COMMENT '是否销户',         
-          `parent_id` int(11) NOT NULL COMMENT '父id',                            
-          `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',       
-          `create_id` int(11) DEFAULT NULL COMMENT '创建人',                   
-          `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',       
-          `update_id` int(11) DEFAULT NULL COMMENT '更新人',                   
-          PRIMARY KEY (`user_id`)                                                 
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8     
-----------------------------------------------------------------------
+---------------------------------------------------------------------------
+# 用户表
+CREATE TABLE `t_user` (
+  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_name` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '真实用户名',
+  `user_code` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户code',
+  `account` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '账号',
+  `phone` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '电话',
+  `pass_word` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '密码',
+  `user_area` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属区域',
+  `address` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户地址',
+  `card_type` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '证件类型',
+  `card_no` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '证件号',
+  `we_chat_no` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '微信号',
+  `settlement_bank` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '结算银行',
+  `bank_address` varchar(256) CHARACTER SET utf8 DEFAULT NULL COMMENT '银行详细地址',
+  `bank_no` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '银行卡号',
+  `bank_serial_no` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '联行号',
+  `vip_level` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户等级',
+  `frozen_status` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '冻结状态',
+  `active_status` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '激活状态',
+  `user_disable` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '是否销户',
+  `parent_id` int(11) NOT NULL COMMENT '父id',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_id` int(11) DEFAULT NULL COMMENT '创建人',
+  `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `update_id` int(11) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+   
+---------------------------------------------------------------------------
+# 审批表
+CREATE TABLE `t_approval` (
+  `approval_id` INT(11) NOT NULL COMMENT '主键',
+  `applicant_id` INT(11) DEFAULT NULL COMMENT '申请人id',
+  `approval_reason` VARCHAR(512) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '申请理由',
+  `before_thirty_achievement` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '前三十天业绩，申请之前的30天',
+  `approval_result` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审批结果',
+  `approval_result_desc` VARCHAR(512) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审批结果描述',
+  `approver_id` INT(11) DEFAULT NULL COMMENT '审批人id',
+  `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
+  `create_id` INT(11) DEFAULT NULL COMMENT '创建人',
+  `update_time` TIMESTAMP NULL DEFAULT NULL COMMENT '更新时间',
+  `update_id` INT(11) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`approval_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+---------------------------------------------------------------------------

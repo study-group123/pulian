@@ -24,7 +24,7 @@
     <result column="frozen_status" property="frozenStatus" jdbcType="VARCHAR" />
     <result column="active_status" property="activeStatus" jdbcType="VARCHAR" /> 
     <result column="user_disable" property="userDisable" jdbcType="VARCHAR" />
-    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />  
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />  
     <result column="creater_id" property="createrId" jdbcType="INTEGER" />
     <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -105,7 +105,7 @@
 				<include refid="conditions"></include>	
 			</if>
 		 </where>	
-	           ORDER BY voi.create_time desc
+	           ORDER BY t.create_time desc
      <include refid="MYSQL.pagination" />
    </select>
    

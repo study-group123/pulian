@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pulian.mall.persist.mapper.ApprovalMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.ApprovalMapper" >
+  
+    <id column="approval_id" property="approvalId" jdbcType="INTEGER" />   
+    <result column="applicant_id" property="applicantId" jdbcType="INTEGER" />
+    <result column="approval_reason" property="approvalReason" jdbcType="VARCHAR" />
+    <result column="before_thirty_achievement" property="beforeThirtyAchievement" jdbcType="VARCHAR" />
+    <result column="approval_result" property="approvalResult" jdbcType="VARCHAR" />  
+    <result column="approval_result_desc" property="approvalResultDesc" jdbcType="VARCHAR" />
+    <result column="approver_id" property="approverId" jdbcType="INTEGER" />  
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  
+  
+  <sql id="queryColumns">
+  	approval_id, applicant_id, approval_reason, before_thirty_achievement, approval_result, approval_result_desc
+  	approver_id, creater_id, updater_id, create_time, update_time
+  </sql>
+  
+  
+  
+  <sql id="insertColumns">
+  	 applicant_id, approval_reason, before_thirty_achievement, approval_result, approval_result_desc
+  	approver_id, creater_id, updater_id, create_time, update_time
+  </sql>
+  
+  <insert id="saveApprovalDto"  parameterType="com.pulian.mall.dto.ApprovalDto" >
+		insert into t_approval
+		(<include refid="insertColumns" />
+		)
+		values
+		(
+		#{condition.applicant_id,jdbcType=INTEGER},
+		#{condition.approval_reason,jdbcType=VARCHAR},
+		#{condition.before_thirty_achievement,jdbcType=VARCHAR},
+		#{condition.approval_result,jdbcType=VARCHAR},
+		#{condition.approval_result_desc,jdbcType=VARCHAR},
+		#{condition.approver_id,jdbcType=INTEGER},
+		#{condition.createrId,jdbcType=INTEGER},
+		#{condition.updaterId,jdbcType=INTEGER},
+		#{condition.createTime,jdbcType=TIMESTAMP},
+		#{condition.updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	
+	
+	<select id="count" resultType="java.lang.Integer">
+       select count(*) from (
+      select 
+	     <include refid="queryColumns" />
+	     from t_approval t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>)t1	
+	</select>
+	
+	
+	
+	<select id="queryApprovalList" resultMap="BaseResultMap">
+   
+	     select 
+	     <include refid="queryColumns" />
+	     from t_approval t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>	
+	           ORDER BY t.create_time desc
+     <include refid="MYSQL.pagination" />
+   </select>
+   
+   
+   
+	<sql id="conditions">
+		<if test="condition.approvalId != null and condition.approvalId != ''">
+			AND t.approval_id = #{condition.approvalId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.applicantId != null and condition.applicantId != ''">
+			AND t.applicant_id = #{condition.applicantId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.approverId != null and condition.approverId != ''">
+			AND t.approver_id = #{condition.approverId,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.approvalResult != null  and condition.approvalResult != ''">
+			AND t.approval_result = #{condition.approvalResult,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	
+	
+	<!--  --> 
+	<update id="updateApprovalDtoByApprovalId">
+		update t_approval 
+		<set>
+			<if test="condition.approvalResult != null and condition.approvalResult != '' ">
+				approval_result = #{condition.approvalResult},
+			</if>
+			<if test="condition.approvalResultDesc != null and condition.approvalResultDesc != '' ">
+				approval_result_desc = #{condition.approvalResultDesc},
+			</if>
+			update_time = #{condition.updateTime,jdbcType=VARCHAR},
+			update_id = #{condition.updateId,jdbcType=VARCHAR}
+		</set>
+		where approval_id = #{condition.approvalId}
+   </update>
+</mapper>

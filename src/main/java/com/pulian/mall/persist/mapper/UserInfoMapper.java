@@ -10,13 +10,13 @@ import com.pulian.mall.request.UserManagerRequest;
 public interface UserInfoMapper {
 	
 
-	 List<UserInfoDto> queryUserInfo(@Param("condition")UserManagerRequest userManagerRequest);
+	 List<UserInfoDto> queryUserInfo(@Param("condition")UserInfoDto userInfoDto);
 	
-     int saveUserInfo(@Param("condition")UserManagerRequest userManagerRequest);
+     int saveUserInfo(@Param("condition")UserInfoDto userInfoDto);
     
-     int updateUserByUserId(@Param("condition")UserManagerRequest userManagerRequest);
+     int updateUserByUserId(@Param("condition")UserInfoDto userInfoDto);
 
-	 int count(@Param("condition")UserManagerRequest userManagerRequest);
+	 int count(@Param("condition")UserInfoDto userInfoDto);
 
 
 }
