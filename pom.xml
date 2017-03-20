@@ -10,7 +10,7 @@
   <properties>
     <spring.version>3.2.4.RELEASE</spring.version>
     <testng.version>6.8.7</testng.version>
-    <jackson.version>2.1.4</jackson.version>
+    <jackson.version>1.9.13</jackson.version>
   </properties>
   <dependencies>
     <dependency>
@@ -110,35 +110,11 @@
               <version>2.3.20</version>  
           </dependency>
           
-           <dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
+          <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
 			<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-		
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-annotations</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.module</groupId>
-				<artifactId>jackson-module-jaxb-annotations</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.jaxrs</groupId>
-				<artifactId>jackson-jaxrs-json-provider</artifactId>
-				<version>${jackson.version}</version>
-				<!-- Jackson2.2.0 版本对于 CXF2.7.3 不支持 -->
-				<!-- http://www.marshut.com/krrqx/fasterxml-jackson-2-2-provider-no-longer-works-with-cxf-jax-rs.pdf -->
-				<!-- http://cxf.547215.n5.nabble.com/Creating-input-values-on-WADL-td5728910.html -->
-			</dependency>   
+          </dependency>
   </dependencies>
   
   <build>
