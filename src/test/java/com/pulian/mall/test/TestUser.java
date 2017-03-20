@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,7 +23,7 @@ import com.pulian.mall.util.MD5util;
 @ContextConfiguration(locations = {"classpath:spring.xml","classpath:spring-servlet.xml","classpath:spring-mybatis.xml"})
 public class TestUser extends AbstractTestNGSpringContextTests{
 
-	 private static final Log log = LogFactory.getLog(TestUser.class);
+//	 /private static final Log log = LogFactory.getLog(TestUser.class);
 	 
 	 @Autowired  
 	 private UserManagerControllerImpl userManagerControllerImpl;  

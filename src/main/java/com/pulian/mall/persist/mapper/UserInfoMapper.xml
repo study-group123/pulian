@@ -146,19 +146,18 @@
 	
 	
 	<!--  --> 
-	<update id="updateByUserId">
+	<update id="updateUserByUserId">
 		update t_user 
 		<set>
 			<if test="condition.userPhone != null and condition.userPhone != '' ">
 				phone = #{condition.userPhone},
 			</if>
+			<if test="condition.passWord != null and condition.passWord != '' ">
+				pass_word = #{condition.passWord},
+			</if>
 			update_time = #{condition.updateTime,jdbcType=VARCHAR},
 			update_id = #{condition.updateId,jdbcType=VARCHAR}
 		</set>
-		<where>
-			<if test="condition != null">
-				<include refid="conditions"></include>	
-			</if>
-		 </where>
+		where user_id = #{condition.userId}
    </update>
 </mapper>

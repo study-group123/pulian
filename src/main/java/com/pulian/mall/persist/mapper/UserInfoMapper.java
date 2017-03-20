@@ -14,7 +14,7 @@ public interface UserInfoMapper {
 	
      int saveUserInfo(@Param("condition")UserManagerRequest userManagerRequest);
     
-     int updateUserInfo(@Param("condition")UserManagerRequest userManagerRequest);
+     int updateUserByUserId(@Param("condition")UserManagerRequest userManagerRequest);
 
 	 int count(@Param("condition")UserManagerRequest userManagerRequest);
 

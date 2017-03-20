@@ -1,5 +1,6 @@
 package com.pulian.mall.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -7,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pulian.mall.controller.impl.UserManagerControllerImpl;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.UserInfoMapper;
@@ -23,9 +23,14 @@ public class UserManagerServiceImpl {
 	private static final Log log = LogFactory.getLog(UserManagerServiceImpl.class);
 	
 	public List<UserInfoDto> queryUserInfo(UserManagerRequest userManagerRequest){
+		List<UserInfoDto> userList = new ArrayList<UserInfoDto>();
+		try{
+			userList = userInfoMapper.queryUserInfo(userManagerRequest);
+		}catch(Exception e){
+			log.error("UserManagerServiceImpl.queryUserInfo",e);
+		}
 		
-		
-		return null;
+		return userList;
 	}
 	
     public BaseResult saveUserInfo(UserManagerRequest userManagerRequest){
@@ -40,10 +45,16 @@ public class UserManagerServiceImpl {
 		return baseResult;
 	}
     
-    public BaseResult updateUserInfo(UserManagerRequest userManagerRequest){
-		
+    public BaseResult updateUserByUserId(UserManagerRequest userManagerRequest){
+    	BaseResult baseResult = new BaseResult();
+    	try{
+    		userInfoMapper.updateUserByUserId(userManagerRequest);
+		}catch(Exception e){
+			log.error("UserManagerServiceImpl.updateUserInfo",e);
+			baseResult.setSuccessStatus(YesOrNoEnum.NO);
+		}
     	
-		return null;
+		return baseResult;
 	}
 
 	public static void main(String[] args) {
