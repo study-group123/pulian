@@ -69,7 +69,7 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		UserManagerRequest request = new UserManagerRequest();
 		
 		request.setUserCode("HB4506000001");
-		
+		;
 		request.setUserAccount("账号");
 		request.setPassWord(MD5util.EncoderPwdByMd5("666666"));
 		
