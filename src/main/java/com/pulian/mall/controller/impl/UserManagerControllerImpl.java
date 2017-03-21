@@ -1,6 +1,5 @@
 package com.pulian.mall.controller.impl;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,10 +1,10 @@
 package com.pulian.mall.dto;
 
-public enum DictionaryValueType {
+public enum DictionaryValueTypeEnum {
    USERCODE("用户code");
    private String cnName;
    
-   private DictionaryValueType(String cnName){
+   private DictionaryValueTypeEnum(String cnName){
 	   this.cnName = cnName;
    }
 

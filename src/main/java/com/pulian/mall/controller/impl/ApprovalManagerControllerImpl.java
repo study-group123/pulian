@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pulian.mall.dto.ApprovalDto;
+import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
@@ -32,11 +33,11 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/saveApprovalDto")
 	@ResponseBody
-	public BaseResult saveApprovalDto(ApprovalManagerRequest ApprovalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResult saveApprovalDto(ApprovalManagerRequest approvalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		BaseResult baseResult = new BaseResult();
 		try{
-			buildSaveApprovalRequest(ApprovalManagerRequest);
-			baseResult = approvalManagerService.saveApprovalDto(ApprovalManagerRequest);
+			buildSaveApprovalRequest(approvalManagerRequest);
+			baseResult = approvalManagerService.saveApprovalDto(approvalManagerRequest);
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.saveApprovalDto",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
@@ -47,10 +48,10 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/queryApprovalList")
 	@ResponseBody
-	public BaseResultT<List<ApprovalDto>> queryApprovalList(ApprovalManagerRequest ApprovalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<List<ApprovalDto>> queryApprovalList(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<List<ApprovalDto>> baseResultT = new BaseResultT<List<ApprovalDto>>();
 		try{
-			List<ApprovalDto> approvalList = approvalManagerService.queryApprovalList(ApprovalManagerRequest);
+			List<ApprovalDto> approvalList = approvalManagerService.queryApprovalList(approvalManagerRequest);
 			baseResultT.setResult(approvalList);
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.queryApprovalList",e);
@@ -60,6 +61,29 @@ public class ApprovalManagerControllerImpl {
 		return baseResultT;
 	}
 	
+	@RequestMapping("/updateApprovalStatus")
+	@ResponseBody
+	public BaseResultT<UserInfoDto> updateApprovalStatus(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
+		try{
+			ApprovalManagerRequest cleanRequest = buildUpdateApprovalStatusRequest(approvalManagerRequest);
+			baseResultT =  approvalManagerService.updateApprovalDtoByApprovalId(cleanRequest);
+		}catch(Exception e){
+			log.error("ApprovalManagerControllerImpl.updateApprovalStatus",e);
+			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
+		}
+		
+		return baseResultT;
+	}
+	
+	private ApprovalManagerRequest buildUpdateApprovalStatusRequest(ApprovalManagerRequest userRequest) {
+		ApprovalManagerRequest cleanRequest = new ApprovalManagerRequest();
+		cleanRequest.setApprovalId(userRequest.getApprovalId());
+		cleanRequest.setApprovalResult(userRequest.getApprovalResult());
+		cleanRequest.setApprovalResultDesc(userRequest.getApprovalResultDesc());
+		return cleanRequest;
+	}
+
 	@RequestMapping("/toSaveApprovalDto")
 	public String toSaveApprovalDto(ApprovalManagerRequest ApprovalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		
