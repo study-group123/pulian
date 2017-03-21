@@ -12,7 +12,12 @@ import com.pulian.mall.dto.DictionaryDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.DictionaryMapper;
 import com.pulian.mall.request.BaseResult;
-
+/**
+ *字典相关服务
+ * 
+ * @author wangxiaoqiang
+ * @date 2017-3-21
+ */
 @Service
 public class DictionaryManagerServiceImpl {
 

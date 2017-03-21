@@ -22,7 +22,11 @@ import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.MD5util;
-
+/**
+ * 
+ * @author wangxiaoqiang
+ * @date 2017-3-21
+ */
 @Controller
 @RequestMapping("/login")
 public class LoginControllerImpl {

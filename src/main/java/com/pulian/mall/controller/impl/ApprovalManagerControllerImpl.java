@@ -20,7 +20,11 @@ import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.ApprovalManagerRequest;
 import com.pulian.mall.service.impl.ApprovalManagerServiceImpl;
-
+/**
+ * 
+ * @author wangxiaoqiang
+ * @date 2017-3-21
+ */
 @Controller
 @RequestMapping("/approval")
 public class ApprovalManagerControllerImpl {

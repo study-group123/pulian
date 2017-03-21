@@ -25,7 +25,11 @@ import com.pulian.mall.util.DateUtils;
 import com.pulian.mall.util.ErrorMessageUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
-
+/**
+ * 
+ * @author wangxiaoqiang
+ * @date 2017-3-21
+ */
 @Controller
 @RequestMapping("/user")
 public class UserManagerControllerImpl {

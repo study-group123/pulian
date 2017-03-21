@@ -13,7 +13,12 @@ import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.UserInfoMapper;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.UserManagerRequest;
-
+/**
+ *用户管理相关服务
+ * 
+ * @author wangxiaoqiang
+ * @date 2017-3-21
+ */
 @Service
 public class UserManagerServiceImpl {
 
