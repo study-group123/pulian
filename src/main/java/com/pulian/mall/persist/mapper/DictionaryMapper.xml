@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pulian.mall.persist.mapper.DictionaryMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.DictionaryMapper" >
+  
+    <id column="dic_id" property="dicId" jdbcType="INTEGER" />   
+    <result column="value_type" property="valueType" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  
+  
+  <sql id="queryColumns">
+  	dic_id, value_type, value, creater_id, updater_id, create_time, update_time
+  </sql>
+  
+  
+  
+  <sql id="insertColumns">
+  	 value_type, value, creater_id, updater_id, create_time, update_time
+  </sql>
+  
+  <insert id="saveDictionaryDto"  parameterType="com.pulian.mall.dto.ApprovalDto" >
+		insert into t_dic
+		(<include refid="insertColumns" />
+		)
+		values
+		(
+		#{condition.valueType,jdbcType=INTEGER},
+		#{condition.value,jdbcType=VARCHAR},
+		#{condition.createrId,jdbcType=INTEGER},
+		#{condition.updaterId,jdbcType=INTEGER},
+		#{condition.createTime,jdbcType=TIMESTAMP},
+		#{condition.updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	
+	
+	<select id="count" resultType="java.lang.Integer">
+       select count(*) from (
+      select 
+	     <include refid="queryColumns" />
+	     from t_dic t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>)t1	
+	</select>
+	
+	
+	
+	<select id="queryDictionaryList" resultMap="BaseResultMap">
+   
+	     select 
+	     <include refid="queryColumns" />
+	     from t_dic t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>	
+	           ORDER BY t.create_time desc
+     <include refid="MYSQL.pagination" />
+   </select>
+   
+   
+   
+	<sql id="conditions">
+		<if test="condition.dicId != null and condition.dicId != ''">
+			AND t.dic_id = #{condition.dicId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.valueType != null and condition.valueType != ''">
+			AND t.value_type = #{condition.valueType,jdbcType=INTEGER}
+		</if>
+		<if test="condition.value != null and condition.value != ''">
+			AND t.value = #{condition.value,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	
+	
+	<!--  --> 
+	<update id="updateDictionaryDtoByDictionaryId">
+		update t_dic 
+		<set>
+			<if test="condition.valueType != null and condition.valueType != '' ">
+				value_type = #{condition.valueType},
+			</if>
+			<if test="condition.value != null and condition.value != '' ">
+				value = #{condition.value},
+			</if>
+			update_time = #{condition.updateTime,jdbcType=VARCHAR},
+			update_id = #{condition.updateId,jdbcType=VARCHAR}
+		</set>
+		where dic_id = #{condition.dicId}
+   </update>
+</mapper>

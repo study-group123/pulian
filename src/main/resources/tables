@@ -51,3 +51,16 @@ CREATE TABLE `t_approval` (
   PRIMARY KEY (`approval_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 ---------------------------------------------------------------------------
+# 字典表
+CREATE TABLE `t_dic` (
+  `dic_id` INT(11) NOT NULL COMMENT '主键',
+  `value_type` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '值类型',
+  `value` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '值',
+  `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
+  `create_id` INT(11) DEFAULT NULL COMMENT '创建人',
+  `update_time` TIMESTAMP NULL DEFAULT NULL COMMENT '更新时间',
+  `update_id` INT(11) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`dic_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+---------------------------------------------------------------------------
+#

@@ -101,7 +101,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest commitRequest = new UserManagerRequest();
 		commitRequest.setUserId(currentUser.getUserId());
-		String newPwd = MD5util.EncoderPwdByMd5(userManagerRequest.getPassWord());
+		String newPwd = MD5util.encoderPwdByMd5(userManagerRequest.getPassWord());
 		commitRequest.setPassWord(newPwd);
 		
 		return commitRequest;
@@ -129,6 +129,7 @@ public class UserManagerControllerImpl {
 	
 		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
 		request.setUserAccount(FirstLetterUtil.getFirstLetter(request.getUserName())+"_"+request.getUserCode());
+		request.setPassWord(MD5util.generateDefaultPwd());
 		request.setCreateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
 		request.setUpdateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
 	}

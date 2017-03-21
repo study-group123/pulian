@@ -43,7 +43,7 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		request.setBankSerialNo("banksno");
 		request.setSettlementBank("settlementBank");
 		//request.setUserAccount("账号");
-		request.setPassWord(MD5util.EncoderPwdByMd5("666666"));
+		//request.setPassWord(MD5util.encoderPwdByMd5("666666"));
 		request.setCardType(CardTypeEnum.ID);
 		request.setCardNo("cardno");
 		request.setUserPhone("phone");
@@ -68,9 +68,8 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		UserManagerRequest request = new UserManagerRequest();
 		
 		request.setUserCode("HB4506000001");
-		;
 		request.setUserAccount("账号");
-		request.setPassWord(MD5util.EncoderPwdByMd5("666666"));
+		request.setPassWord(MD5util.encoderPwdByMd5("666666"));
 		
 		loginControllerImpl.userLogin(null, request, null, null);
 	 }  

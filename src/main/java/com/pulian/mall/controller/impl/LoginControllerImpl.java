@@ -67,7 +67,7 @@ public class LoginControllerImpl {
 	
 	
   private void buildQueryUserRequest(UserManagerRequest request) {
-	  request.setPassWord(MD5util.EncoderPwdByMd5(request.getPassWord()));
+	  request.setPassWord(MD5util.encoderPwdByMd5(request.getPassWord()));
 		
    }
 

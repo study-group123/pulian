@@ -4,12 +4,13 @@ import java.security.MessageDigest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import sun.misc.BASE64Encoder;
 
 public class MD5util {
 	private static final Log log = LogFactory.getLog(MD5util.class);
   
-    public static final String EncoderPwdByMd5(String str) {  
+    public static  String encoderPwdByMd5(String str) {  
     	
     	String newstr = null;
 		try {
@@ -22,15 +23,18 @@ public class MD5util {
         
         return newstr;  
     }  
-//测试   
+    public static  String generateDefaultPwd(){
+    	
+    	return encoderPwdByMd5("666666");
+    } 
     public static void main(String[] args) {   
         try {  
-            System.out.println("64位：result: " + EncoderPwdByMd5("12345678") + "**");  
+            System.out.println("64位：result: " + encoderPwdByMd5("12345678") + "**");  
         }catch (Exception e) {  
         	log.error("加密失败",e);
         }  
         
-    }  
+    }
     
     
 } 

@@ -16,7 +16,7 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private String userPhone;//电话
 	 
-	 private String userCode;//电话
+	 private String userCode;//code
 	 
 	 private String userAccount;//账号
 	 

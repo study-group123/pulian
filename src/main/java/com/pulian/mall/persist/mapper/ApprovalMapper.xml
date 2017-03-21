@@ -38,12 +38,12 @@
 		)
 		values
 		(
-		#{condition.applicant_id,jdbcType=INTEGER},
-		#{condition.approval_reason,jdbcType=VARCHAR},
-		#{condition.before_thirty_achievement,jdbcType=VARCHAR},
-		#{condition.approval_result,jdbcType=VARCHAR},
-		#{condition.approval_result_desc,jdbcType=VARCHAR},
-		#{condition.approver_id,jdbcType=INTEGER},
+		#{condition.applicantId,jdbcType=INTEGER},
+		#{condition.approvalReason,jdbcType=VARCHAR},
+		#{condition.beforeThirty_achievement,jdbcType=VARCHAR},
+		#{condition.approvalResult,jdbcType=VARCHAR},
+		#{condition.approvalResultDesc,jdbcType=VARCHAR},
+		#{condition.approverId,jdbcType=INTEGER},
 		#{condition.createrId,jdbcType=INTEGER},
 		#{condition.updaterId,jdbcType=INTEGER},
 		#{condition.createTime,jdbcType=TIMESTAMP},
