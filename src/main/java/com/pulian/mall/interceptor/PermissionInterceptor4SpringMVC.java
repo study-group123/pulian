@@ -33,7 +33,7 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 		
 		String requestUrl = request.getRequestURI();
 		
-		if(requestUrl.contains("toUserLogin"))
+		if(requestUrl.contains("toUserLogin") || requestUrl.contains("login") )
 			return true;
 		
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
@@ -43,6 +43,11 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 			menuRequest.setVipLevel(user.getVipLevel());
 			List<MenuDto> userMenuList= menuManagerService.queryMenuList(menuRequest);
 			
+			for(MenuDto menu : userMenuList){
+				if(menu.getUrlPath().equalsIgnoreCase(requestUrl)){
+					return true;
+				}
+			}
 		}else{
 			response.sendRedirect("http://www.pulian.com/login/toUserLogin"); 
 		}

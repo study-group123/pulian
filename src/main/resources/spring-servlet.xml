@@ -24,8 +24,7 @@
     <mvc:annotation-driven />
      <mvc:interceptors>
     	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
-    	<bean class="com.lvmama.lvf.common.trace.TraceContextInterceptor4SpringMVC">
-    		<property name="offlineFlag" value="true"></property>
+    	<bean class="com.pulian.mall.interceptor.PermissionInterceptor4SpringMVC">
     	</bean>
     </mvc:interceptors>
     <mvc:resources mapping="/js/**" location="/js/"/>  
