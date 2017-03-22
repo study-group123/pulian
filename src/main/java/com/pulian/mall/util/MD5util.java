@@ -23,10 +23,7 @@ public class MD5util {
         
         return newstr;  
     }  
-    public static  String generateDefaultPwd(){
-    	
-    	return encoderPwdByMd5("666666");
-    } 
+    
     public static void main(String[] args) {   
         try {  
             System.out.println("64位：result: " + encoderPwdByMd5("12345678") + "**");  

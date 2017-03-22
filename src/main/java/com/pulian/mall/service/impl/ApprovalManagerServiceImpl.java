@@ -77,6 +77,7 @@ public class ApprovalManagerServiceImpl {
     		if(approvalDto.getApprovalResult() == YesOrNoEnum.YES){
     		  UserInfoDto newUser= addNewGoldCard(approvalDto);
     		  baseResultT.setResult(newUser);
+    		  frozenOlderUser(approvalDto);
     		}
 		}catch(Exception e){
 			log.error("ApprovalManagerServiceImpl.updateApprovalDtoByApprovalId",e);
@@ -84,6 +85,12 @@ public class ApprovalManagerServiceImpl {
 		}
     	
 		return baseResultT;
+	}
+
+	private void frozenOlderUser(ApprovalDto approvalDto) {
+		UserManagerRequest userManagerRequest = new UserManagerRequest();
+		userManagerRequest.setFrozenStatus(YesOrNoEnum.YES);
+		userManagerService.updateUserByUserId(userManagerRequest);
 	}
 
 	private UserInfoDto addNewGoldCard(ApprovalDto approvalDto) {

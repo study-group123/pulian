@@ -21,10 +21,10 @@ import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.CodeUtil;
-import com.pulian.mall.util.DateUtils;
 import com.pulian.mall.util.ErrorMessageUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
+import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
  * 
  * @author wangxiaoqiang
@@ -133,9 +133,7 @@ public class UserManagerControllerImpl {
 	
 		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
 		request.setUserAccount(FirstLetterUtil.getFirstLetter(request.getUserName())+"_"+request.getUserCode());
-		request.setPassWord(MD5util.generateDefaultPwd());
-		request.setCreateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
-		request.setUpdateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
+		UserDefaultFieldUtil.setUserDefaultField(request);
 	}
 
 	public static void main(String[] args) {
