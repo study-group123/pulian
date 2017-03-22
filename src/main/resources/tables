@@ -63,4 +63,15 @@ CREATE TABLE `t_dic` (
   PRIMARY KEY (`dic_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 ---------------------------------------------------------------------------
-#
+# 菜单权限表
+CREATE TABLE `t_menu` (
+  `menu_id` INT(11) NOT NULL COMMENT '主键',
+  `vip_level` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户等级',
+  `url_path` VARCHAR(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'url路径',
+  `disabled` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '是否禁用',
+  `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
+  `create_id` INT(11) DEFAULT NULL COMMENT '创建人',
+  `update_time` TIMESTAMP NULL DEFAULT NULL COMMENT '更新时间',
+  `update_id` INT(11) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci

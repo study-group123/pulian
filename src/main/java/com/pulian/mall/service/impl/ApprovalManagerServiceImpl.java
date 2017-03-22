@@ -25,7 +25,6 @@ import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.DateUtils;
 import com.pulian.mall.util.FirstLetterUtil;
 /**
- *审批相关服务
  * 
  * @author wangxiaoqiang
  * @date 2017-3-21
@@ -137,7 +136,7 @@ public class ApprovalManagerServiceImpl {
 			getUnUsedUserCode(userArea);
 		}
 		
-		return null;
+		return newCode;
 	}
 
 	public static void main(String[] args) {

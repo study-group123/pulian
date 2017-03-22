@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pulian.mall.persist.mapper.MenuMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.MenuMapper" >
+  
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />   
+    <result column="vip_level" property="vipLevel" jdbcType="VARCHAR" />
+    <result column="url_path" property="urlPath" jdbcType="VARCHAR" />
+    <result column="disabled" property="disabled" jdbcType="VARCHAR" />
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  
+  
+  <sql id="queryColumns">
+  	menu_id, vip_level, url_path, disabled,creater_id, updater_id, create_time, update_time
+  </sql>
+  
+  
+  
+  <sql id="insertColumns">
+  	 vip_level, url_path, creater_id, disabled,updater_id, create_time, update_time
+  </sql>
+  
+  <insert id="saveMenuDto"  parameterType="com.pulian.mall.dto.ApprovalDto" >
+		insert into t_menu
+		(<include refid="insertColumns" />
+		)
+		values
+		(
+		#{condition.vipLevel,jdbcType=INTEGER},
+		#{condition.urlPath,jdbcType=VARCHAR},
+		#{condition.urlPath,jdbcType=VARCHAR},
+		#{condition.createrId,jdbcType=INTEGER},
+		#{condition.updaterId,jdbcType=INTEGER},
+		#{condition.createTime,jdbcType=TIMESTAMP},
+		#{condition.updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	
+	
+	<select id="count" resultType="java.lang.Integer">
+       select count(*) from (
+      select 
+	     <include refid="queryColumns" />
+	     from t_menu t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>)t1	
+	</select>
+	
+	
+	
+	<select id="queryMenuList" resultMap="BaseResultMap">
+   
+	     select 
+	     <include refid="queryColumns" />
+	     from t_menu t
+	     <where>
+			<if test="condition != null">
+				<include refid="conditions"></include>	
+			</if>
+		 </where>	
+	           ORDER BY t.create_time desc
+     <include refid="MYSQL.pagination" />
+   </select>
+   
+   
+   
+	<sql id="conditions">
+		<if test="condition.menuId != null and condition.menuId != ''">
+			AND t.menu_id = #{condition.menuId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.vipLevel != null and condition.vipLevel != ''">
+			AND t.vip_level = #{condition.vipLevel,jdbcType=INTEGER}
+		</if>
+		<if test="condition.url_path != null and condition.url_path != ''">
+			AND t.url_path = #{condition.urlPath,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	
+	
+	<!--  --> 
+	<update id="updateMenuDtoByMenuId">
+		update t_menu 
+		<set>
+			<if test="condition.vipLevel != null and condition.vipLevel != '' ">
+				vip_level = #{condition.vipLevel},
+			</if>
+			<if test="condition.url_path != null and condition.url_path != '' ">
+				url_path = #{condition.urlPath},
+			</if>
+			update_time = #{condition.updateTime,jdbcType=VARCHAR},
+			update_id = #{condition.updateId,jdbcType=VARCHAR}
+		</set>
+		where menu_id = #{condition.menuId}
+   </update>
+</mapper>

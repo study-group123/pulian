@@ -18,7 +18,7 @@ public class UserDefaultFieldUtil {
     	return MD5util.encoderPwdByMd5(DEFAULT_PWD);
     }
     
-    public static void setUserDefaultField(UserManagerRequest userManagerRequest){
+    public static void setUserDefaultFields(UserManagerRequest userManagerRequest){
     	userManagerRequest.setActiveStatus(DEFAULT_ACTIVE_STATUS);
     	userManagerRequest.setFrozenStatus(DEFAULT_FROZEN_STATUS);
     	userManagerRequest.setUserDisable(DEFAULT_DISABLED);

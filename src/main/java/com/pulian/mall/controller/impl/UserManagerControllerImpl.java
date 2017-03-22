@@ -133,7 +133,7 @@ public class UserManagerControllerImpl {
 	
 		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
 		request.setUserAccount(FirstLetterUtil.getFirstLetter(request.getUserName())+"_"+request.getUserCode());
-		UserDefaultFieldUtil.setUserDefaultField(request);
+		UserDefaultFieldUtil.setUserDefaultFields(request);
 	}
 
 	public static void main(String[] args) {
