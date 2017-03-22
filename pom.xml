@@ -11,6 +11,7 @@
     <spring.version>3.2.4.RELEASE</spring.version>
     <testng.version>6.8.7</testng.version>
     <jackson.version>1.9.13</jackson.version>
+    <poi.version>3.7</poi.version>
   </properties>
   <dependencies>
     <dependency>
@@ -65,7 +66,13 @@
         <groupId>log4j</groupId>    
         <artifactId>log4j</artifactId>    
         <version>1.2.14</version>    
-    </dependency>  
+    </dependency> 
+     <!-- 添加poi -->
+    <dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>${poi.version}</version>
+	</dependency>
      <!-- 添加Servlet -->
     <dependency>  
         <groupId>javax.servlet</groupId>  
