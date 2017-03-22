@@ -11,7 +11,7 @@ public class ConstantUtil {
     
     public static final String EMPTY_PWD_OR_NAME = "请填写用户名或者密码！";
     
-    public static final String ERROR_PWD_OR_NAME = "请填写用户名或者密码！";
+    public static final String ERROR_PWD_OR_NAME = "用户名或者密码错误！";
     
     
     
