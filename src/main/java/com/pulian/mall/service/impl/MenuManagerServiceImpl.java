@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pulian.mall.dto.MenuDto;
+import com.pulian.mall.dto.MenuLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.MenuMapper;
 import com.pulian.mall.request.BaseResult;
@@ -35,6 +36,34 @@ public class MenuManagerServiceImpl {
 		
 		return menuList;
 	}
+	
+	public List<MenuDto> getMenuTree(MenuDto queryMenu){
+		List<MenuDto> result = new ArrayList<MenuDto>();
+		try{
+			queryMenu.setDisabled(YesOrNoEnum.NO);
+			queryMenu.setMenuLevel(MenuLevelEnum.ONE);
+			List<MenuDto> oneLevelMenuList = menuMapper.queryMenuList(queryMenu);
+			
+			queryMenu.setDisabled(YesOrNoEnum.NO);
+			queryMenu.setMenuLevel(MenuLevelEnum.TWO);
+			List<MenuDto> twoLevelMenuList = menuMapper.queryMenuList(queryMenu);
+			
+			for(MenuDto parentMenu : oneLevelMenuList){
+				
+				for(MenuDto sonMenu : twoLevelMenuList){
+					if(parentMenu.getMenuId() == sonMenu.getParentId()){
+						parentMenu.addSonMenu(sonMenu);
+					}
+				}
+			}
+			result = oneLevelMenuList;
+		}catch(Exception e){
+			log.error("MenuManagerServiceImpl.getMenuTree",e);
+		}
+		
+		return result;
+	}
+	
 	
     public BaseResult saveMenuDto(MenuDto menuDto){
     	BaseResult baseResult = new BaseResult();

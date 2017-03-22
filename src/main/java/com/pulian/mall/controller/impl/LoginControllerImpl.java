@@ -1,5 +1,6 @@
 package com.pulian.mall.controller.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pulian.mall.dto.MenuDto;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
+import com.pulian.mall.service.impl.MenuManagerServiceImpl;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.MD5util;
@@ -33,10 +36,13 @@ import com.pulian.mall.util.ServletUtil;
 @RequestMapping("/login")
 public class LoginControllerImpl {
 
+	private static final Log log = LogFactory.getLog(LoginControllerImpl.class);
+	
 	@Autowired
 	private UserManagerServiceImpl userManagerService;
 	
-	private static final Log log = LogFactory.getLog(LoginControllerImpl.class);
+	@Autowired
+	private MenuManagerServiceImpl menuManagerService;
 	/**
 	 * 进入主页
 	 */
@@ -57,7 +63,7 @@ public class LoginControllerImpl {
 		String pwd = userManagerRequest.getUserInfoDto().getPassWord();
 		if(StringUtils.isEmpty(code) || StringUtils.isEmpty(pwd)){
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
-			log.error("请填写用户名和密码");
+			baseResultT.setMessage(ConstantUtil.EMPTY_PWD_OR_NAME);
 			return baseResultT;
 		}
 		buildQueryUserRequest(userManagerRequest);
@@ -67,22 +73,40 @@ public class LoginControllerImpl {
 			ServletUtil.putSession(request, response, ConstantUtil.USER_SESSION_KEY, result.get(0));
 		}else{
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
-			baseResultT.setMessage("用户名或者密码错误");
+			baseResultT.setMessage(ConstantUtil.ERROR_PWD_OR_NAME);
 		}
+		
 		return baseResultT;
 	}
-	
-	
-  private void buildQueryUserRequest(UserManagerRequest request) {
-	  request.setPassWord(MD5util.encoderPwdByMd5(request.getPassWord()));
-		
-   }
 
-  @RequestMapping(value="/testIndex",method=RequestMethod.GET)     
-  public String getFirstPage(Model model) {    
-      model.addAttribute("name", "王大锤");
-	  return "index";
-  }  
+	  @RequestMapping(value="/index",method=RequestMethod.GET)     
+	  public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
+		  
+		  UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		  List<MenuDto> menus = new ArrayList<MenuDto>();
+		  if(user != null){
+				MenuDto menuRequest = new MenuDto();
+				menuRequest.setDisabled(YesOrNoEnum.NO);
+				menuRequest.setVipLevel(user.getVipLevel());
+				menus= menuManagerService.getMenuTree(menuRequest);
+				
+		  }
+	      model.addAttribute("menus", menus);
+		  return "index";
+	  }  
+	
+	
+     private void buildQueryUserRequest(UserManagerRequest request) {
+	    request.setPassWord(MD5util.encoderPwdByMd5(request.getPassWord()));
+		
+     }
+
+     //测试方法
+     @RequestMapping(value="/testIndex",method=RequestMethod.GET)     
+     public String getFirstPage(Model model) {    
+         model.addAttribute("name", "王大锤");
+	     return "index";
+     }  
 	
 }
 
