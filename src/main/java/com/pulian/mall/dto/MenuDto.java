@@ -10,6 +10,10 @@ public class MenuDto extends BaseDto{
 	
 	private String urlPath;
 	
+	private int menuLevel;
+	
+	private int parentId;
+	
 	private YesOrNoEnum disabled;
 
 	public int getMenuId() {
@@ -42,6 +46,22 @@ public class MenuDto extends BaseDto{
 
 	public void setDisabled(YesOrNoEnum disabled) {
 		this.disabled = disabled;
+	}
+
+	public int getMenuLevel() {
+		return menuLevel;
+	}
+
+	public void setMenuLevel(int menuLevel) {
+		this.menuLevel = menuLevel;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 	
 	

@@ -21,7 +21,7 @@ import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.CodeUtil;
-import com.pulian.mall.util.ErrorMessageUtil;
+import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
 import com.pulian.mall.util.UserDefaultFieldUtil;
@@ -90,7 +90,7 @@ public class UserManagerControllerImpl {
 				UserManagerRequest commitRequest = buildUpdatePassWordCommitRequest(userList.get(0),userManagerRequest);
 				baseResult = userManagerService.updateUserByUserId(commitRequest);
 			}else{
-				baseResult.setMessage(ErrorMessageUtil.USER_NOT_FOUND);
+				baseResult.setMessage(ConstantUtil.USER_NOT_FOUND);
 				baseResult.setSuccessStatus(YesOrNoEnum.NO);
 			}
 		}catch(Exception e){

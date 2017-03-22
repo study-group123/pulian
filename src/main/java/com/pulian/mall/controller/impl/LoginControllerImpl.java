@@ -21,7 +21,9 @@ import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
+import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.MD5util;
+import com.pulian.mall.util.ServletUtil;
 /**
  * 
  * @author wangxiaoqiang
@@ -62,6 +64,7 @@ public class LoginControllerImpl {
 		List<UserInfoDto> result = userManagerService.queryUserInfo(userManagerRequest);
 		if(!CollectionUtils.isEmpty(result)){
 			baseResultT.setResult(result.get(0));
+			ServletUtil.putSession(request, response, ConstantUtil.USER_SESSION_KEY, result.get(0));
 		}else{
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 			baseResultT.setMessage("用户名或者密码错误");

@@ -68,6 +68,8 @@ CREATE TABLE `t_menu` (
   `menu_id` INT(11) NOT NULL COMMENT '主键',
   `vip_level` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户等级',
   `url_path` VARCHAR(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'url路径',
+  `menu_level` INT(2) DEFAULT NULL COMMENT '菜单等级',
+  `parent_id` INT(11) DEFAULT NULL COMMENT '父菜单id',
   `disabled` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '是否禁用',
   `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
   `create_id` INT(11) DEFAULT NULL COMMENT '创建人',

@@ -22,6 +22,17 @@
      <context:component-scan base-package="com.pulian" />
     <!-- 默认的注解映射的支持 -->
     <mvc:annotation-driven />
+     <mvc:interceptors>
+    	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+    	<bean class="com.lvmama.lvf.common.trace.TraceContextInterceptor4SpringMVC">
+    		<property name="offlineFlag" value="true"></property>
+    	</bean>
+    </mvc:interceptors>
+    <mvc:resources mapping="/js/**" location="/js/"/>  
+    <mvc:resources mapping="/css/**" location="/css/"/>  
+    <mvc:resources mapping="/images/**" location="/images/"/>  
+	<mvc:default-servlet-handler />
+	
     <!-- 针对freemarker的视图配置 -->    
    <bean id="viewResolver"    
        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">    

@@ -25,7 +25,7 @@ public class MenuManagerServiceImpl {
 	
 	private static final Log log = LogFactory.getLog(MenuManagerServiceImpl.class);
 	
-	public List<MenuDto> queryDictionaryList(MenuDto menuDto){
+	public List<MenuDto> queryMenuList(MenuDto menuDto){
 		List<MenuDto> menuList = new ArrayList<MenuDto>();
 		try{
 			menuList = menuMapper.queryMenuList(menuDto);
