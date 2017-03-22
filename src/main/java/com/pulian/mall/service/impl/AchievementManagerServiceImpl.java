@@ -1,5 +1,7 @@
 package com.pulian.mall.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.pulian.mall.dto.AchievementDto;
@@ -15,7 +17,7 @@ import com.pulian.mall.util.Pagination;
 @Service
 public class AchievementManagerServiceImpl {
 
-	public BaseResultT<AchievementDto> queryAchievementList(Pagination pagination,AchievementManagerRequest achievementManagerRequest) {
+	public BaseResultT<List<AchievementDto>> queryAchievementList(Pagination pagination,AchievementManagerRequest achievementManagerRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

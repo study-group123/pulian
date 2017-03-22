@@ -1,8 +1,6 @@
 package com.pulian.mall.controller.impl;
 
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +23,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lvmama.lvtraffic.offline.web.form.vas.AchievementDto;
 import com.pulian.mall.dto.AchievementDto;
 import com.pulian.mall.request.AchievementManagerRequest;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.service.impl.AchievementManagerServiceImpl;
+import com.pulian.mall.util.DateUtil;
 import com.pulian.mall.util.Pagination;
 /**
  * 
@@ -52,36 +50,26 @@ public class AchievementControllerImpl {
 		return "time_achievement";
 	}
 	@RequestMapping("exportVasCouponOrderListCsv")
-	@Override
 	public String exportAchievementList(Model model,AchievementManagerRequest achievementManagerRequest, HttpServletResponse response) {
 		
-    	BaseResultT<AchievementDto> baseResult = null;
-		try {
-			baseResult = achievementManagerService.queryAchievementList(new Pagination(1, 9999),achievementManagerRequest);
-		} catch (Exception e) {
-			log.error("导出业绩异常",e);
-		} 
-		
-    	List<AchievementDto> forms = new ArrayList<AchievementDto>();	
-    	for (AchievementDto achievementDto : baseResult.getResult()) {		 
-    		AchievementDto vasOrderResultVo = convertToVo(achievementDto); 
-    		forms.add(vasOrderResultVo);
-    	}
-    	
-		String date = DateUtils.formatDate(new Date(), DateUtils.YYYY_MM_DD);
-		String title = date+"_vas_coupon_order_list";
-		String[] headers = new String[]{"采购订单号", "优惠券产品订单号", "下单时间", "子类型","产品名称","销售价", "联系人姓名", "驴妈妈账号", "发放状态", "优惠券码","订单金额", "产品线", "渠道", "订单状态","发放时间"};
-		HSSFWorkbook workbook = getHssfWorkbook(forms, title, headers);
-		
-		response.reset();
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("octets/stream");
-		response.addHeader("Content-Disposition", "attachment;filename=" + title + ".xls");
-		response.setHeader("Connection", "close");
-		//response.setContentLength(1024);
-		response.setHeader("Content-Type", "application/vnd.ms-excel");
+    	BaseResultT<List<AchievementDto>> baseResult = null;
 
 		try {
+			
+			baseResult = achievementManagerService.queryAchievementList(new Pagination(1, 9999),achievementManagerRequest);
+			
+			String title = DateUtil.getCurrentDateByFormat(DateUtil.YYMMDD)+"_vas_coupon_order_list";
+			String[] headers = new String[]{"", "", "", "","","", "", "", "", "","", "", "", "",""};
+			HSSFWorkbook workbook = getHssfWorkbook(baseResult.getResult(), title, headers);
+			
+			response.reset();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("octets/stream");
+			response.addHeader("Content-Disposition", "attachment;filename=" + title + ".xls");
+			response.setHeader("Connection", "close");
+			//response.setContentLength(1024);
+			response.setHeader("Content-Type", "application/vnd.ms-excel");
+			
 			OutputStream os = response.getOutputStream();
 
 			workbook.write(os);
@@ -89,7 +77,7 @@ public class AchievementControllerImpl {
 			os.close();
 			os = null;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("导出业绩异常", e);
 		}
 		return null;
 	}
@@ -152,7 +140,7 @@ public class AchievementControllerImpl {
 		for (int i = 0; i < results.size(); i++) {
 			AchievementDto achievementDto = results.get(i);
 			row = sheet.createRow(i + 1);
-			row.createCell(0).setCellValue();
+			/*row.createCell(0).setCellValue();
 			row.createCell(1).setCellValue();
 			row.createCell(2).setCellValue();
 			row.createCell(3).setCellValue();
@@ -166,7 +154,7 @@ public class AchievementControllerImpl {
 			row.createCell(11).setCellValue();
 			row.createCell(12).setCellValue();
 			row.createCell(13).setCellValue();
-			row.createCell(14).setCellValue();
+			row.createCell(14).setCellValue();*/
 			
 		}
 		return workbook;

@@ -22,7 +22,7 @@ import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.util.CodeUtil;
-import com.pulian.mall.util.DateUtils;
+import com.pulian.mall.util.DateUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 /**
  * 
@@ -126,8 +126,8 @@ public class ApprovalManagerServiceImpl {
 		//之前没用过，将新code插入字典，并返回使用
 		if(CollectionUtils.isEmpty(list)){
 			
-			queryConditon.setCreateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
-			queryConditon.setUpdateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
+			queryConditon.setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+			queryConditon.setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
 			dictionaryManagerService.saveDictionaryDto(queryConditon);
 			return newCode;
 			

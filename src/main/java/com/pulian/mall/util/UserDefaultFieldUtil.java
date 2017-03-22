@@ -23,7 +23,7 @@ public class UserDefaultFieldUtil {
     	userManagerRequest.setFrozenStatus(DEFAULT_FROZEN_STATUS);
     	userManagerRequest.setUserDisable(DEFAULT_DISABLED);
     	userManagerRequest.setPassWord(generateDefaultPwd());
-    	userManagerRequest.setCreateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
-    	userManagerRequest.setUpdateTime(DateUtils.getDateByFormat(DateUtils.YYMMDDHHMMSS));
+    	userManagerRequest.setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+    	userManagerRequest.setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     }
 }
