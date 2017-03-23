@@ -40,7 +40,8 @@
    
      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
          <property name="dataSource" ref="dataSource" />  
-         <!-- 自动扫描entity目录 xml文件 -->  
+         <!-- 自动扫描entity目录 xml文件 --> 
+         <property name="configLocation" value="classpath:mybatis-config-mysql.xml"/> 
          <property name="mapperLocations" value="classpath:com/pulian/mall/persist/mapper/*.xml"></property>  
      </bean>  
      <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  

@@ -51,7 +51,7 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 		}else{
 			response.sendRedirect("http://www.pulian.com/login/toUserLogin"); 
 		}
-		 
+		//TODO
 		return true;
 	}
 

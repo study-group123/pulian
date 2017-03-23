@@ -81,7 +81,7 @@
 	
 	
 	
-	<select id="count" resultType="java.lang.Integer">
+	<select id="countUsers" resultType="java.lang.Integer">
        select count(*) from (
       select 
 	     <include refid="queryColumns" />
@@ -94,10 +94,8 @@
 	</select>
 	
 	
-	
 	<select id="queryUserInfo" resultMap="BaseResultMap">
-   
-	     select 
+	     select
 	     <include refid="queryColumns" />
 	     from t_user t
 	     <where>
