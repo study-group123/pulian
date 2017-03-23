@@ -12,6 +12,6 @@
     </typeAliases>
     
     <mappers>
-        <mapper resource="MysqlPagination.xml"/>
+        <mapper resource="com/pulian/mall/persist/mybatis/mysql/MysqlPagination.xml"/>
     </mappers>
 </configuration>

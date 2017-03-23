@@ -33,7 +33,7 @@
   
   
   
-  <sql id="queryColumns">
+  <sql id="queryColumns"> 
   	user_id, user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
   	settlement_bank, bank_address, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
   	parent_id, creater_id, updater_id, create_time, update_time
@@ -81,8 +81,8 @@
 	
 	
 	
-	<select id="countUsers" resultType="java.lang.Integer">
-       select count(*) from (
+	<select id="count" resultType="java.lang.Integer">
+       select count(*) from (   
       select 
 	     <include refid="queryColumns" />
 	     from t_user t
