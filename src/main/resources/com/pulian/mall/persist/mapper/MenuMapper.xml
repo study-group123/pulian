@@ -3,15 +3,16 @@
 <mapper namespace="com.pulian.mall.persist.mapper.MenuMapper">
 
 
-  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.pulian.mall.dto.MenuDto" >
   
-    <id column="menu_id" property="menuId" jdbcType="INTEGER" />   
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="menu_code" property="menuCode" jdbcType="VARCHAR" />   
     <result column="vip_level" property="vipLevel" jdbcType="VARCHAR" />
     <result column="menu_path" property="menuPath" jdbcType="VARCHAR" />
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
     <result column="menu_disabled" property="menuDisabled" jdbcType="VARCHAR" />
-    <result column="menu_level" property="menuLevel" jdbcType="INTEGER" />
-    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="menu_level" property="menuLevel" jdbcType="VARCHAR" />
+    <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
     <result column="creater_id" property="createrId" jdbcType="INTEGER" />
     <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -21,27 +22,28 @@
   
   
   <sql id="queryColumns">
-  	menu_id, vip_level, menu_path, menu_name, menu_disabled, menu_level, parent_id, creater_id, updater_id, create_time, update_time
+  	menu_id, menu_code,vip_level, menu_path, menu_name, menu_disabled, menu_level, parent_code, creater_id, updater_id, create_time, update_time
   </sql>
   
   
   
   <sql id="insertColumns">
-  	 vip_level, menu_path, menu_name, menu_disabled, menu_level, parent_id,creater_id, disabled, menu_level, parent_id, updater_id, create_time, update_time
+  	 menu_code, vip_level, menu_path, menu_name, menu_disabled, menu_level, parent_code,creater_id,  updater_id, create_time, update_time
   </sql>
   
-  <insert id="saveMenuDto"  parameterType="com.pulian.mall.dto.ApprovalDto" >
+  <insert id="saveMenuDto"  parameterType="com.pulian.mall.dto.MenuDto" >
 		insert into t_menu
 		(<include refid="insertColumns" />
 		)
 		values
 		(
+		#{condition.menuCode,jdbcType=VARCHAR},
 		#{condition.vipLevel,jdbcType=VARCHAR},
 		#{condition.menuPath,jdbcType=VARCHAR},
 		#{condition.menuName,jdbcType=VARCHAR},
 		#{condition.menuDisabled,jdbcType=VARCHAR},
-		#{condition.menuLevel,jdbcType=INTEGER},
-		#{condition.parentId,jdbcType=INTEGER},
+		#{condition.menuLevel,jdbcType=VARCHAR},
+		#{condition.parentCode,jdbcType=VARCHAR},
 		#{condition.createrId,jdbcType=INTEGER},
 		#{condition.updaterId,jdbcType=INTEGER},
 		#{condition.createTime,jdbcType=TIMESTAMP},
@@ -76,7 +78,6 @@
 			</if>
 		 </where>	
 	           ORDER BY t.create_time desc
-     <include refid="MYSQL.pagination" />
    </select>
    
    
@@ -84,6 +85,9 @@
 	<sql id="conditions">
 		<if test="condition.menuId != null and condition.menuId != ''">
 			AND t.menu_id = #{condition.menuId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.menuCode != null and condition.menuCode != ''">
+			AND t.menu_code = #{condition.menuCode,jdbcType=INTEGER}
 		</if>
 		<if test="condition.vipLevel != null and condition.vipLevel != ''">
 			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
@@ -95,10 +99,10 @@
 			AND t.menu_name = #{condition.menuName,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.menuLevel != null and condition.menuLevel != ''">
-			AND t.menu_level = #{condition.menuLevel,jdbcType=INTEGER}
+			AND t.menu_level = #{condition.menuLevel,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.parentId != null and condition.parentId != ''">
-			AND t.parent_id = #{condition.parentId,jdbcType=INTEGER}
+		<if test="condition.parentCode != null and condition.parentCode != ''">
+			AND t.parent_code = #{condition.parentCode,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.menuDisabled != null and condition.menuDisabled != ''">
 			AND t.menu_disabled = #{condition.menuDisabled,jdbcType=VARCHAR}

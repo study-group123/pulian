@@ -50,7 +50,7 @@ public class MenuManagerServiceImpl {
 			for(MenuDto parentMenu : oneLevelMenuList){
 				
 				for(MenuDto sonMenu : twoLevelMenuList){
-					if(parentMenu.getMenuId() == sonMenu.getParentId()){
+					if(parentMenu.getMenuCode().equals(sonMenu.getParentCode())){
 						parentMenu.addSonMenu(sonMenu);
 					}
 				}

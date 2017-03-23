@@ -1,6 +1,5 @@
 package com.pulian.mall.interceptor;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pulian.mall.dto.MenuDto;
 import com.pulian.mall.dto.UserInfoDto;
-import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.service.impl.MenuManagerServiceImpl;
 import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.ServletUtil;
@@ -38,7 +35,7 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 		
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		if(user != null){
-			MenuDto menuRequest = new MenuDto();
+			/*MenuDto menuRequest = new MenuDto();
 			menuRequest.setMenuDisabled(YesOrNoEnum.NO);
 			menuRequest.setVipLevel(user.getVipLevel());
 			List<MenuDto> userMenuList= menuManagerService.queryMenuList(menuRequest);
@@ -47,12 +44,13 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 				if(menu.getMenuPath().equalsIgnoreCase(requestUrl)){
 					return true;
 				}
-			}
+			}*/
+			return true;
 		}else{
 			response.sendRedirect("http://www.pulian.com/login/toUserLogin"); 
 		}
 		//TODO
-		return true;
+		return false;
 	}
 
 	@Override

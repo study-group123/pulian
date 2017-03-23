@@ -37,7 +37,7 @@ CREATE TABLE `t_user` (
 ---------------------------------------------------------------------------
 # 审批表
 CREATE TABLE `t_approval` (
-  `approval_id` INT(11) NOT NULL COMMENT '主键',
+  `approval_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `applicant_id` INT(11) DEFAULT NULL COMMENT '申请人id',
   `approval_reason` VARCHAR(512) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '申请理由',
   `before_thirty_achievement` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '前三十天业绩，申请之前的30天',
@@ -53,7 +53,7 @@ CREATE TABLE `t_approval` (
 ---------------------------------------------------------------------------
 # 字典表
 CREATE TABLE `t_dic` (
-  `dic_id` INT(11) NOT NULL COMMENT '主键',
+  `dic_id` INT(11) NOT NULL AUTO_INCREMENT  COMMENT '主键',
   `value_type` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '值类型',
   `value` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '值',
   `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
@@ -65,13 +65,13 @@ CREATE TABLE `t_dic` (
 ---------------------------------------------------------------------------
 # 菜单权限表
 CREATE TABLE `t_menu` (
-  `menu_id` INT(11) NOT NULL COMMENT '主键',
+  `menu_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `menu_code` VARCHAR(64)  DEFAULT NULL COMMENT 'code',
   `vip_level` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户等级',
   `menu_path` VARCHAR(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '菜单路径',
   `menu_name` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '菜单名称',
-  `menu_level` INT(2) DEFAULT NULL COMMENT '菜单等级',
-  `disabled` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '是否禁用',
-  `parent_id` INT(11) DEFAULT NULL COMMENT '父菜单id',
+  `menu_level` VARCHAR(64) DEFAULT NULL COMMENT '菜单等级',
+  `parent_code` VARCHAR(64)  DEFAULT NULL COMMENT '父菜单code',
   `menu_disabled` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '是否禁用',
   `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
   `creater_id` INT(11) DEFAULT NULL COMMENT '创建人',
@@ -79,3 +79,12 @@ CREATE TABLE `t_menu` (
   `updater_id` INT(11) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`menu_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+
+# 菜单初始化
+INSERT INTO t_menu (menu_code, parent_code,vip_level, menu_path, menu_name, menu_disabled, menu_level, creater_id, updater_id, create_time, update_time) 
+VALUES ('index',NULL,'GOLD', '/index','首页','NO','ZERO', NULL, NULL, NULL, NULL)
+ , ('goldCardManager','index','GOLD', '/goldCardManager','金卡管理','NO','ONE', NULL, NULL, NULL, NULL)
+ , ('goldCardadd','goldCardManager','GOLD', '/goldCardadd','金卡新增','NO','TWO', NULL, NULL, NULL, NULL)
+  
+ ---------------------------------------------------------------------------
+

@@ -3,7 +3,7 @@
 <mapper namespace="com.pulian.mall.persist.mapper.DictionaryMapper">
 
 
-  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.pulian.mall.dto.DictionaryDto" >
   
     <id column="dic_id" property="dicId" jdbcType="INTEGER" />   
     <result column="value_type" property="valueType" jdbcType="VARCHAR" />
@@ -68,7 +68,6 @@
 			</if>
 		 </where>	
 	           ORDER BY t.create_time desc
-     <include refid="MYSQL.pagination" />
    </select>
    
    

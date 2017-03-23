@@ -3,7 +3,7 @@
 <mapper namespace="com.pulian.mall.persist.mapper.ApprovalMapper">
 
 
-  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.ApprovalMapper" >
+  <resultMap id="BaseResultMap" type="com.pulian.mall.dto.ApprovalDto" >
   
     <id column="approval_id" property="approvalId" jdbcType="INTEGER" />   
     <result column="applicant_id" property="applicantId" jdbcType="INTEGER" />

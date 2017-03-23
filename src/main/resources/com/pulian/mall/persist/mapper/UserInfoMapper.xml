@@ -3,14 +3,14 @@
 <mapper namespace="com.pulian.mall.persist.mapper.UserInfoMapper">
 
 
-  <resultMap id="BaseResultMap" type="com.pulian.mall.persist.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pulian.mall.dto.UserInfoDto" >
   
     <id column="user_id" property="userId" jdbcType="INTEGER" />   
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_code" property="userCode" jdbcType="VARCHAR" />
     <result column="account" property="userAccount" jdbcType="VARCHAR" />
-    <result column="pass_word" property="passWrod" jdbcType="VARCHAR" />
+    <result column="pass_word" property="passWord" jdbcType="VARCHAR" />
     <result column="user_area" property="userArea" jdbcType="VARCHAR" />
     <result column="address" property="userAddress" jdbcType="VARCHAR" />
     <result column="card_type" property="cardType" jdbcType="VARCHAR" />

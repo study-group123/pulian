@@ -46,7 +46,7 @@ public class ApprovalManagerServiceImpl {
 	public List<ApprovalDto> queryApprovalList(ApprovalManagerRequest approvalManagerRequest){
 		List<ApprovalDto> approvalList = new ArrayList<ApprovalDto>();
 		try{
-			approvalList = approvalMapper.queryApprovalList(approvalManagerRequest.getApprovalDto());
+			approvalList = approvalMapper.queryApprovalList(approvalManagerRequest);
 		}catch(Exception e){
 			log.error("ApprovalManagerServiceImpl.queryApprovalList",e);
 		}

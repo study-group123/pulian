@@ -29,7 +29,7 @@ public class UserManagerServiceImpl {
 	public List<UserInfoDto> queryUserInfo(UserManagerRequest userManagerRequest){
 		List<UserInfoDto> userList = new ArrayList<UserInfoDto>();
 		try{
-			userList = userInfoMapper.queryUserInfo(userManagerRequest.getUserInfoDto());
+			userList = userInfoMapper.queryUserInfo(userManagerRequest);
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.queryUserInfo",e);
 		}

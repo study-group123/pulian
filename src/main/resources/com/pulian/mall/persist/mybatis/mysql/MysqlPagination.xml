@@ -18,7 +18,7 @@
   <sql id="MYSQL.pagination">
     <![CDATA[
      
-     limit ${startRow-1} ,${endRow-(startRow-1)}
+     limit ${condition.startRow-1} ,${condition.endRow-(condition.startRow-1)}
   ]]>
   </sql>
   

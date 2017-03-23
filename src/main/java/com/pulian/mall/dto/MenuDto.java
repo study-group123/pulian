@@ -8,6 +8,8 @@ public class MenuDto extends BaseDto{
   
 	private int menuId;
 	
+	private String menuCode;
+	
 	private VipLevelEnum vipLevel;
 	
 	private String menuPath;
@@ -16,7 +18,7 @@ public class MenuDto extends BaseDto{
 	
 	private MenuLevelEnum menuLevel;
 	
-	private int parentId;
+	private String parentCode;
 	
 	private YesOrNoEnum menuDisabled;
 	
@@ -50,13 +52,6 @@ public class MenuDto extends BaseDto{
 		this.menuLevel = menuLevel;
 	}
 
-	public int getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
-	}
 
 	public MenuDto getParentMenu() {
 		return parentMenu;
@@ -100,6 +95,22 @@ public class MenuDto extends BaseDto{
 
 	public void setMenuDisabled(YesOrNoEnum menuDisabled) {
 		this.menuDisabled = menuDisabled;
+	}
+
+	public String getMenuCode() {
+		return menuCode;
+	}
+
+	public void setMenuCode(String menuCode) {
+		this.menuCode = menuCode;
+	}
+
+	public String getParentCode() {
+		return parentCode;
+	}
+
+	public void setParentCode(String parentCode) {
+		this.parentCode = parentCode;
 	}
 
 	
