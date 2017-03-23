@@ -86,7 +86,7 @@ public class LoginControllerImpl {
 		  List<MenuDto> menus = new ArrayList<MenuDto>();
 		  if(user != null){
 				MenuDto menuRequest = new MenuDto();
-				menuRequest.setDisabled(YesOrNoEnum.NO);
+				menuRequest.setMenuDisabled(YesOrNoEnum.NO);
 				menuRequest.setVipLevel(user.getVipLevel());
 				menus= menuManagerService.getMenuTree(menuRequest);
 				

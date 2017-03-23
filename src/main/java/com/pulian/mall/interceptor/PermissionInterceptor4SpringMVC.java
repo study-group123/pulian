@@ -39,12 +39,12 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		if(user != null){
 			MenuDto menuRequest = new MenuDto();
-			menuRequest.setDisabled(YesOrNoEnum.NO);
+			menuRequest.setMenuDisabled(YesOrNoEnum.NO);
 			menuRequest.setVipLevel(user.getVipLevel());
 			List<MenuDto> userMenuList= menuManagerService.queryMenuList(menuRequest);
 			
 			for(MenuDto menu : userMenuList){
-				if(menu.getUrlPath().equalsIgnoreCase(requestUrl)){
+				if(menu.getMenuPath().equalsIgnoreCase(requestUrl)){
 					return true;
 				}
 			}

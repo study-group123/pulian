@@ -40,11 +40,10 @@ public class MenuManagerServiceImpl {
 	public List<MenuDto> getMenuTree(MenuDto queryMenu){
 		List<MenuDto> result = new ArrayList<MenuDto>();
 		try{
-			queryMenu.setDisabled(YesOrNoEnum.NO);
+			queryMenu.setMenuDisabled(YesOrNoEnum.NO);
 			queryMenu.setMenuLevel(MenuLevelEnum.ONE);
 			List<MenuDto> oneLevelMenuList = menuMapper.queryMenuList(queryMenu);
 			
-			queryMenu.setDisabled(YesOrNoEnum.NO);
 			queryMenu.setMenuLevel(MenuLevelEnum.TWO);
 			List<MenuDto> twoLevelMenuList = menuMapper.queryMenuList(queryMenu);
 			

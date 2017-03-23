@@ -10,13 +10,15 @@ public class MenuDto extends BaseDto{
 	
 	private VipLevelEnum vipLevel;
 	
-	private String urlPath;
+	private String menuPath;
+	
+	private String menuName;
 	
 	private MenuLevelEnum menuLevel;
 	
 	private int parentId;
 	
-	private YesOrNoEnum disabled;
+	private YesOrNoEnum menuDisabled;
 	
 	////////////////////////////// 上面是数据库属性////////////////////////////////////////////
 	
@@ -38,22 +40,6 @@ public class MenuDto extends BaseDto{
 
 	public void setVipLevel(VipLevelEnum vipLevel) {
 		this.vipLevel = vipLevel;
-	}
-
-	public String getUrlPath() {
-		return urlPath;
-	}
-
-	public void setUrlPath(String urlPath) {
-		this.urlPath = urlPath;
-	}
-
-	public YesOrNoEnum getDisabled() {
-		return disabled;
-	}
-
-	public void setDisabled(YesOrNoEnum disabled) {
-		this.disabled = disabled;
 	}
 
 	public MenuLevelEnum getMenuLevel() {
@@ -90,6 +76,30 @@ public class MenuDto extends BaseDto{
 	
 	public void addSonMenu(MenuDto sonMenu) {
 		this.sonMenu.add(sonMenu);
+	}
+
+	public String getMenuPath() {
+		return menuPath;
+	}
+
+	public void setMenuPath(String menuPath) {
+		this.menuPath = menuPath;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public YesOrNoEnum getMenuDisabled() {
+		return menuDisabled;
+	}
+
+	public void setMenuDisabled(YesOrNoEnum menuDisabled) {
+		this.menuDisabled = menuDisabled;
 	}
 
 	

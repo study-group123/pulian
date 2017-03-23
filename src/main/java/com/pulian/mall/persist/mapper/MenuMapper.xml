@@ -7,8 +7,9 @@
   
     <id column="menu_id" property="menuId" jdbcType="INTEGER" />   
     <result column="vip_level" property="vipLevel" jdbcType="VARCHAR" />
-    <result column="url_path" property="urlPath" jdbcType="VARCHAR" />
-    <result column="disabled" property="disabled" jdbcType="VARCHAR" />
+    <result column="menu_path" property="menuPath" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_disabled" property="menuDisabled" jdbcType="VARCHAR" />
     <result column="menu_level" property="menuLevel" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="creater_id" property="createrId" jdbcType="INTEGER" />
@@ -20,13 +21,13 @@
   
   
   <sql id="queryColumns">
-  	menu_id, vip_level, url_path, disabled, menu_level, parent_id, creater_id, updater_id, create_time, update_time
+  	menu_id, vip_level, menu_path, menu_name, menu_disabled, menu_level, parent_id, creater_id, updater_id, create_time, update_time
   </sql>
   
   
   
   <sql id="insertColumns">
-  	 vip_level, url_path, disabled, menu_level, parent_id,creater_id, disabled, menu_level, parent_id, updater_id, create_time, update_time
+  	 vip_level, menu_path, menu_name, menu_disabled, menu_level, parent_id,creater_id, disabled, menu_level, parent_id, updater_id, create_time, update_time
   </sql>
   
   <insert id="saveMenuDto"  parameterType="com.pulian.mall.dto.ApprovalDto" >
@@ -36,8 +37,9 @@
 		values
 		(
 		#{condition.vipLevel,jdbcType=VARCHAR},
-		#{condition.urlPath,jdbcType=VARCHAR},
-		#{condition.disabled,jdbcType=VARCHAR},
+		#{condition.menuPath,jdbcType=VARCHAR},
+		#{condition.menuName,jdbcType=VARCHAR},
+		#{condition.menuDisabled,jdbcType=VARCHAR},
 		#{condition.menuLevel,jdbcType=INTEGER},
 		#{condition.parentId,jdbcType=INTEGER},
 		#{condition.createrId,jdbcType=INTEGER},
@@ -86,14 +88,20 @@
 		<if test="condition.vipLevel != null and condition.vipLevel != ''">
 			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.url_path != null and condition.url_path != ''">
-			AND t.url_path = #{condition.urlPath,jdbcType=VARCHAR}
+		<if test="condition.menuPath != null and condition.menuPath != ''">
+			AND t.menu_path = #{condition.menuPath,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.menuName != null and condition.menuName != ''">
+			AND t.menu_name = #{condition.menuName,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.menuLevel != null and condition.menuLevel != ''">
 			AND t.menu_level = #{condition.menuLevel,jdbcType=INTEGER}
 		</if>
 		<if test="condition.parentId != null and condition.parentId != ''">
 			AND t.parent_id = #{condition.parentId,jdbcType=INTEGER}
+		</if>
+		<if test="condition.menuDisabled != null and condition.menuDisabled != ''">
+			AND t.menu_disabled = #{condition.menuDisabled,jdbcType=VARCHAR}
 		</if>
 	</sql>
 	
@@ -105,8 +113,8 @@
 			<if test="condition.vipLevel != null and condition.vipLevel != '' ">
 				vip_level = #{condition.vipLevel},
 			</if>
-			<if test="condition.url_path != null and condition.url_path != '' ">
-				url_path = #{condition.urlPath},
+			<if test="condition.menuPath != null and condition.menuPath != '' ">
+				menu_path = #{condition.menuPath},
 			</if>
 			update_time = #{condition.updateTime,jdbcType=VARCHAR},
 			update_id = #{condition.updateId,jdbcType=VARCHAR}
