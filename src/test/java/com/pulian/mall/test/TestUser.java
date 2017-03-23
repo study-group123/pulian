@@ -1,9 +1,12 @@
 package com.pulian.mall.test;
 
+import java.io.IOException;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,12 +21,13 @@ import com.pulian.mall.dto.CardTypeEnum;
 import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.UserManagerRequest;
+import com.pulian.mall.util.JSONMapper;
 import com.pulian.mall.util.MD5util;
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)  
 @ContextConfiguration(locations = {"classpath:spring.xml","classpath:spring-servlet.xml","classpath:spring-mybatis.xml"})
 public class TestUser extends AbstractTestNGSpringContextTests{
 
-//	 /private static final Log log = LogFactory.getLog(TestUser.class);
+	 private static final Log log = LogFactory.getLog(TestUser.class);
 	 
 	 @Autowired  
 	 private UserManagerControllerImpl userManagerControllerImpl;  
@@ -34,6 +38,13 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 	 @Rollback(false)
 	 @Test  
 	 public void testSaveUser(){  
+		 UserManagerRequest request = getTestUserManagerRequest();
+		
+		userManagerControllerImpl.saveUser(request,null,null,null);
+	 }  
+	 
+	 public UserManagerRequest getTestUserManagerRequest(){
+		 
 		UserManagerRequest request = new UserManagerRequest();
 		request.setActiveStatus(YesOrNoEnum.YES);
 		request.setBankAddress("银行地址");
@@ -59,8 +70,19 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		request.setUpdateTime(new Date());
 		request.setUpdaterId(10);
 		request.setCreaterId(10);
-		userManagerControllerImpl.saveUser(request,null,null,null);
-	 }  
+		 
+		return request;
+	 }
+	 
+	 @Test
+	 public void printUserManagerRequestJson(){
+		 
+		 try {
+			System.out.println(JSONMapper.getInstance().writeValueAsString(getTestUserManagerRequest()));
+		} catch (Exception e) {
+			log.error("", e);
+		} 
+	 }
 	 
 	 @Rollback(false)
 	 @Test  

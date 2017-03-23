@@ -21,6 +21,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pulian.mall.dto.AchievementDto;
@@ -50,7 +51,7 @@ public class AchievementControllerImpl {
 		return "time_achievement";
 	}
 	@RequestMapping("exportVasCouponOrderListCsv")
-	public String exportAchievementList(Model model,AchievementManagerRequest achievementManagerRequest, HttpServletResponse response) {
+	public String exportAchievementList(Model model,@RequestBody AchievementManagerRequest achievementManagerRequest, HttpServletResponse response) {
 		
     	BaseResultT<List<AchievementDto>> baseResult = null;
 

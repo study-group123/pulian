@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,7 +43,7 @@ public class UserManagerControllerImpl {
 	
 	@RequestMapping("/saveUser")
 	@ResponseBody
-	public BaseResult saveUser(UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResult saveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		BaseResult baseResult = new BaseResult();
 		try{
 			//一个证件只能开一次账户
@@ -63,7 +64,7 @@ public class UserManagerControllerImpl {
 	
 	@RequestMapping("/queryUsers")
 	@ResponseBody
-	public BaseResultT<List<UserInfoDto>> queryUsers(UserManagerRequest userManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<List<UserInfoDto>> queryUsers(@RequestBody UserManagerRequest userManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<List<UserInfoDto>> baseResultT = new BaseResultT<List<UserInfoDto>>();
 		try{
 			List<UserInfoDto> userList = userManagerService.queryUserInfo(userManagerRequest);
@@ -78,7 +79,7 @@ public class UserManagerControllerImpl {
 	
 	@RequestMapping("/updatePassWord")
 	@ResponseBody
-	public BaseResult updatePassWord(UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResult updatePassWord(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		BaseResult baseResult = new BaseResult();
 		try{
 			//clean user request
@@ -122,7 +123,7 @@ public class UserManagerControllerImpl {
 	}
 
 	@RequestMapping("/toSaveUser")
-	public String toSaveUser(UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public String toSaveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		

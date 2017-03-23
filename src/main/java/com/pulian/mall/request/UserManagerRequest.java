@@ -12,6 +12,9 @@ import com.pulian.mall.dto.YesOrNoEnum;
 public class UserManagerRequest {
 
 	
+	public UserManagerRequest(){
+		
+	}
     private UserInfoDto userInfoDto = new UserInfoDto();
     
     private String parentCode;

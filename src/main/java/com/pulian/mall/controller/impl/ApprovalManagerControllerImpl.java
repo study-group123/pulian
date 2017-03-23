@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,7 +38,7 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/saveApprovalDto")
 	@ResponseBody
-	public BaseResult saveApprovalDto(ApprovalManagerRequest approvalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResult saveApprovalDto(@RequestBody ApprovalManagerRequest approvalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		BaseResult baseResult = new BaseResult();
 		try{
 			buildSaveApprovalRequest(approvalManagerRequest);
@@ -52,7 +53,7 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/queryApprovalList")
 	@ResponseBody
-	public BaseResultT<List<ApprovalDto>> queryApprovalList(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<List<ApprovalDto>> queryApprovalList(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<List<ApprovalDto>> baseResultT = new BaseResultT<List<ApprovalDto>>();
 		try{
 			List<ApprovalDto> approvalList = approvalManagerService.queryApprovalList(approvalManagerRequest);
@@ -67,7 +68,7 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/updateApprovalStatus")
 	@ResponseBody
-	public BaseResultT<UserInfoDto> updateApprovalStatus(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<UserInfoDto> updateApprovalStatus(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
 		try{
 			ApprovalManagerRequest cleanRequest = buildUpdateApprovalStatusRequest(approvalManagerRequest);
@@ -80,7 +81,7 @@ public class ApprovalManagerControllerImpl {
 		return baseResultT;
 	}
 	
-	private ApprovalManagerRequest buildUpdateApprovalStatusRequest(ApprovalManagerRequest userRequest) {
+	private ApprovalManagerRequest buildUpdateApprovalStatusRequest(@RequestBody ApprovalManagerRequest userRequest) {
 		ApprovalManagerRequest cleanRequest = new ApprovalManagerRequest();
 		cleanRequest.setApprovalId(userRequest.getApprovalId());
 		cleanRequest.setApprovalResult(userRequest.getApprovalResult());
@@ -89,7 +90,7 @@ public class ApprovalManagerControllerImpl {
 	}
 
 	@RequestMapping("/toSaveApprovalDto")
-	public String toSaveApprovalDto(ApprovalManagerRequest ApprovalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public String toSaveApprovalDto(@RequestBody ApprovalManagerRequest ApprovalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		
