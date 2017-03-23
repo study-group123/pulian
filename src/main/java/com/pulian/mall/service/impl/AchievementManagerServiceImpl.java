@@ -22,6 +22,9 @@ public class AchievementManagerServiceImpl {
 		return null;
 	}
 
-	
+	/*public BaseResultT<List<AchievementDto>> getBeforeThirtyAchievement(Pagination pagination,AchievementManagerRequest achievementManagerRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 
 }

@@ -52,7 +52,7 @@ public class UserManagerControllerImpl {
 			//查询当前用户开过的银卡数
 			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
 			
-			buildSaveUserRequest(userManagerRequest,silverSons);
+			buildSaveUserRequest(userManagerRequest,silverSons,request, response);
 			baseResult = userManagerService.saveUserInfo(userManagerRequest);
 		}catch(Exception e){
 			log.error("UserManagerControllerImpl.saveUser",e);
@@ -130,11 +130,11 @@ public class UserManagerControllerImpl {
 		return "";
 	}
 	
-	private void buildSaveUserRequest(UserManagerRequest request, int silverSons) {
+	private void buildSaveUserRequest(UserManagerRequest userManagerRequest, int silverSons,HttpServletRequest request, HttpServletResponse response) {
 	
-		request.setUserCode(request.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
-		request.setUserAccount(FirstLetterUtil.getFirstLetter(request.getUserName())+"_"+request.getUserCode());
-		UserDefaultFieldUtil.setUserDefaultFields(request);
+		userManagerRequest.setUserCode(userManagerRequest.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
+		userManagerRequest.setUserAccount(FirstLetterUtil.getFirstLetter(userManagerRequest.getUserName())+"_"+userManagerRequest.getUserCode());
+		UserDefaultFieldUtil.setUserDefaultFields(userManagerRequest,request,response);
 	}
 
 	public static void main(String[] args) {

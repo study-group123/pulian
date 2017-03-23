@@ -35,6 +35,7 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 		
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		if(user != null){
+			//权限只做到控制菜单，没有控制到具体功能
 			/*MenuDto menuRequest = new MenuDto();
 			menuRequest.setMenuDisabled(YesOrNoEnum.NO);
 			menuRequest.setVipLevel(user.getVipLevel());

@@ -21,6 +21,9 @@ import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.ApprovalManagerRequest;
 import com.pulian.mall.service.impl.ApprovalManagerServiceImpl;
+import com.pulian.mall.util.ConstantUtil;
+import com.pulian.mall.util.ServletUtil;
+import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
  * 
  * @author wangxiaoqiang
@@ -41,7 +44,7 @@ public class ApprovalManagerControllerImpl {
 	public BaseResult saveApprovalDto(@RequestBody ApprovalManagerRequest approvalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		BaseResult baseResult = new BaseResult();
 		try{
-			buildSaveApprovalRequest(approvalManagerRequest);
+			buildSaveApprovalRequest(approvalManagerRequest,request,response);
 			baseResult = approvalManagerService.saveApprovalDto(approvalManagerRequest);
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.saveApprovalDto",e);
@@ -97,9 +100,14 @@ public class ApprovalManagerControllerImpl {
 		return "";
 	}
 	
-	private void buildSaveApprovalRequest(ApprovalManagerRequest request) {
-	
+	private void buildSaveApprovalRequest(ApprovalManagerRequest approvalManagerRequest, HttpServletRequest request, HttpServletResponse response) {
+	   
+		//TODO: 拿到用户前三十天业绩
+		approvalManagerRequest.setBeforeThirtyAchievement("");
 		
+		UserDefaultFieldUtil.setApprovalDefaultFields(approvalManagerRequest, request, response);
+		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		approvalManagerRequest.setApplicantId(user.getUserId());
 	}
 
 	public static void main(String[] args) {
