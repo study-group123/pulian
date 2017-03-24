@@ -13,6 +13,8 @@ public class ConstantUtil {
     
     public static final String ERROR_PWD_OR_NAME = "用户名或者密码错误！";
     
+    public static final String APPROVAL_REPEAT = "您已经申请过了，不能重复申请哦！";
     
+    public static final String APPROVAL_SILVER_TO_GOLD_ERROR = "申请银升金失败！";
     
 }

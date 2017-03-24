@@ -21,6 +21,7 @@ import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.util.CodeUtil;
+import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.DateUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.Pagination;
@@ -65,16 +66,30 @@ public class ApprovalManagerServiceImpl {
     public BaseResult saveApprovalDto(ApprovalManagerRequest approvalManagerRequest){
     	BaseResult baseResult = new BaseResult();
     	try{
-    		approvalMapper.saveApprovalDto(approvalManagerRequest.getApprovalDto());
+    		boolean repeat = validateRepeat(approvalManagerRequest);
+    		if(!repeat){
+    			approvalMapper.saveApprovalDto(approvalManagerRequest.getApprovalDto());
+    		}else{
+    			baseResult.setMessage(ConstantUtil.APPROVAL_REPEAT);
+    		}
+    		
 		}catch(Exception e){
 			log.error("ApprovalManagerServiceImpl.saveApprovalDto",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
+			baseResult.setMessage(ConstantUtil.APPROVAL_SILVER_TO_GOLD_ERROR);
 		}
     	
 		return baseResult;
 	}
     
-    @Transactional
+    private boolean validateRepeat(ApprovalManagerRequest approvalManagerRequest) {
+    	
+    	List<ApprovalDto> approvalList = approvalMapper.queryApprovalList(approvalManagerRequest);
+    	
+		return approvalList.size()>0;
+	}
+
+	@Transactional
     public BaseResultT<UserInfoDto> updateApprovalDtoByApprovalId(ApprovalManagerRequest approvalManagerRequest){
     	BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
     	try{

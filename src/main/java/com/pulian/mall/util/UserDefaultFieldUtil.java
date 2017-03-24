@@ -3,6 +3,7 @@ package com.pulian.mall.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.ApprovalManagerRequest;
@@ -37,7 +38,7 @@ public class UserDefaultFieldUtil {
     
     public static void setApprovalDefaultFields(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response){
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
-    	
+    	approvalManagerRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);
     	approvalManagerRequest.getApprovalDto().setCreaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));

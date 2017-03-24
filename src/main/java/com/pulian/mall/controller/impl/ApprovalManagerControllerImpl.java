@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pulian.mall.dto.ApprovalDto;
+import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResult;
@@ -57,6 +58,7 @@ public class ApprovalManagerControllerImpl {
 	public BaseResultT<ApprovalDto> queryApprovalList(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<ApprovalDto> baseResultT = null;
 		try{
+			buildQueryApprovalListRequest(approvalManagerRequest);
 			baseResultT  = approvalManagerService.queryApprovalList(approvalManagerRequest);
 				
 		}catch(Exception e){
@@ -67,6 +69,11 @@ public class ApprovalManagerControllerImpl {
 		return baseResultT;
 	}
 	
+	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest) {
+		approvalManagerRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);
+		
+	}
+
 	@RequestMapping("/updateApprovalStatus")
 	@ResponseBody
 	public BaseResultT<UserInfoDto> updateApprovalStatus(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {

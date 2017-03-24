@@ -1,6 +1,7 @@
 package com.pulian.mall.request;
 
 import com.pulian.mall.dto.ApprovalDto;
+import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.util.Pagination;
 public class ApprovalManagerRequest {
@@ -72,6 +73,14 @@ public class ApprovalManagerRequest {
 
 	public void setApprovalResultDesc(String approvalResultDesc) {
 		this.approvalDto.setApprovalResultDesc(approvalResultDesc);
+	}
+	
+	public ApprovalTypeEnum getApprovaltype() {
+		return this.approvalDto.getApprovaltype();
+	}
+
+	public void setApprovaltype(ApprovalTypeEnum approvaltype) {
+		this.approvalDto.setApprovaltype(approvaltype);
 	}
 	
 	public String getApplicantName() {
