@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.ApprovalManagerRequest;
 import com.pulian.mall.request.UserManagerRequest;
@@ -19,11 +20,49 @@ public class UserDefaultFieldUtil {
 	
 	public static YesOrNoEnum DEFAULT_DISABLED = YesOrNoEnum.NO;
 	
+	public static int DEFAULT_PUBLISH_CARDS_A = 60;
+	
+	public static int DEFAULT_PUBLISH_CARDS_B = 50;
+	
+	public static int DEFAULT_PUBLISH_CARDS_C = 30;
+	
+	public static int DEFAULT_PUBLISH_CARDS_D = 20;
+	
+	public static int DEFAULT_PUBLISH_CARDS_E = 10;
+	
+	
+	//取用户最大发卡数
+	public static int getDefaultPublicCardNumbers(UserManagerRequest userManagerRequest){
+		int cards = 0;
+		switch(userManagerRequest.getVipLevel().getValue()){
+		
+		case VipLevelEnum.GOLD_A_VALUE:
+			cards = DEFAULT_PUBLISH_CARDS_A;
+			break;
+		case VipLevelEnum.GOLD_B_VALUE:
+			cards = DEFAULT_PUBLISH_CARDS_B;
+			break;
+		case VipLevelEnum.GOLD_C_VALUE:
+			cards = DEFAULT_PUBLISH_CARDS_C;
+			break;
+		case VipLevelEnum.GOLD_D_VALUE:
+			cards = DEFAULT_PUBLISH_CARDS_D;
+			break;
+		case VipLevelEnum.GOLD_E_VALUE:
+			cards = DEFAULT_PUBLISH_CARDS_E;
+			break;
+		
+		}
+		return cards;
+	}
+	
+	//产生默认密码
     public static  String generateDefaultPwd(){
     	
     	return MD5util.encoderPwdByMd5(DEFAULT_PWD);
     }
     
+    //新增用户默认属性
     public static void setUserDefaultFields(UserManagerRequest userManagerRequest,HttpServletRequest request, HttpServletResponse response){
     	userManagerRequest.setActiveStatus(DEFAULT_ACTIVE_STATUS);
     	userManagerRequest.setFrozenStatus(DEFAULT_FROZEN_STATUS);
@@ -36,6 +75,7 @@ public class UserDefaultFieldUtil {
     	userManagerRequest.setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     }
     
+    //新增审批默认属性
     public static void setApprovalDefaultFields(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response){
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
     	approvalManagerRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);

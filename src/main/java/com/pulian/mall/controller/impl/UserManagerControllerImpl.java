@@ -51,9 +51,15 @@ public class UserManagerControllerImpl {
 			
 			//查询当前用户开过的银卡数
 			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
+			int maxCards = UserDefaultFieldUtil.getDefaultPublicCardNumbers(userManagerRequest);
+			if(silverSons < maxCards){
+				buildSaveUserRequest(userManagerRequest,silverSons,request, response);
+				baseResult = userManagerService.saveUserInfo(userManagerRequest);
+			}else{
+				baseResult.setMessage(ConstantUtil.MAX_PUBLISH_CARD_NUMBERS);
+				baseResult.setSuccessStatus(YesOrNoEnum.NO);
+			}
 			
-			buildSaveUserRequest(userManagerRequest,silverSons,request, response);
-			baseResult = userManagerService.saveUserInfo(userManagerRequest);
 		}catch(Exception e){
 			log.error("UserManagerControllerImpl.saveUser",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
