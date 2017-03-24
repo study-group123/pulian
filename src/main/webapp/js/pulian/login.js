@@ -2,26 +2,23 @@
 function checkUserLogin(){
 	 var userCode=$.trim($("#userCode").val());
 	 var password=$.trim($("#passWord").val());
-		if(loginName=='' || password==''){
+		if(userCode=='' || password==''){
 			alert("请输入登录用户名和密码");
 			return;
 		}
 	   $.ajax({
-			url : "${request.contextPath}/login/userLogin",
+			url : "/login/userLogin",
 			cache : false,
 			async : false,
-			data : {
-				"userCode" : userCode,
-				"passWord" : password
-				},
+			data : JSON.stringify($("#loginForm").serializeObject()),
 			type : "POST",
 			datatype : "json",
+			contentType:"application/json",
 			success: function(data){
 			 if(data!="" && data.successStatus=="YES"){
-			    	$("#userName").val(loginName);
-		            $("#passwords").val(password);
-		            document.form1.action = "searchUserLogin";
-                    document.form1.submit(); 
+		            document.loginForm.action = "/login/index";
+		            document.loginForm.reset(); 
+                    document.loginForm.submit(); 
 			 }else{
 			     alert("登录失败,请重新登录！");
 			     window.location.reload(); 

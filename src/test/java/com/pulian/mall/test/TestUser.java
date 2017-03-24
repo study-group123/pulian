@@ -93,6 +93,6 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		request.setUserAccount("账号");
 		request.setPassWord(MD5util.encoderPwdByMd5("666666"));
 		
-		loginControllerImpl.userLogin(null, request, null, null);
+		//loginControllerImpl.userLogin(null, request, null, null);
 	 }  
 }

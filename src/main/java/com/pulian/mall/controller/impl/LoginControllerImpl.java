@@ -55,7 +55,7 @@ public class LoginControllerImpl {
 		return "/login/login";
 	}
 	
-	@RequestMapping("/userLogin")
+	@RequestMapping(value="/userLogin",method=RequestMethod.POST)  
 	@ResponseBody
 	public BaseResultT<UserInfoDto> userLogin(Model model,@RequestBody UserManagerRequest userManagerRequest,HttpServletRequest request,HttpServletResponse response) {
 		
@@ -126,8 +126,9 @@ public class LoginControllerImpl {
 		
 		return commitRequest;
 	}
+	  
 	
-	  @RequestMapping(value="/index",method=RequestMethod.GET)     
+	  @RequestMapping(value="/index",method=RequestMethod.POST)     
 	  public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
 		  
 		  UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);

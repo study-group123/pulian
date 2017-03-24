@@ -20,7 +20,7 @@
                         <h3 class="panel-title">请登入</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" name="loginForm" action="${request.contextPath}/login/index">
+                        <form role="form" name="loginForm" id = "loginForm" action="" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="CODE" name="userCode" id="userCode"  type="email" autofocus>
@@ -55,5 +55,6 @@
     <script src="${request.contextPath}/dist/js/sb-admin-2.js"></script>
 
 	<script src="${request.contextPath}/js/pulian/login.js"></script>
+	<script src="${request.contextPath}/js/pulian/common.js"></script>
 </body>
  </html>
