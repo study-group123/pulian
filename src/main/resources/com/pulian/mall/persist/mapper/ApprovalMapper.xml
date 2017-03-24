@@ -11,6 +11,10 @@
     <result column="before_thirty_achievement" property="beforeThirtyAchievement" jdbcType="VARCHAR" />
     <result column="approval_result" property="approvalResult" jdbcType="VARCHAR" />  
     <result column="approval_result_desc" property="approvalResultDesc" jdbcType="VARCHAR" />
+    <result column="applicant_name" property="applicantName" jdbcType="VARCHAR" />  
+    <result column="applicant_phone" property="applicantPhone" jdbcType="VARCHAR" />
+    <result column="approver_name" property="approverName" jdbcType="VARCHAR" />  
+    <result column="approver_phone" property="approverPhone" jdbcType="VARCHAR" />
     <result column="approver_id" property="approverId" jdbcType="INTEGER" />  
     <result column="creater_id" property="createrId" jdbcType="INTEGER" />
     <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
@@ -21,14 +25,14 @@
   
   
   <sql id="queryColumns">
-  	approval_id, applicant_id, approval_reason, before_thirty_achievement, approval_result, approval_result_desc
+  	approval_id, applicant_id, approval_reason, before_thirty_achievement, approval_result, approval_result_desc,
   	approver_id, creater_id, updater_id, create_time, update_time
   </sql>
   
   
   
   <sql id="insertColumns">
-  	 applicant_id, approval_reason, before_thirty_achievement, approval_result, approval_result_desc
+  	 applicant_id, approval_reason, before_thirty_achievement, approval_result, approval_result_desc,
   	approver_id, creater_id, updater_id, create_time, update_time
   </sql>
   
@@ -40,7 +44,7 @@
 		(
 		#{condition.applicantId,jdbcType=INTEGER},
 		#{condition.approvalReason,jdbcType=VARCHAR},
-		#{condition.beforeThirty_achievement,jdbcType=VARCHAR},
+		#{condition.beforeThirtyAchievement,jdbcType=VARCHAR},
 		#{condition.approvalResult,jdbcType=VARCHAR},
 		#{condition.approvalResultDesc,jdbcType=VARCHAR},
 		#{condition.approverId,jdbcType=INTEGER},
@@ -54,15 +58,21 @@
 	
 	
 	<select id="count" resultType="java.lang.Integer">
-       select count(*) from (
+       select count(1) from (
       select 
 	     <include refid="queryColumns" />
-	     from t_approval t
+		   
+	     from t_approval approval
 	     <where>
 			<if test="condition != null">
 				<include refid="conditions"></include>	
 			</if>
-		 </where>)t1	
+		 </where>
+		    INNER JOIN t_user user1
+			ON approval.applicant_id = user1.user_id
+			<if test="condition != null">
+				<include refid="applicantConditions"></include>	
+			</if>)t1	
 	</select>
 	
 	
@@ -71,17 +81,38 @@
    
 	     select 
 	     <include refid="queryColumns" />
-	     from t_approval t
+		    ,user1.user_name AS applicant_name
+			,user1.phone AS applicant_phone
+			,user2.user_name AS approver_name
+			,user2.phone AS approver_phone
+	     from t_approval approval
 	     <where>
 			<if test="condition != null">
 				<include refid="conditions"></include>	
 			</if>
-		 </where>	
-	           ORDER BY t.create_time desc
+		 </where>
+		    INNER JOIN t_user user1
+			ON approval.applicant_id = user1.user_id
+			<if test="condition != null">
+				<include refid="applicantConditions"></include>	
+			</if>
+			LEFT JOIN t_user user2
+			ON approval.approver_id = user2.user_id	
+	          
+	          
+	           ORDER BY approval.create_time desc
      <include refid="MYSQL.pagination" />
    </select>
    
-   
+   <sql id="applicantConditions">
+		
+		<if test="condition.applicantName != null and condition.applicantName != ''">
+			AND user1.user_name = #{condition.applicantName,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.applicantPhone != null  and condition.applicantPhone != ''">
+			AND user1.phone = #{condition.applicantPhone,jdbcType=VARCHAR}
+		</if>
+	</sql>
    
 	<sql id="conditions">
 		<if test="condition.approvalId != null and condition.approvalId != ''">

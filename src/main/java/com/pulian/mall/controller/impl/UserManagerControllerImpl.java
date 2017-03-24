@@ -64,11 +64,10 @@ public class UserManagerControllerImpl {
 	
 	@RequestMapping("/queryUsers")
 	@ResponseBody
-	public BaseResultT<List<UserInfoDto>> queryUsers(@RequestBody UserManagerRequest userManagerRequest,HttpServletRequest request, HttpServletResponse response) {
-		BaseResultT<List<UserInfoDto>> baseResultT = new BaseResultT<List<UserInfoDto>>();
+	public BaseResultT<UserInfoDto> queryUsers(@RequestBody UserManagerRequest userManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
 		try{
-			List<UserInfoDto> userList = userManagerService.queryUserInfo(userManagerRequest);
-			baseResultT.setResult(userList);
+			baseResultT = userManagerService.queryUserInfo(userManagerRequest);
 		}catch(Exception e){
 			log.error("UserManagerControllerImpl.queryUsers",e);
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
@@ -85,7 +84,8 @@ public class UserManagerControllerImpl {
 			//clean user request
 			UserManagerRequest searchRequest = buildUpdatePassWordSearchRequest(userManagerRequest);
 			
-			List<UserInfoDto> userList= userManagerService.queryUserInfo(searchRequest);
+			BaseResultT<UserInfoDto> resultT = userManagerService.queryUserInfo(searchRequest);
+			List<UserInfoDto> userList= resultT.getResults();
 			if(!CollectionUtils.isEmpty(userList) && userList.size() == 1){
 				
 				UserManagerRequest commitRequest = buildUpdatePassWordCommitRequest(userList.get(0),userManagerRequest);

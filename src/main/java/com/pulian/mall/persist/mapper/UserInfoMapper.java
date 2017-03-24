@@ -16,7 +16,7 @@ public interface UserInfoMapper {
     
      int updateUserByUserId(@Param("condition")UserInfoDto userInfoDto);
 
-	 int count(@Param("condition")UserInfoDto userInfoDto);
+	 int count(@Param("condition")UserManagerRequest userManagerRequest);
 
 
 }

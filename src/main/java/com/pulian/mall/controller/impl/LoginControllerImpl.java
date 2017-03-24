@@ -68,10 +68,11 @@ public class LoginControllerImpl {
 			return baseResultT;
 		}
 		buildQueryUserRequest(userManagerRequest);
-		List<UserInfoDto> result = userManagerService.queryUserInfo(userManagerRequest);
-		if(!CollectionUtils.isEmpty(result)){
-			baseResultT.setResult(result.get(0));
-			ServletUtil.putSession(request, response, ConstantUtil.USER_SESSION_KEY, result.get(0));
+		BaseResultT<UserInfoDto> resultT = userManagerService.queryUserInfo(userManagerRequest);
+		List<UserInfoDto> userList= resultT.getResults();
+		if(!CollectionUtils.isEmpty(userList)){
+			baseResultT.setResult(userList.get(0));
+			ServletUtil.putSession(request, response, ConstantUtil.USER_SESSION_KEY, userList.get(0));
 		}else{
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 			baseResultT.setMessage(ConstantUtil.ERROR_PWD_OR_NAME);

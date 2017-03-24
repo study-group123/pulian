@@ -16,7 +16,7 @@ public interface ApprovalMapper {
     
      int updateApprovalDtoByApprovalId(@Param("condition")ApprovalDto approvalDto);
 
-	 int count(@Param("condition")ApprovalDto approvalDto);
+	 int count(@Param("condition")ApprovalManagerRequest approvalManagerRequest);
 
 
 }

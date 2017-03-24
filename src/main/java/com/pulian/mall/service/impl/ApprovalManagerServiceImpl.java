@@ -1,6 +1,5 @@
 package com.pulian.mall.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -24,6 +23,7 @@ import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.DateUtil;
 import com.pulian.mall.util.FirstLetterUtil;
+import com.pulian.mall.util.Pagination;
 /**
  * 
  * @author wangxiaoqiang
@@ -43,15 +43,23 @@ public class ApprovalManagerServiceImpl {
 	
 	private static final Log log = LogFactory.getLog(ApprovalManagerServiceImpl.class);
 	
-	public List<ApprovalDto> queryApprovalList(ApprovalManagerRequest approvalManagerRequest){
-		List<ApprovalDto> approvalList = new ArrayList<ApprovalDto>();
+	public BaseResultT<ApprovalDto> queryApprovalList(ApprovalManagerRequest approvalManagerRequest){
+		BaseResultT<ApprovalDto> baseResultT= new BaseResultT<ApprovalDto>();
 		try{
-			approvalList = approvalMapper.queryApprovalList(approvalManagerRequest);
+			List<ApprovalDto> approvalList = approvalMapper.queryApprovalList(approvalManagerRequest);
+			int count = approvalMapper.count(approvalManagerRequest);
+			
+			Pagination pagination = approvalManagerRequest.getPagination();
+			pagination.setRecords(count);
+			pagination.countRecords(count);			
+			baseResultT.setResults(approvalList);
+			baseResultT.setPagination(pagination);
 		}catch(Exception e){
 			log.error("ApprovalManagerServiceImpl.queryApprovalList",e);
+			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
-		return approvalList;
+		return baseResultT;
 	}
 	
     public BaseResult saveApprovalDto(ApprovalManagerRequest approvalManagerRequest){
@@ -97,10 +105,10 @@ public class ApprovalManagerServiceImpl {
 		//查询银卡用户信息
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setUserId(approvalDto.getApplicantId());
-		List<UserInfoDto> userList = userManagerService.queryUserInfo(userManagerRequest);
+		BaseResultT<UserInfoDto> resultT = userManagerService.queryUserInfo(userManagerRequest);
 		
 		//不考虑查询不到的情况
-		UserInfoDto userInfoDto  = userList.get(0);
+		UserInfoDto userInfoDto  = resultT.getResults().get(0);
 		
 		//在所属大区下生成一个未使用过的code
 		String newCode = getUnUsedUserCode(userInfoDto.getUserArea());

@@ -20,6 +20,16 @@ public class ApprovalDto extends BaseDto{
     private YesOrNoEnum approvalResult;//审批结果
     
     private String approvalResultDesc;//审批结果描述
+    
+    //////////////////////////////上面是数据库属性////////////////////////////////////////////
+    
+    private String applicantName;//申请人名称
+    
+    private String applicantPhone;//申请人电话
+    
+    private String approverName;//审批人名称
+    
+    private String approverPhone;//审批人名称
 
 	public int getApprovalId() {
 		return approvalId;
@@ -78,5 +88,37 @@ public class ApprovalDto extends BaseDto{
 		this.approvalResultDesc = approvalResultDesc;
 	}
 
+	public String getApplicantName() {
+		return applicantName;
+	}
+
+	public void setApplicantName(String applicantName) {
+		this.applicantName = applicantName;
+	}
+
+	public String getApplicantPhone() {
+		return applicantPhone;
+	}
+
+	public void setApplicantPhone(String applicantPhone) {
+		this.applicantPhone = applicantPhone;
+	}
+
+	public String getApproverName() {
+		return approverName;
+	}
+
+	public void setApproverName(String approverName) {
+		this.approverName = approverName;
+	}
+
+	public String getApproverPhone() {
+		return approverPhone;
+	}
+
+	public void setApproverPhone(String approverPhone) {
+		this.approverPhone = approverPhone;
+	}
+	
 	
 }

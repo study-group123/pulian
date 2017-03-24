@@ -1,6 +1,5 @@
 package com.pulian.mall.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -12,7 +11,9 @@ import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.UserInfoMapper;
 import com.pulian.mall.request.BaseResult;
+import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
+import com.pulian.mall.util.Pagination;
 /**
  * 
  * @author wangxiaoqiang
@@ -26,15 +27,24 @@ public class UserManagerServiceImpl {
 	
 	private static final Log log = LogFactory.getLog(UserManagerServiceImpl.class);
 	
-	public List<UserInfoDto> queryUserInfo(UserManagerRequest userManagerRequest){
-		List<UserInfoDto> userList = new ArrayList<UserInfoDto>();
+	public BaseResultT<UserInfoDto> queryUserInfo(UserManagerRequest userManagerRequest){
+		BaseResultT<UserInfoDto> baseResultT= new BaseResultT<UserInfoDto>();
 		try{
-			userList = userInfoMapper.queryUserInfo(userManagerRequest);
+			List<UserInfoDto> userList = userInfoMapper.queryUserInfo(userManagerRequest);
+			
+			int count = userInfoMapper.count(userManagerRequest);
+			
+			Pagination pagination = userManagerRequest.getPagination();
+			pagination.setRecords(count);
+			pagination.countRecords(count);			
+			baseResultT.setResults(userList);
+			baseResultT.setPagination(pagination);
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.queryUserInfo",e);
+			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
-		return userList;
+		return baseResultT;
 	}
 	
     public BaseResult saveUserInfo(UserManagerRequest userManagerRequest){
@@ -67,13 +77,12 @@ public class UserManagerServiceImpl {
 	}
 
 	public int queryUserByParentIdAndVipLevel(UserManagerRequest request) {
-		UserInfoDto queryDto = new UserInfoDto();
-		queryDto.setParentId(request.getParentId());
-		queryDto.setVipLevel(request.getVipLevel());
-		
+
 		UserManagerRequest queryRequest = new UserManagerRequest();
-		queryRequest.setUserInfoDto(queryDto);
-		return userInfoMapper.count(queryRequest.getUserInfoDto());
+		queryRequest.setParentId(request.getParentId());
+		queryRequest.setVipLevel(request.getVipLevel());
+		
+		return userInfoMapper.count(queryRequest);
 	}
 
 }

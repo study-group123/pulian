@@ -1,7 +1,5 @@
 package com.pulian.mall.controller.impl;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,11 +54,11 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/queryApprovalList")
 	@ResponseBody
-	public BaseResultT<List<ApprovalDto>> queryApprovalList(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
-		BaseResultT<List<ApprovalDto>> baseResultT = new BaseResultT<List<ApprovalDto>>();
+	public BaseResultT<ApprovalDto> queryApprovalList(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+		BaseResultT<ApprovalDto> baseResultT = null;
 		try{
-			List<ApprovalDto> approvalList = approvalManagerService.queryApprovalList(approvalManagerRequest);
-			baseResultT.setResult(approvalList);
+			baseResultT  = approvalManagerService.queryApprovalList(approvalManagerRequest);
+				
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.queryApprovalList",e);
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);

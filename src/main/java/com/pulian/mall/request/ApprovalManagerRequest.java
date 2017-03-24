@@ -74,6 +74,38 @@ public class ApprovalManagerRequest {
 		this.approvalDto.setApprovalResultDesc(approvalResultDesc);
 	}
 	
+	public String getApplicantName() {
+		return this.approvalDto.getApplicantName();
+	}
+	
+	public void setApplicantName(String applicantName) {
+		this.approvalDto.setApplicantName(applicantName);
+	}
+
+	public String getApplicantPhone() {
+		return this.approvalDto.getApplicantPhone();
+	}
+
+	public void setApplicantPhone(String applicantPhone) {
+		this.approvalDto.setApplicantPhone(applicantPhone);;
+	}
+
+	public String getApproverName() {
+		return this.approvalDto.getApproverName();
+	}
+
+	public void setApproverName(String approverName) {
+		this.approvalDto.setApproverName(approverName);
+	}
+
+	public String getApproverPhone() {
+		return this.approvalDto.getApproverPhone();
+	}
+
+	public void setApproverPhone(String approverPhone) {
+		this.approvalDto.setApproverPhone(approverPhone);
+	}
+	
 	public Pagination getPagination() {
 		return pagination;
 	}
