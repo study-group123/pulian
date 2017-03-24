@@ -30,7 +30,7 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 		
 		String requestUrl = request.getRequestURI();
 		
-		if(requestUrl.contains("toUserLogin") || requestUrl.contains("login") )
+		if(isPermissionPath(requestUrl))
 			return true;
 		
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
@@ -48,12 +48,19 @@ public class PermissionInterceptor4SpringMVC implements HandlerInterceptor {
 			}*/
 			return true;
 		}else{
-			response.sendRedirect("http://www.pulian.com/login/toUserLogin"); 
+			response.sendRedirect("http://127.0.0.1:8008/login/toUserLogin"); 
 		}
 		//TODO
 		return false;
 	}
 
+	private boolean isPermissionPath(String requestUrl){
+		String[] urls =  {"toUserLogin","login","/js/","/css/","/images/","/vendor/","/dist"};
+		for(String url:urls){
+			if(requestUrl.contains(url))return true;
+		}
+		return false;
+	}
 	@Override
 	public void postHandle(HttpServletRequest request,HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

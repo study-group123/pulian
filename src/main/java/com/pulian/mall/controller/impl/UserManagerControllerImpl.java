@@ -82,51 +82,6 @@ public class UserManagerControllerImpl {
 		return baseResultT;
 	}
 	
-	@RequestMapping("/updatePassWord")
-	@ResponseBody
-	public BaseResult updatePassWord(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
-		BaseResult baseResult = new BaseResult();
-		try{
-			//clean user request
-			UserManagerRequest searchRequest = buildUpdatePassWordSearchRequest(userManagerRequest);
-			
-			BaseResultT<UserInfoDto> resultT = userManagerService.queryUserInfo(searchRequest);
-			List<UserInfoDto> userList= resultT.getResults();
-			if(!CollectionUtils.isEmpty(userList) && userList.size() == 1){
-				
-				UserManagerRequest commitRequest = buildUpdatePassWordCommitRequest(userList.get(0),userManagerRequest);
-				baseResult = userManagerService.updateUserByUserId(commitRequest);
-			}else{
-				baseResult.setMessage(ConstantUtil.USER_NOT_FOUND);
-				baseResult.setSuccessStatus(YesOrNoEnum.NO);
-			}
-		}catch(Exception e){
-			log.error("UserManagerControllerImpl.updatePassWord",e);
-			baseResult.setSuccessStatus(YesOrNoEnum.NO);
-		}
-		
-		return baseResult;
-	}
-	
-	private UserManagerRequest buildUpdatePassWordCommitRequest(UserInfoDto currentUser,UserManagerRequest userManagerRequest) {
-		
-		UserManagerRequest commitRequest = new UserManagerRequest();
-		commitRequest.setUserId(currentUser.getUserId());
-		String newPwd = MD5util.encoderPwdByMd5(userManagerRequest.getPassWord());
-		commitRequest.setPassWord(newPwd);
-		
-		return commitRequest;
-	}
-
-	private UserManagerRequest buildUpdatePassWordSearchRequest(UserManagerRequest request) {
-		
-		UserManagerRequest searchRequest = new UserManagerRequest();
-		searchRequest.setBankNo(request.getBankNo());	
-		searchRequest.setCardType(request.getCardType());
-		searchRequest.setCardNo(request.getCardNo());
-		
-		return searchRequest;
-	}
 
 	@RequestMapping("/toSaveUser")
 	public String toSaveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {

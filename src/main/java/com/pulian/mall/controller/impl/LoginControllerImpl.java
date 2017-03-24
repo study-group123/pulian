@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pulian.mall.dto.MenuDto;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.YesOrNoEnum;
+import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.MenuManagerServiceImpl;
@@ -47,11 +48,11 @@ public class LoginControllerImpl {
 	/**
 	 * 进入主页
 	 */
-	@RequestMapping("/toUserLogin")
-	public String toUserLogin(Model model,HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/toUserLogin",method=RequestMethod.GET)   
+	public String toUserLogin(HttpServletRequest request, HttpServletResponse response) {
 		
 		
-		return "user_login";
+		return "/login/login";
 	}
 	
 	@RequestMapping("/userLogin")
@@ -81,6 +82,51 @@ public class LoginControllerImpl {
 		return baseResultT;
 	}
 
+	@RequestMapping("/updatePassWord")
+	@ResponseBody
+	public BaseResult updatePassWord(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+		BaseResult baseResult = new BaseResult();
+		try{
+			//clean user request
+			UserManagerRequest searchRequest = buildUpdatePassWordSearchRequest(userManagerRequest);
+			
+			BaseResultT<UserInfoDto> resultT = userManagerService.queryUserInfo(searchRequest);
+			List<UserInfoDto> userList= resultT.getResults();
+			if(!CollectionUtils.isEmpty(userList) && userList.size() == 1){
+				
+				UserManagerRequest commitRequest = buildUpdatePassWordCommitRequest(userList.get(0),userManagerRequest);
+				baseResult = userManagerService.updateUserByUserId(commitRequest);
+			}else{
+				baseResult.setMessage(ConstantUtil.USER_NOT_FOUND);
+				baseResult.setSuccessStatus(YesOrNoEnum.NO);
+			}
+		}catch(Exception e){
+			log.error("UserManagerControllerImpl.updatePassWord",e);
+			baseResult.setSuccessStatus(YesOrNoEnum.NO);
+		}
+		
+		return baseResult;
+	}
+	private UserManagerRequest buildUpdatePassWordSearchRequest(UserManagerRequest request) {
+		
+		UserManagerRequest searchRequest = new UserManagerRequest();
+		searchRequest.setBankNo(request.getBankNo());	
+		searchRequest.setCardType(request.getCardType());
+		searchRequest.setCardNo(request.getCardNo());
+		
+		return searchRequest;
+	}
+	
+	private UserManagerRequest buildUpdatePassWordCommitRequest(UserInfoDto currentUser,UserManagerRequest userManagerRequest) {
+		
+		UserManagerRequest commitRequest = new UserManagerRequest();
+		commitRequest.setUserId(currentUser.getUserId());
+		String newPwd = MD5util.encoderPwdByMd5(userManagerRequest.getPassWord());
+		commitRequest.setPassWord(newPwd);
+		
+		return commitRequest;
+	}
+	
 	  @RequestMapping(value="/index",method=RequestMethod.GET)     
 	  public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
 		  
