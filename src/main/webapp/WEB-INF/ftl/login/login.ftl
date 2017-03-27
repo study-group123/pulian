@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <a href="${request.contextPath}/login/updatePassWord">忘记密码</a>
+                                        <a href="${request.contextPath}/updatePassWord">忘记密码</a>
                                     </label>
                                 </div>
                                 <a href="javascript:checkUserLogin()" class="btn btn-lg btn-success btn-block">登入</a>

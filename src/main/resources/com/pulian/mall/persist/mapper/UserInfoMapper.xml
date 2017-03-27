@@ -131,13 +131,13 @@
 		<if test="condition.vipLevel != null ">
 			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.frozenStatus != null and condition.frozenStatus != ''">
+		<if test="condition.frozenStatus != null ">
 			AND t.frozen_status = #{condition.frozenStatus,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.activeStatus != null  and condition.activeStatus != ''">
+		<if test="condition.activeStatus != null ">
 			AND t.active_status = #{condition.activeStatus,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.userDisable != null  and condition.userDisable != ''">
+		<if test="condition.userDisable != null ">
 			AND t.user_disable = #{condition.userDisable,jdbcType=VARCHAR}
 		</if>
 	</sql>

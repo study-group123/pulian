@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pulian.mall.dto.MenuDto;
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
@@ -35,7 +36,7 @@ import com.pulian.mall.util.ServletUtil;
  * @date 2017-3-21
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("")
 public class LoginControllerImpl {
 
 	private static final Log log = LogFactory.getLog(LoginControllerImpl.class);
@@ -45,17 +46,15 @@ public class LoginControllerImpl {
 	
 	@Autowired
 	private MenuManagerServiceImpl menuManagerService;
-	/**
-	 * 进入主页
-	 */
-	@RequestMapping(value="/toUserLogin",method=RequestMethod.GET)   
+	
+	@RequestMapping(value="/login/toUserLogin",method=RequestMethod.GET)   
 	public String toUserLogin(HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		return "/login/login";
 	}
 	
-	@RequestMapping(value="/userLogin",method=RequestMethod.POST)  
+	@RequestMapping(value="/login/userLogin",method=RequestMethod.POST)  
 	@ResponseBody
 	public BaseResultT<UserInfoDto> userLogin(Model model,@RequestBody UserManagerRequest userManagerRequest,HttpServletRequest request,HttpServletResponse response) {
 		
@@ -128,19 +127,19 @@ public class LoginControllerImpl {
 	}
 	  
 	
-	  @RequestMapping(value="/index",method=RequestMethod.POST)     
+	  @RequestMapping(value="/index",method={RequestMethod.POST,RequestMethod.GET})     
 	  public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
 		  
 		  UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
-		  List<MenuDto> menus = new ArrayList<MenuDto>();
+		  List<MenuDto> menuList = new ArrayList<MenuDto>();
 		  if(user != null){
 				MenuDto menuRequest = new MenuDto();
 				menuRequest.setMenuDisabled(YesOrNoEnum.NO);
-				menuRequest.setVipLevel(user.getVipLevel());
-				menus= menuManagerService.getMenuTree(menuRequest);
+				menuRequest.setVipLevel(VipLevelEnum.valueOf(user.getVipLevel().getParent()));
+				menuList= menuManagerService.getMenuTree(menuRequest);
 				
 		  }
-	      model.addAttribute("menus", menus);
+	      model.addAttribute("menuList", menuList);
 		  return "index";
 	  }  
 	

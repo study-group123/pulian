@@ -16,7 +16,7 @@ function checkUserLogin(){
 			contentType:"application/json",
 			success: function(data){
 			 if(data!="" && data.successStatus=="YES"){
-		            document.loginForm.action = "/login/index";
+		            document.loginForm.action = "/index";
 		            document.loginForm.reset(); 
                     document.loginForm.submit(); 
 			 }else{

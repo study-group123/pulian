@@ -89,7 +89,7 @@
 		<if test="condition.menuCode != null and condition.menuCode != ''">
 			AND t.menu_code = #{condition.menuCode,jdbcType=INTEGER}
 		</if>
-		<if test="condition.vipLevel != null and condition.vipLevel != ''">
+		<if test="condition.vipLevel != null ">
 			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.menuPath != null and condition.menuPath != ''">
@@ -98,13 +98,13 @@
 		<if test="condition.menuName != null and condition.menuName != ''">
 			AND t.menu_name = #{condition.menuName,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.menuLevel != null and condition.menuLevel != ''">
+		<if test="condition.menuLevel != null ">
 			AND t.menu_level = #{condition.menuLevel,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.parentCode != null and condition.parentCode != ''">
 			AND t.parent_code = #{condition.parentCode,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.menuDisabled != null and condition.menuDisabled != ''">
+		<if test="condition.menuDisabled != null ">
 			AND t.menu_disabled = #{condition.menuDisabled,jdbcType=VARCHAR}
 		</if>
 	</sql>

@@ -1,5 +1,6 @@
 package com.pulian.mall.controller.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pulian.mall.dto.MenuDto;
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
@@ -25,6 +29,7 @@ import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
+import com.pulian.mall.util.ServletUtil;
 import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
  * 
@@ -82,6 +87,14 @@ public class UserManagerControllerImpl {
 		return baseResultT;
 	}
 	
+	@RequestMapping(value="/profile",method={RequestMethod.POST,RequestMethod.GET})     
+	public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
+		  
+		  UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		  
+	      model.addAttribute("user", user);
+		  return "/user/profile";
+	} 
 
 	@RequestMapping("/toSaveUser")
 	public String toSaveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {

@@ -2,21 +2,36 @@
 <html>    
     <head>    
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
-    <title>登入页</title> 
+    <title></title> 
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/metisMenu/metisMenu.min.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/dist/css/sb-admin-2.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/font-awesome/css/font-awesome.min.css"/>
     <link href="${request.contextPath}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>   
-       
+    <script type="text/javascript">
+	     function showContent(url){
+			console.info(url);
+			$.ajax( {
+			    url: url, 
+			    type: "GET", 
+			    success: function(data){
+			      $("#page-wrapper").html(data);
+			    }
+			});
+		 }
+	
+	</script>
     <body>
 
      <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            
+            <div class="navbar-header">
+                
+                <a class="navbar-brand" href="/index">System Name</a>
+            </div>
 
             <ul class="nav navbar-top-links navbar-right">
                 
@@ -44,9 +59,7 @@
                     <ul class="nav" id="side-menu">
                        
                        
-                        <li>
-                            <a href="${request.contextPath}/login/index"><i class="fa fa-dashboard fa-fw"></i> 首页</a>
-                        </li>
+                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -62,10 +75,10 @@
                         <#if menuList??>
 							<#list menuList as obj>
 				            	<li>
-							    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> ${obj.url?if_exists}<span class="fa arrow"></span></a>
+							    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> ${obj.menuName}<span class="fa arrow"></span></a>
 								    <ul class="nav nav-second-level">
-									<#list obj.subList as subObj>
-										<li ><a target="iframeMain" href="${subObj.url?if_exists}">{subObj.name}</a></li>
+									<#list obj.sonMenu as subObj>
+										<li ><a href="javascript:showContent('${subObj.menuPath}')" >${subObj.menuName}</a></li>
 									</#list>
 									</ul>
 								</li>
@@ -78,26 +91,14 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-         <div id="page-wrapper">
-            <form class="form-horizontal" role="form">
-			  <div class="form-group">
-				<label for="firstname" class="col-sm-2 control-label">名字</label>
-				<div class="col-sm-10">
-				  <input type="text" class="form-control" id="firstname" >
-				</div>
-			  </div>
-			 
-			  <div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-				  <button type="submit" class="btn btn-default">add</button>
-				</div>
-			  </div>
-			</form>
-        </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+         <div id="page-wrapper">
+           <#include "/user/profile.ftl">
+        </div>
 
     <!-- jQuery -->
     <script src="${request.contextPath}/vendor/jquery/jquery.min.js"></script>
@@ -112,5 +113,12 @@
     <script src="${request.contextPath}/dist/js/sb-admin-2.js"></script>
 
 	<script src="${request.contextPath}/js/pulian/common.js"></script>
+	<script type="text/javascript">
+		$(function(){ 
+		　　showContent("/user/profile");
+		}); 
+	    
+	
+	</script>
 </body>
  </html>

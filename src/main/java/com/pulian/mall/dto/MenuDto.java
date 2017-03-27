@@ -1,5 +1,6 @@
 package com.pulian.mall.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDto extends BaseDto{
@@ -26,7 +27,7 @@ public class MenuDto extends BaseDto{
 	
 	private MenuDto parentMenu;
 	
-	private List<MenuDto> sonMenu;
+	private List<MenuDto> sonMenu  = new ArrayList<MenuDto>();
 
 	public int getMenuId() {
 		return menuId;
