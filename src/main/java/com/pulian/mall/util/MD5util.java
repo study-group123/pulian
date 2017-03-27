@@ -26,7 +26,7 @@ public class MD5util {
     
     public static void main(String[] args) {   
         try {  
-            System.out.println("64位：result: " + encoderPwdByMd5("12345678") + "**");  
+            System.out.println("64位：result: " + encoderPwdByMd5("1003671336") + "**");  
         }catch (Exception e) {  
         	log.error("加密失败",e);
         }  

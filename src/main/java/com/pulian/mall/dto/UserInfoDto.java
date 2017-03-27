@@ -49,6 +49,7 @@ public class UserInfoDto extends BaseDto{
 	 private YesOrNoEnum userDisable;//是否销户
 	 
 	 private int parentId;//父id
+	 ///////////////////////////上面是数据库属性///////////////////////////////////////
 	 
 	 private UserInfoDto parent;//父对象
 	 
