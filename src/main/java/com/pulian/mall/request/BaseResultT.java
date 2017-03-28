@@ -15,6 +15,8 @@ public class  BaseResultT<T> {
 	private T result;
 	
 	private List<T> results = new ArrayList<T>();
+	
+	private int count;
 
 	private Pagination pagination = new Pagination();
 
@@ -92,6 +94,12 @@ public class  BaseResultT<T> {
 	
 	public Boolean isHasResults() {
 		return getResults() != null ? true : false;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	

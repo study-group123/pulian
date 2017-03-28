@@ -29,6 +29,7 @@ import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
+import com.pulian.mall.util.Pagination;
 import com.pulian.mall.util.ServletUtil;
 import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
@@ -104,6 +105,29 @@ public class UserManagerControllerImpl {
 		return "";
 	}
 	
+	public void getChildrenOfCurrentUser(HttpServletRequest request, HttpServletResponse response){
+		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		
+		UserManagerRequest userManagerRequest = new UserManagerRequest();
+		userManagerRequest.setParentId(user.getUserId());
+		userManagerRequest.setPagination(new Pagination(0,9999));
+		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
+		
+		List<UserInfoDto> sonList = baseResultT.getResults();
+		int sonSize = sonList.size();
+		for(UserInfoDto userInfo:sonList){
+			
+			if(VipLevelEnum.GOLD.name().equals(userInfo.getVipLevel().getParent())){
+				userManagerRequest.setParentId(user.getUserId());
+				baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
+				sonSize += baseResultT.getResults().size();
+				userInfo.setSons(baseResultT.getResults());
+			}
+			
+		}
+		baseResultT.setResults(sonList);
+		baseResultT.setCount(sonSize);
+	}
 	private void buildSaveUserRequest(UserManagerRequest userManagerRequest, int silverSons,HttpServletRequest request, HttpServletResponse response) {
 	
 		userManagerRequest.setUserCode(userManagerRequest.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));

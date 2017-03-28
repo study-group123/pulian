@@ -51,6 +51,14 @@ public class UserInfoDto extends BaseDto{
 	 private int parentId;//父id
 	 ///////////////////////////上面是数据库属性///////////////////////////////////////
 	 
+	 private int remainingCardsNum;//剩余开卡数
+	 
+	 private int activeChildren;//已激活人数
+	 
+	 private int inActiveChildren;//未激活人数
+	 
+	 private int frozenChildren;//已冻结人数
+	 
 	 private UserInfoDto parent;//父对象
 	 
 	 private List<UserInfoDto> sons;//直属子

@@ -129,7 +129,7 @@
 			AND t.user_code = #{condition.userCode,jdbcType=DECIMAL}
 		</if>
 		<if test="condition.vipLevel != null ">
-			AND t.vip_level = #{condition.vipLevel,jdbcType=VARCHAR}
+			AND t.vip_level like CONCAT('%',#{condition.vipLevel,jdbcType=VARCHAR},'%')	
 		</if>
 		<if test="condition.frozenStatus != null ">
 			AND t.frozen_status = #{condition.frozenStatus,jdbcType=VARCHAR}
