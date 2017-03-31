@@ -57,7 +57,7 @@ public class UserManagerControllerImpl {
 			
 			//查询当前用户开过的银卡数
 			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
-			int maxCards = UserDefaultFieldUtil.getDefaultPublicCardNumbers(userManagerRequest);
+			int maxCards = UserDefaultFieldUtil.getDefaultPublicCardNumbers(userManagerRequest.getVipLevel());
 			if(silverSons < maxCards){
 				buildSaveUserRequest(userManagerRequest,silverSons,request, response);
 				baseResult = userManagerService.saveUserInfo(userManagerRequest);
@@ -92,10 +92,46 @@ public class UserManagerControllerImpl {
 	public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
 		  
 		  UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		  int silverSons = userManagerService.queryUserByParentIdAndVipLevel(new UserManagerRequest());
+		  
+		  user.setRemainingCardsNum(UserDefaultFieldUtil.getDefaultPublicCardNumbers(user.getVipLevel())-silverSons);
+		  
+		  user.setInActiveChildren(getInActiveChildren(user));
+		  
+		  user.setFrozenChildren(getFrozenChildren(user));
+		  
+		  //TODO 有过购买记录的
+		  user.setBoughtChildren(0);
 		  
 	      model.addAttribute("user", user);
-		  return "/user/profile";
+		  return "/user/user_profile";
 	} 
+
+	private int getInActiveChildren(UserInfoDto user) {
+		
+		UserManagerRequest userManagerRequest = new UserManagerRequest();
+		userManagerRequest.setParentId(user.getUserId());
+		userManagerRequest.setPagination(new Pagination(0,9999));
+		userManagerRequest.setActiveStatus(YesOrNoEnum.NO);
+		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
+		
+		List<UserInfoDto> sonList = baseResultT.getResults();
+		
+		return sonList.size();
+	}
+	
+	private int getFrozenChildren(UserInfoDto user) {
+		
+		UserManagerRequest userManagerRequest = new UserManagerRequest();
+		userManagerRequest.setParentId(user.getUserId());
+		userManagerRequest.setPagination(new Pagination(0,9999));
+		userManagerRequest.setFrozenStatus(YesOrNoEnum.YES);
+		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
+		
+		List<UserInfoDto> sonList = baseResultT.getResults();
+		
+		return sonList.size();
+	}
 
 	@RequestMapping("/toSaveUser")
 	public String toSaveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {

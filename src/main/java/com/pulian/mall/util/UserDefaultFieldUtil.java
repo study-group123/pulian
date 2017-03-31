@@ -16,7 +16,7 @@ public class UserDefaultFieldUtil {
 	
 	public static YesOrNoEnum DEFAULT_FROZEN_STATUS = YesOrNoEnum.NO;
 	
-	public static YesOrNoEnum DEFAULT_ACTIVE_STATUS = YesOrNoEnum.YES;
+	public static YesOrNoEnum DEFAULT_ACTIVE_STATUS = YesOrNoEnum.NO;
 	
 	public static YesOrNoEnum DEFAULT_DISABLED = YesOrNoEnum.NO;
 	
@@ -32,9 +32,9 @@ public class UserDefaultFieldUtil {
 	
 	
 	//取用户最大发卡数
-	public static int getDefaultPublicCardNumbers(UserManagerRequest userManagerRequest){
+	public static int getDefaultPublicCardNumbers(VipLevelEnum vipLevelEnum){
 		int cards = 0;
-		switch(userManagerRequest.getVipLevel().getValue()){
+		switch(vipLevelEnum.getValue()){
 		
 		case VipLevelEnum.GOLD_A_VALUE:
 			cards = DEFAULT_PUBLISH_CARDS_A;

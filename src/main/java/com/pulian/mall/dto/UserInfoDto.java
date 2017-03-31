@@ -57,6 +57,8 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private int inActiveChildren;//未激活人数
 	 
+	 private int boughtChildren;//活跃人数，有过购买记录的
+	 
 	 private int frozenChildren;//已冻结人数
 	 
 	 private UserInfoDto parent;//父对象
@@ -237,6 +239,46 @@ public class UserInfoDto extends BaseDto{
 
 	public void setSons(List<UserInfoDto> sons) {
 		this.sons = sons;
+	}
+
+	public int getRemainingCardsNum() {
+		return remainingCardsNum;
+	}
+
+	public void setRemainingCardsNum(int remainingCardsNum) {
+		this.remainingCardsNum = remainingCardsNum;
+	}
+
+	public int getActiveChildren() {
+		return activeChildren;
+	}
+
+	public void setActiveChildren(int activeChildren) {
+		this.activeChildren = activeChildren;
+	}
+
+	public int getInActiveChildren() {
+		return inActiveChildren;
+	}
+
+	public void setInActiveChildren(int inActiveChildren) {
+		this.inActiveChildren = inActiveChildren;
+	}
+
+	public int getFrozenChildren() {
+		return frozenChildren;
+	}
+
+	public void setFrozenChildren(int frozenChildren) {
+		this.frozenChildren = frozenChildren;
+	}
+
+	public int getBoughtChildren() {
+		return boughtChildren;
+	}
+
+	public void setBoughtChildren(int boughtChildren) {
+		this.boughtChildren = boughtChildren;
 	}
 
 	 
