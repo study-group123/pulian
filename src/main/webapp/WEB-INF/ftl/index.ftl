@@ -103,6 +103,7 @@
          <div id="page-wrapper">
           
         </div>
+    <#include "/common/modal_template.ftl">
 
     <!-- jQuery -->
     <script src="${request.contextPath}/vendor/jquery/jquery.min.js"></script>
@@ -116,10 +117,13 @@
     <!-- Custom Theme JavaScript -->
     <script src="${request.contextPath}/dist/js/sb-admin-2.js"></script>
 
-	<script src="${request.contextPath}/js/pulian/common.js"></script>
+	<script src="${request.contextPath}/js/pulian/jquery_fn_extends.js"></script>
+	
+	<script src="${request.contextPath}/js/pulian/Modal.js"></script>
 	<script type="text/javascript">
 		$(function(){ 
 		　　showContent("/user/profile");
+		 
 		}); 
 	    
 	

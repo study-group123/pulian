@@ -1,5 +1,4 @@
-
-function checkUserLogin(){
+function saveUser(){
 	 var userCode=$.trim($("#userCode").val());
 	 var password=$.trim($("#passWord").val());
 		if(userCode=='' || password==''){
@@ -7,18 +6,16 @@ function checkUserLogin(){
 			return;
 		}
 	   $.ajax({
-			url : "/login/userLogin",
+			url : "/user/saveUser",
 			cache : false,
 			async : false,
-			data : JSON.stringify($("#loginForm").serializeObject()),
+			data : JSON.stringify($("#addUserForm").serializeObject()),
 			type : "POST",
 			datatype : "json",
 			contentType:"application/json",
 			success: function(data){
 			 if(data!="" && data.successStatus=="YES"){
-		            document.loginForm.action = "/index";
-		            document.loginForm.reset(); 
-                    document.loginForm.submit(); 
+		            alert()
 			 }else{
 			     alert("登录失败,请重新登录！");
 			     window.location.reload(); 

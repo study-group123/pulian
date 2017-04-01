@@ -55,6 +55,6 @@
     <script src="${request.contextPath}/dist/js/sb-admin-2.js"></script>
 
 	<script src="${request.contextPath}/js/pulian/login.js"></script>
-	<script src="${request.contextPath}/js/pulian/common.js"></script>
+	<script src="${request.contextPath}/js/pulian/jquery_fn_extends.js"></script>
 </body>
  </html>

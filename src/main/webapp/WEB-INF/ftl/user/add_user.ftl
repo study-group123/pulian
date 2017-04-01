@@ -4,7 +4,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" name="addUserForm">
 			  <div class="form-group">
 				<label for="userName" class="col-sm-2 control-label">真实姓名:</label>
 				<div class="col-sm-2">
@@ -86,6 +86,7 @@
 				  <input type="text" class="form-control" id="bankNo"  >
 				</div>
 			  </div>
-			 
+			  <a href="javascript:saveUser()" class="btn btn-lg btn-success btn-block">提交</a>
 			 
 			</form>
+		<script src="${request.contextPath}/js/pulian/manager_user.js"></script>
