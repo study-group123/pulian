@@ -32,6 +32,8 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private String weChatNo;//微信号
 	 
+	 private String userEmail;//邮箱
+	 
 	 private String settlementBank;//结算银行,别忘了trim
 	 
 	 private String bankBranchName;//支行名称
@@ -161,8 +163,6 @@ public class UserInfoDto extends BaseDto{
 		this.settlementBank = settlementBank;
 	}
 
-
-
 	public String getBankBranchName() {
 		return bankBranchName;
 	}
@@ -281,6 +281,14 @@ public class UserInfoDto extends BaseDto{
 
 	public void setBoughtChildren(int boughtChildren) {
 		this.boughtChildren = boughtChildren;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	 

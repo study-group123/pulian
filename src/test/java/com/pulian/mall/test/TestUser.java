@@ -47,7 +47,7 @@ public class TestUser extends AbstractTestNGSpringContextTests{
 		 
 		UserManagerRequest request = new UserManagerRequest();
 		request.setActiveStatus(YesOrNoEnum.YES);
-		request.setBankAddress("银行地址");
+		request.setBankBranchName("支行名称");
 		request.setUserName("用户名");
 		//request.setUserCode(CodeUtil.getCode(request.getUserArea()));
 		request.setBankNo("bankno");

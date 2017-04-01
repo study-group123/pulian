@@ -127,6 +127,14 @@ public class UserManagerRequest {
 	public void setWeChatNo(String weChatNo) {
 		this.userInfoDto.setWeChatNo(weChatNo);
 	}
+	
+	public String getUserEmail() {
+		return this.userInfoDto.getUserEmail();
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userInfoDto.setUserEmail(userEmail);
+	}
 
 	public String getSettlementBank() {
 		return this.userInfoDto.getSettlementBank();
@@ -136,11 +144,11 @@ public class UserManagerRequest {
 		this.userInfoDto.setSettlementBank(settlementBank);
 	}
 
-	public String getBankAddress() {
+	public String getBankBranchName() {
 		return this.userInfoDto.getBankBranchName();
 	}
 
-	public void setBankAddress(String bankBranchName) {
+	public void setBankBranchName(String bankBranchName) {
 		this.userInfoDto.setBankBranchName(bankBranchName);
 	}
 

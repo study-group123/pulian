@@ -52,14 +52,15 @@ public class UserManagerControllerImpl {
 	
 	@RequestMapping("/saveUser")
 	@ResponseBody
-	public BaseResult saveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
-		BaseResult baseResult = new BaseResult();
+	public BaseResultT<UserInfoDto> saveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+		BaseResultT<UserInfoDto> baseResult = new BaseResultT<UserInfoDto>();
 		try{
 			//一个证件只能开一次账户
 			//TODO
 			
 			//查询当前用户开过的银卡数
-			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
+			userManagerRequest.setVipLevel(VipLevelEnum.SILVER);
+			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest, request,  response);
 			int maxCards = UserDefaultFieldUtil.getDefaultPublicCardNumbers(userManagerRequest.getVipLevel());
 			if(silverSons < maxCards){
 				buildSaveUserRequest(userManagerRequest,silverSons,request, response);
@@ -99,7 +100,7 @@ public class UserManagerControllerImpl {
 		  UserManagerRequest userManagerRequest = new  UserManagerRequest();
 		  userManagerRequest.setVipLevel(user.getVipLevel());
 		  userManagerRequest.setParentId(user.getUserId());
-		  int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
+		  int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest,request,response);
 		  
 		  user.setRemainingCardsNum(UserDefaultFieldUtil.getDefaultPublicCardNumbers(user.getVipLevel())-silverSons);
 		  
@@ -175,8 +176,8 @@ public class UserManagerControllerImpl {
 		baseResultT.setCount(sonSize);
 	}
 	private void buildSaveUserRequest(UserManagerRequest userManagerRequest, int silverSons,HttpServletRequest request, HttpServletResponse response) {
-	
-		userManagerRequest.setUserCode(userManagerRequest.getParentCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
+		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		userManagerRequest.setUserCode(user.getUserCode()+CodeUtil.padedNumberToSixDigits(++silverSons));
 		userManagerRequest.setUserAccount(FirstLetterUtil.getFirstLetter(userManagerRequest.getUserName())+"_"+userManagerRequest.getUserCode());
 		UserDefaultFieldUtil.setUserDefaultFields(userManagerRequest,request,response);
 	}

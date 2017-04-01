@@ -16,6 +16,7 @@
     <result column="card_type" property="cardType" jdbcType="VARCHAR" />
     <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
     <result column="we_chat_no" property="weChatNo" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
     <result column="settlement_bank" property="settlementBank" jdbcType="VARCHAR" />
     <result column="bank_branch_name" property="bankBranchName" jdbcType="VARCHAR" />   
     <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
@@ -34,7 +35,7 @@
   
   
   <sql id="queryColumns"> 
-  	user_id, user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
+  	user_id, user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, user_email
   	settlement_bank, bank_branch_name, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
   	parent_id, creater_id, updater_id, create_time, update_time
   </sql>
@@ -42,7 +43,7 @@
   
   
   <sql id="insertColumns">
-  	 user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, 
+  	 user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, user_email
   	settlement_bank, bank_branch_name, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
   	parent_id, creater_id, updater_id, create_time, update_time
   </sql>
@@ -63,6 +64,7 @@
 		#{condition.cardType,jdbcType=VARCHAR},
 		#{condition.cardNo,jdbcType=VARCHAR},
 		#{condition.weChatNo,jdbcType=VARCHAR},
+		#{condition.userEmail,jdbcType=VARCHAR},
 		#{condition.settlementBank,jdbcType=VARCHAR},
 		#{condition.bankBranchName,jdbcType=VARCHAR},
 		#{condition.bankNo,jdbcType=VARCHAR},

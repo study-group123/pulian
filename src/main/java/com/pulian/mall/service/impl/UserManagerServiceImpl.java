@@ -2,18 +2,24 @@ package com.pulian.mall.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.UserInfoMapper;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
+import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.ServletUtil;
 /**
  * 
  * @author wangxiaoqiang
@@ -47,15 +53,15 @@ public class UserManagerServiceImpl {
 		return baseResultT;
 	}
 	
-    public BaseResult saveUserInfo(UserManagerRequest userManagerRequest){
-    	BaseResult baseResult = new BaseResult();
+    public BaseResultT<UserInfoDto> saveUserInfo(UserManagerRequest userManagerRequest){
+    	BaseResultT<UserInfoDto> baseResult = new BaseResultT<UserInfoDto>();
     	try{
     		userInfoMapper.saveUserInfo(userManagerRequest.getUserInfoDto());
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.saveUserInfo",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);
 		}
-    	
+    	baseResult.setResult(userManagerRequest.getUserInfoDto());
 		return baseResult;
 	}
     
@@ -76,11 +82,11 @@ public class UserManagerServiceImpl {
 
 	}
 
-	public int queryUserByParentIdAndVipLevel(UserManagerRequest request) {
-
+	public int queryUserByParentIdAndVipLevel(UserManagerRequest userRequest,HttpServletRequest request, HttpServletResponse response) {
+		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		UserManagerRequest queryRequest = new UserManagerRequest();
-		queryRequest.setParentId(request.getParentId());
-		queryRequest.setVipLevel(request.getVipLevel());
+		queryRequest.setParentId(user.getUserId());
+		queryRequest.setVipLevel(userRequest.getVipLevel());
 		
 		return userInfoMapper.count(queryRequest);
 	}
