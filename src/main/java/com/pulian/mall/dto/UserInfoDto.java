@@ -34,7 +34,7 @@ public class UserInfoDto extends BaseDto{
 	 
 	 private String settlementBank;//结算银行,别忘了trim
 	 
-	 private String bankAddress;//银行详细名称
+	 private String bankBranchName;//支行名称
 	 
 	 private String bankNo;//银行卡号
 	 
@@ -161,12 +161,14 @@ public class UserInfoDto extends BaseDto{
 		this.settlementBank = settlementBank;
 	}
 
-	public String getBankAddress() {
-		return bankAddress;
+
+
+	public String getBankBranchName() {
+		return bankBranchName;
 	}
 
-	public void setBankAddress(String bankAddress) {
-		this.bankAddress = bankAddress;
+	public void setBankBranchName(String bankBranchName) {
+		this.bankBranchName = bankBranchName;
 	}
 
 	public String getBankNo() {

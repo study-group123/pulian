@@ -135,11 +135,11 @@ public class UserManagerRequest {
 	}
 
 	public String getBankAddress() {
-		return this.userInfoDto.getBankAddress();
+		return this.userInfoDto.getBankBranchName();
 	}
 
-	public void setBankAddress(String bankAddress) {
-		this.userInfoDto.setBankAddress(bankAddress);
+	public void setBankAddress(String bankBranchName) {
+		this.userInfoDto.setBankBranchName(bankBranchName);
 	}
 
 	public String getBankNo() {

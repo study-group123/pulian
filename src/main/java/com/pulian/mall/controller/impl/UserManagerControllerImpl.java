@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pulian.mall.dto.AreasEnum;
+import com.pulian.mall.dto.CardTypeEnum;
 import com.pulian.mall.dto.MenuDto;
+import com.pulian.mall.dto.SettlementBankEnum;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
@@ -137,8 +140,11 @@ public class UserManagerControllerImpl {
 	public String toSaveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		
 		
+		model.addAttribute("userAreaEnum", AreasEnum.values());
+		model.addAttribute("settlementBankEnum",SettlementBankEnum.values());
+		model.addAttribute("cardTypeEnum",CardTypeEnum.values());
 		
-		return "";
+		return "/user/add_user_profile";
 	}
 	
 	public void getChildrenOfCurrentUser(HttpServletRequest request, HttpServletResponse response){
