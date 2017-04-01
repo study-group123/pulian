@@ -14,7 +14,8 @@
 			console.info(url);
 			$.ajax( {
 			    url: url, 
-			    type: "GET", 
+			    type: "post", 
+			    dataType: "html",
 			    success: function(data){
 			      $("#page-wrapper").html(data);
 			    }
@@ -59,8 +60,9 @@
                     <ul class="nav" id="side-menu">
                        
                        
-                        
-                        <li>
+                         <!-- 
+                         
+                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -70,8 +72,10 @@
                                     <a href="morris.html">Morris.js Charts</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
+                           
                         </li>
+                         -->
+                        
                         <#if menuList??>
 							<#list menuList as obj>
 				            	<li>
@@ -97,7 +101,7 @@
     <!-- /#wrapper -->
 
          <div id="page-wrapper">
-           <#include "/user/profile.ftl">
+          
         </div>
 
     <!-- jQuery -->

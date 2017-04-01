@@ -19,6 +19,8 @@ public class UserManagerRequest {
     private String parentCode;
     
     
+    
+    
 	public UserInfoDto getUserInfoDto() {
 		return userInfoDto;
 	}

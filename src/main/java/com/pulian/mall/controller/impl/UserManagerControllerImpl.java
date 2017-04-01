@@ -92,10 +92,14 @@ public class UserManagerControllerImpl {
 	}
 	
 	@RequestMapping(value="/profile",method={RequestMethod.POST,RequestMethod.GET})     
-	public String toIndex(Model model,HttpServletRequest request,HttpServletResponse response) { 
+	public String toUserProfile(Model model,HttpServletRequest request,HttpServletResponse response) { 
 		  
 		  UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
-		  int silverSons = userManagerService.queryUserByParentIdAndVipLevel(new UserManagerRequest());
+		  
+		  UserManagerRequest userManagerRequest = new  UserManagerRequest();
+		  userManagerRequest.setVipLevel(user.getVipLevel());
+		  userManagerRequest.setParentId(user.getUserId());
+		  int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest);
 		  
 		  user.setRemainingCardsNum(UserDefaultFieldUtil.getDefaultPublicCardNumbers(user.getVipLevel())-silverSons);
 		  
@@ -136,15 +140,15 @@ public class UserManagerControllerImpl {
 		return sonList.size();
 	}
 
-	@RequestMapping("/toSaveUser")
-	public String toSaveUser(@RequestBody UserManagerRequest userManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/toSaveUser",method={RequestMethod.POST,RequestMethod.GET})
+	public String toSaveUser(Model model,HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		model.addAttribute("userAreaEnum", AreasEnum.values());
 		model.addAttribute("settlementBankEnum",SettlementBankEnum.values());
 		model.addAttribute("cardTypeEnum",CardTypeEnum.values());
 		
-		return "/user/add_user_profile";
+		return "/user/add_user";
 	}
 	
 	public void getChildrenOfCurrentUser(HttpServletRequest request, HttpServletResponse response){

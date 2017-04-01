@@ -1,6 +1,6 @@
 		   <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">新增银卡用户</h1>
+                    <h3 class="page-header">新增银卡用户</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
