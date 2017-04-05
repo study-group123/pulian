@@ -75,12 +75,12 @@ public class ApprovalManagerRequest {
 		this.approvalDto.setApprovalResultDesc(approvalResultDesc);
 	}
 	
-	public ApprovalTypeEnum getApprovaltype() {
-		return this.approvalDto.getApprovaltype();
+	public ApprovalTypeEnum getApprovalType() {
+		return this.approvalDto.getApprovalType();
 	}
 
-	public void setApprovaltype(ApprovalTypeEnum approvaltype) {
-		this.approvalDto.setApprovaltype(approvaltype);
+	public void setApprovalType(ApprovalTypeEnum approvaltype) {
+		this.approvalDto.setApprovalType(approvaltype);
 	}
 	
 	public String getApplicantName() {

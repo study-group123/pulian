@@ -27,7 +27,7 @@
   
   <sql id="queryColumns">
   	approval_id, applicant_id, approval_reason,approval_type, before_thirty_achievement, approval_result, approval_result_desc,
-  	approver_id, creater_id, updater_id, create_time, update_time
+  	approver_id, t.creater_id, t.updater_id, t.create_time, t.update_time
   </sql>
   
   
@@ -64,17 +64,20 @@
       select 
 	     <include refid="queryColumns" />
 		   
-	     from t_approval approval
-	     <where>
-			<if test="condition != null">
-				<include refid="conditions"></include>	
-			</if>
-		 </where>
+	     from t_approval t
+	     
 		    INNER JOIN t_user user1
-			ON approval.applicant_id = user1.user_id
+			ON t.applicant_id = user1.user_id
 			<if test="condition != null">
 				<include refid="applicantConditions"></include>	
-			</if>)t1	
+			</if>
+			
+			<where>
+				<if test="condition != null">
+					<include refid="conditions"></include>	
+				</if>
+			 </where>
+			 )t1	
 	</select>
 	
 	
@@ -87,22 +90,23 @@
 			,user1.phone AS applicant_phone
 			,user2.user_name AS approver_name
 			,user2.phone AS approver_phone
-	     from t_approval approval
-	     <where>
-			<if test="condition != null">
-				<include refid="conditions"></include>	
-			</if>
-		 </where>
+	     from t_approval  t
+	    
 		    INNER JOIN t_user user1
-			ON approval.applicant_id = user1.user_id
+			ON t.applicant_id = user1.user_id
 			<if test="condition != null">
 				<include refid="applicantConditions"></include>	
 			</if>
 			LEFT JOIN t_user user2
-			ON approval.approver_id = user2.user_id	
+			ON t.approver_id = user2.user_id	
+	          <where>
+				<if test="condition != null">
+					<include refid="conditions"></include>	
+				</if>
+			 </where>
 	          
-	          
-	           ORDER BY approval.create_time desc
+	           ORDER BY t.create_time desc
+	            
      <include refid="MYSQL.pagination" />
    </select>
    
@@ -123,8 +127,8 @@
 		<if test="condition.applicantId != null and condition.applicantId != ''">
 			AND t.applicant_id = #{condition.applicantId,jdbcType=INTEGER}
 		</if>
-		<if test="condition.approvalType != null and condition.approvalType != ''">
-			AND t.applicant_type = #{condition.approvalType,jdbcType=INTEGER}
+		<if test="condition.approvalType != null ">
+			AND t.approval_type = #{condition.approvalType,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.approverId != null and condition.approverId != ''">
 			AND t.approver_id = #{condition.approverId,jdbcType=VARCHAR}

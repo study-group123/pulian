@@ -26,23 +26,26 @@ function updateApprovalStatus(approvalId,beforeThirtyAchievement,status){
 			  })
 			  .on( function (e,desc) {
 			    alert("返回结果：" + desc);
+			    if(e){
+			    	$.ajax({
+						url : "/approval/updateApprovalStatus",
+						cache : false,
+						async : false,
+						data : "{}",
+						type : "POST",
+						datatype : "json",
+						contentType:"application/json",
+						success: function(data){
+						 if(data!="" && data.successStatus=="YES"){
+					            Modal.alert({msg: "操作成功",title: '标题', btnok: '确定',btncl:'取消'});
+						 }else{
+						      Modal.alert({msg: "操作失败",title: '标题', btnok: '确定',btncl:'取消'});
+						 }
+					  }
+				    });
+			    }
 			  });
-	   $.ajax({
-			url : "/approval/updateApprovalStatus",
-			cache : false,
-			async : false,
-			data : "{}",
-			type : "POST",
-			datatype : "json",
-			contentType:"application/json",
-			success: function(data){
-			 if(data!="" && data.successStatus=="YES"){
-		            Modal.alert({msg: "申请成功",title: '标题', btnok: '确定',btncl:'取消'});
-			 }else{
-			      Modal.alert({msg: data.message,title: '标题', btnok: '确定',btncl:'取消'});
-			 }
-		  }
-	    });
+	   
 }
 
 //将条件插入到导出exportCsvForm
@@ -61,6 +64,7 @@ function conditionHtmlToExportCsvForm()
 function getParams()
 {
 	conditionHtmlToExportCsvForm();
+	console.info(JSON.stringify($("#exportCsvForm").serializeObject()));
 	return JSON.stringify($("#exportCsvForm").serializeObject());
 }
 function queryApprovalList() { 
@@ -108,11 +112,11 @@ $("#jqGridList").jqGrid({
     rownumbers: true,  
     autowidth: true,  
     height: "100%",  
-    rowNum: 20,  
+    rowNum: 10,  
     rownumbers: true, // 显示行号  
     rownumWidth: 35, // the width of the row numbers columns  
     pager: "#jqGridPager",//分页控件的id
-    rowList:[10,20,50,500],   //分页选项，可以下拉选择每页显示记录数
+    rowList:[10,20,50],   //分页选项，可以下拉选择每页显示记录数
     jsonReader : {
 		root : "results",               // json中代表实际模型数据的入口  
 		page : "pagination.page",       // json中代表当前页码的数据   
@@ -121,11 +125,6 @@ $("#jqGridList").jqGrid({
 		repeatitems : false             // 如果设为false，则jqGrid在解析json时，会根据name来搜索对应的数据元素（即可以json中元素可以不按顺序）；而所使用的name是来自于colModel中的name设定。   
 	    },
     subGrid: false,//是否启用子表格  
-    postData : getParams(),
+    postData : getParams()
 });  
 
-// 设置jqgrid的宽度  
-$(window).bind('resize', function () {  
-    var width = $('.jqGrid_wrapper').width();  
-    jqGrid.setGridWidth(width);  
-});  

@@ -41,6 +41,7 @@ CREATE TABLE `t_approval` (
   `approval_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `applicant_id` INT(11) DEFAULT NULL COMMENT '申请人id',
   `approval_reason` VARCHAR(512) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '申请理由',
+  `approval_type` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审批类型',
   `before_thirty_achievement` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '前三十天业绩，申请之前的30天',
   `approval_result` VARCHAR(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审批结果',
   `approval_result_desc` VARCHAR(512) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '审批结果描述',

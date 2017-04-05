@@ -21,7 +21,7 @@ public class ApprovalDto extends BaseDto{
     
     private String approvalResultDesc;//审批结果描述
     
-    private ApprovalTypeEnum approvaltype;
+    private ApprovalTypeEnum approvalType;
     
     //////////////////////////////上面是数据库属性////////////////////////////////////////////
     
@@ -122,13 +122,15 @@ public class ApprovalDto extends BaseDto{
 		this.approverPhone = approverPhone;
 	}
 
-	public ApprovalTypeEnum getApprovaltype() {
-		return approvaltype;
+	public ApprovalTypeEnum getApprovalType() {
+		return approvalType;
 	}
 
-	public void setApprovaltype(ApprovalTypeEnum approvaltype) {
-		this.approvaltype = approvaltype;
+	public void setApprovalType(ApprovalTypeEnum approvalType) {
+		this.approvalType = approvalType;
 	}
+
+	
 	
 	
 }

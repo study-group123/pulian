@@ -78,7 +78,7 @@ public class UserDefaultFieldUtil {
     //新增审批默认属性
     public static void setApprovalDefaultFields(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response){
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
-    	approvalManagerRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);
+    	approvalManagerRequest.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
     	approvalManagerRequest.getApprovalDto().setCreaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));

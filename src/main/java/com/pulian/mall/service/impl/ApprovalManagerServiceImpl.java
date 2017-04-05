@@ -86,7 +86,7 @@ public class ApprovalManagerServiceImpl {
     private boolean validateRepeat(ApprovalManagerRequest approvalManagerRequest) {
     	ApprovalManagerRequest queryRequest = new ApprovalManagerRequest();
     	queryRequest.setApplicantId(approvalManagerRequest.getApplicantId());
-    	queryRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);
+    	queryRequest.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
     	List<ApprovalDto> approvalList = approvalMapper.queryApprovalList(queryRequest);
     	
 		return approvalList.size()>0;

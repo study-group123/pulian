@@ -1,5 +1,8 @@
 package com.pulian.mall.controller.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,7 +59,7 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/queryApprovalList")
 	@ResponseBody
-	public BaseResultT<ApprovalDto> queryApprovalList(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<ApprovalDto> queryApprovalList( ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<ApprovalDto> baseResultT = null;
 		try{
 			buildQueryApprovalListRequest(approvalManagerRequest);
@@ -68,6 +71,9 @@ public class ApprovalManagerControllerImpl {
 				approvalDto.setApplicantName(user.getUserName());
 				approvalDto.setApplicantPhone(user.getUserPhone());
 				approvalDto.setBeforeThirtyAchievement(getBeforeThirtyAchievement());
+				List<ApprovalDto> results = new ArrayList<ApprovalDto>();
+				results.add(approvalDto);
+				baseResultT.setResults(results);
 			}
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.queryApprovalList",e);
@@ -78,7 +84,7 @@ public class ApprovalManagerControllerImpl {
 	}
 	
 	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest) {
-		approvalManagerRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);
+		approvalManagerRequest.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
 		
 	}
 
@@ -106,7 +112,7 @@ public class ApprovalManagerControllerImpl {
 	}
 
 	@RequestMapping("/toSaveApprovalDto")
-	public String toSaveApprovalDto(@RequestBody ApprovalManagerRequest ApprovalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public String toSaveApprovalDto(Model model,HttpServletRequest request, HttpServletResponse response) {
 		
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		model.addAttribute("user", user);
