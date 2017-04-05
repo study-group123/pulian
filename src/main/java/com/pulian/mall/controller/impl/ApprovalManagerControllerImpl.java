@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pulian.mall.dto.ApprovalDto;
 import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
@@ -60,7 +61,14 @@ public class ApprovalManagerControllerImpl {
 		try{
 			buildQueryApprovalListRequest(approvalManagerRequest);
 			baseResultT  = approvalManagerService.queryApprovalList(approvalManagerRequest);
-				
+			//add new approvalDto
+			UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+			if(user.getVipLevel()==VipLevelEnum.SILVER && baseResultT.getResults().size()==0){
+				ApprovalDto approvalDto =  new ApprovalDto();
+				approvalDto.setApplicantName(user.getUserName());
+				approvalDto.setApplicantPhone(user.getUserPhone());
+				approvalDto.setBeforeThirtyAchievement(getBeforeThirtyAchievement());
+			}
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.queryApprovalList",e);
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
@@ -100,19 +108,25 @@ public class ApprovalManagerControllerImpl {
 	@RequestMapping("/toSaveApprovalDto")
 	public String toSaveApprovalDto(@RequestBody ApprovalManagerRequest ApprovalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		
+		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		model.addAttribute("user", user);
 		
-		
-		return "";
+		return "/approment/approment_manager";
 	}
 	
 	private void buildSaveApprovalRequest(ApprovalManagerRequest approvalManagerRequest, HttpServletRequest request, HttpServletResponse response) {
 	   
 		//TODO: 拿到用户前三十天业绩
-		approvalManagerRequest.setBeforeThirtyAchievement("");
+		approvalManagerRequest.setBeforeThirtyAchievement(getBeforeThirtyAchievement());
 		
 		UserDefaultFieldUtil.setApprovalDefaultFields(approvalManagerRequest, request, response);
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		approvalManagerRequest.setApplicantId(user.getUserId());
+	}
+
+	private String getBeforeThirtyAchievement() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public static void main(String[] args) {

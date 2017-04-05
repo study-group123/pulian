@@ -58,8 +58,8 @@ $(function () {
       return {
         on: function (callback) {
           if (callback && callback instanceof Function) {
-            alr.find('.ok').click(function () { callback(true) });
-            alr.find('.cancel').click(function () { callback(false) });
+            alr.find('.ok').click(function () { callback(true,$("#desc").val()) });
+            alr.find('.cancel').click(function () { callback(false,$("#desc").val()) });
           }
         }
       };

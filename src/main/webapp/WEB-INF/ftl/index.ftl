@@ -7,7 +7,7 @@
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/metisMenu/metisMenu.min.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/dist/css/sb-admin-2.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/font-awesome/css/font-awesome.min.css"/>
-    <link href="${request.contextPath}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link type="text/css" rel="stylesheet" href="${request.contextPath}/css/jqgrid/ui.jqgrid.css"/>
     </head>   
     <script type="text/javascript">
 	     function showContent(url){
@@ -110,6 +110,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script src="${request.contextPath}/js/jqgrid/js/jquery.jqGrid.src.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="${request.contextPath}/vendor/metisMenu/metisMenu.min.js"></script>

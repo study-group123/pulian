@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.pulian.mall.dto.ApprovalDto;
+import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.AreasEnum;
 import com.pulian.mall.dto.DictionaryDto;
 import com.pulian.mall.dto.DictionaryValueTypeEnum;
@@ -83,8 +84,10 @@ public class ApprovalManagerServiceImpl {
 	}
     
     private boolean validateRepeat(ApprovalManagerRequest approvalManagerRequest) {
-    	
-    	List<ApprovalDto> approvalList = approvalMapper.queryApprovalList(approvalManagerRequest);
+    	ApprovalManagerRequest queryRequest = new ApprovalManagerRequest();
+    	queryRequest.setApplicantId(approvalManagerRequest.getApplicantId());
+    	queryRequest.setApprovaltype(ApprovalTypeEnum.SILVER_TO_GOLD);
+    	List<ApprovalDto> approvalList = approvalMapper.queryApprovalList(queryRequest);
     	
 		return approvalList.size()>0;
 	}
