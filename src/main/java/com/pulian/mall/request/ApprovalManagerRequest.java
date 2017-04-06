@@ -2,6 +2,8 @@ package com.pulian.mall.request;
 
 import com.pulian.mall.dto.ApprovalDto;
 import com.pulian.mall.dto.ApprovalTypeEnum;
+import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.util.Pagination;
 public class ApprovalManagerRequest {
@@ -10,6 +12,9 @@ public class ApprovalManagerRequest {
     private ApprovalDto approvalDto = new ApprovalDto();
     
     private Pagination pagination = new Pagination();
+    
+    private UserInfoDto userInfo = new UserInfoDto();
+    
 
 	public ApprovalDto getApprovalDto() {
 		return approvalDto;
@@ -194,5 +199,29 @@ public class ApprovalManagerRequest {
 
 	public void setTotal(int total) {
 		pagination.setTotal(total);
+	}
+
+	public UserInfoDto getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfoDto userInfo) {
+		this.userInfo = userInfo;
+	}
+	
+	public int getUserId() {
+		return this.userInfo.getUserId();
+	}
+
+	public void setUserId(int userId) {
+		this.userInfo.setUserId(userId);
+	}
+	
+	public VipLevelEnum getVipLevel() {
+		return this.userInfo.getVipLevel();
+	}
+
+	public void setVipLevel(VipLevelEnum vipLevel) {
+		this.userInfo.setVipLevel(vipLevel);
 	}
 }

@@ -94,6 +94,7 @@
 	    
 		    INNER JOIN t_user user1
 			ON t.applicant_id = user1.user_id
+			and 
 			<if test="condition != null">
 				<include refid="applicantConditions"></include>	
 			</if>
@@ -111,7 +112,9 @@
    </select>
    
    <sql id="applicantConditions">
-		
+		<if test="condition.vipLevel != null and condition.vipLevel.name != 'SILVER' ">
+			AND user1.parent_id = #{condition.userId,jdbcType=Integer}
+		</if>
 		<if test="condition.applicantName != null and condition.applicantName != ''">
 			AND user1.user_name = #{condition.applicantName,jdbcType=VARCHAR}
 		</if>
@@ -150,7 +153,7 @@
 				approval_result_desc = #{condition.approvalResultDesc},
 			</if>
 			update_time = #{condition.updateTime,jdbcType=VARCHAR},
-			update_id = #{condition.updateId,jdbcType=VARCHAR}
+			updater_id = #{condition.updaterId,jdbcType=VARCHAR}
 		</set>
 		where approval_id = #{condition.approvalId}
    </update>

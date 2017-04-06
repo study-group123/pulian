@@ -96,12 +96,12 @@ $("#jqGridList").jqGrid({
         {  
             name: 'currentUserVipLevel', index: 'currentUserVipLevel', 
             formatter: function(cellValue, options, rowObject) {  
-            	str = '';
+            	var str = '';
 				if($('input[name="currentUserVipLevel"]') == 'SILVER'){
-					operateClick+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >申请</a>';
+					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >申请</a>';
 				}else{
-					operateClick+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+approvalId+"' ,'"+ beforeThirtyAchievement+"' ,'YES'"+')" >批准</a>    ';
-					operateClick+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+approvalId+"' ,'"+ beforeThirtyAchievement+"' ,'NO'"+')" >拒绝</a>';
+					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+rowObject.approvalId+"' ,'"+ rowObject.beforeThirtyAchievement+"' ,'YES'"+')" >批准</a>    ';
+					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+rowObject.approvalId+"' ,'"+ rowObject.beforeThirtyAchievement+"' ,'NO'"+')" >拒绝</a>';
 				} 
                 return str ;  
             }//jqgrid自定义格式化  

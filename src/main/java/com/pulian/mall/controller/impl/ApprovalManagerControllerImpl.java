@@ -62,10 +62,12 @@ public class ApprovalManagerControllerImpl {
 	public BaseResultT<ApprovalDto> queryApprovalList( ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<ApprovalDto> baseResultT = null;
 		try{
-			buildQueryApprovalListRequest(approvalManagerRequest);
+			UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+			
+			buildQueryApprovalListRequest(approvalManagerRequest,user);
 			baseResultT  = approvalManagerService.queryApprovalList(approvalManagerRequest);
 			//add new approvalDto
-			UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+			
 			if(user.getVipLevel()==VipLevelEnum.SILVER && baseResultT.getResults().size()==0){
 				ApprovalDto approvalDto =  new ApprovalDto();
 				approvalDto.setApplicantName(user.getUserName());
@@ -83,9 +85,9 @@ public class ApprovalManagerControllerImpl {
 		return baseResultT;
 	}
 	
-	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest) {
+	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest ,UserInfoDto user) {
 		approvalManagerRequest.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
-		
+		approvalManagerRequest.setUserInfo(user);
 	}
 
 	@RequestMapping("/updateApprovalStatus")

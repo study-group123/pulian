@@ -20,7 +20,7 @@
 			  <div class="form-group">
 				<label for="bankNo" class="col-sm-7 control-label"></label>
 				<div class="col-sm-1">
-				  <a href="javascript:queryApprovalList()" class="btn btn-lg btn-success btn-block">搜索</a>
+				  <a href="javascript:queryApprovalList()" class="btn btn-sm btn-success btn-block">搜索</a>
 				</div>
 			  </div>
 			  
