@@ -15,11 +15,16 @@
   ]]>
   </sql> -->
   <!-- limit #{startRow}, (#{endRow}-#{startRow}+1) -->
-  <sql id="MYSQL.pagination">
+  <!--sql id="MYSQL.pagination">
     <![CDATA[
      
      limit ${condition.startRow-1} ,${condition.endRow-(condition.startRow-1)}
   ]]>
+  </sql-->
+  <sql id="MYSQL.pagination">
+    <![CDATA[
+     
+     limit ${condition.start} ,${condition.length}
+  ]]>
   </sql>
-  
 </mapper>

@@ -125,7 +125,7 @@
 	<script src="${request.contextPath}/js/pulian/Modal.js"></script>
 	<script type="text/javascript">
 		$(function(){ 
-		　　showContent("/user/profile");
+		　//　showContent("/user/profile");
 		 
 		}); 
 	    

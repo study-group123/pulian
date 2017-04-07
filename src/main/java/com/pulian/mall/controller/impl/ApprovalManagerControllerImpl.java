@@ -83,7 +83,7 @@ public class ApprovalManagerControllerImpl {
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
-		return new AjaxDataTableObj<ApprovalDto>(1,baseResultT.getResults());
+		return new AjaxDataTableObj<ApprovalDto>(1,baseResultT.getResults(),baseResultT.getPagination());
 	}
 	
 	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest ,UserInfoDto user) {

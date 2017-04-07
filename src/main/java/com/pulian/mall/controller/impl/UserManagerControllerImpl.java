@@ -1,6 +1,5 @@
 package com.pulian.mall.controller.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,20 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pulian.mall.dto.AreasEnum;
 import com.pulian.mall.dto.CardTypeEnum;
-import com.pulian.mall.dto.MenuDto;
 import com.pulian.mall.dto.SettlementBankEnum;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
-import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.service.impl.UserManagerServiceImpl;
 import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.ConstantUtil;
+import com.pulian.mall.util.DataTablesPagination;
 import com.pulian.mall.util.FirstLetterUtil;
-import com.pulian.mall.util.MD5util;
-import com.pulian.mall.util.JqGridPagination;
 import com.pulian.mall.util.ServletUtil;
 import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
@@ -119,7 +114,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new JqGridPagination(0,9999));
+		userManagerRequest.setPagination(new DataTablesPagination(0,9999));
 		userManagerRequest.setActiveStatus(YesOrNoEnum.NO);
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
@@ -132,7 +127,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new JqGridPagination(0,9999));
+		userManagerRequest.setPagination(new DataTablesPagination(0,9999));
 		userManagerRequest.setFrozenStatus(YesOrNoEnum.YES);
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
@@ -157,7 +152,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new JqGridPagination(0,9999));
+		userManagerRequest.setPagination(new DataTablesPagination(0,9999));
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
 		List<UserInfoDto> sonList = baseResultT.getResults();

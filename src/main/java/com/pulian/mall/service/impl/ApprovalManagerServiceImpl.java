@@ -23,6 +23,7 @@ import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.ConstantUtil;
+import com.pulian.mall.util.DataTablesPagination;
 import com.pulian.mall.util.DateUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.JqGridPagination;
@@ -51,9 +52,8 @@ public class ApprovalManagerServiceImpl {
 			List<ApprovalDto> approvalList = approvalMapper.queryApprovalList(approvalManagerRequest);
 			int count = approvalMapper.count(approvalManagerRequest);
 			
-			JqGridPagination pagination = approvalManagerRequest.getPagination();
-			pagination.setRecords(count);
-			pagination.countRecords(count);			
+			DataTablesPagination pagination = approvalManagerRequest.getPagination();
+			pagination.setTotalCount(count);
 			baseResultT.setResults(approvalList);
 			baseResultT.setPagination(pagination);
 		}catch(Exception e){

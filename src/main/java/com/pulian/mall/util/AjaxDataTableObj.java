@@ -26,14 +26,14 @@ public class AjaxDataTableObj<T> {
      * @param sEcho 请求标识
      * @param prs 分页结果集
      */
-    public AjaxDataTableObj(int sEcho, List<T> results) {
-        this.draw = sEcho;
+    public AjaxDataTableObj(int draw, List<T> results,DataTablesPagination dt) {
+        this.draw = draw;
         // 设置列表数据
         this.data = results;
         // 设置显示总记录条数
-        this.recordsTotal = results.size();
+        this.recordsTotal = dt.getTotalCount();
         // 设置总记录条数
-        this.recordsFiltered = results.size();
+        this.recordsFiltered = dt.getTotalCount();
     }
 
 

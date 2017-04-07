@@ -5,13 +5,13 @@ import com.pulian.mall.dto.ApprovalTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
-import com.pulian.mall.util.JqGridPagination;
+import com.pulian.mall.util.DataTablesPagination;
 public class ApprovalManagerRequest {
 
 	
     private ApprovalDto approvalDto = new ApprovalDto();
     
-    private JqGridPagination pagination = new JqGridPagination();
+    private DataTablesPagination pagination = new DataTablesPagination();
     
     private UserInfoDto userInfo = new UserInfoDto();
     
@@ -120,87 +120,6 @@ public class ApprovalManagerRequest {
 		this.approvalDto.setApproverPhone(approverPhone);
 	}
 	
-	public JqGridPagination getPagination() {
-		return pagination;
-	}
-
-	public void setPagination(JqGridPagination pagination) {
-		this.pagination = pagination;
-	}
-	
-	
-	public void countRecords(int records) {
-		pagination.countRecords(records);
-	}
-
-	public int getEndRow() {
-		return pagination.getEndRow();
-	}
-
-	public int getPage() {
-		return pagination.getPage();
-	}
-
-	public int getRecords() {
-		return pagination.getRecords();
-	}
-
-	public int getRows() {
-		return pagination.getRows();
-	}
-
-	public String getSidx() {
-		return pagination.getSidx();
-	}
-
-	public String getSord() {
-		return pagination.getSord();
-	}
-
-	public int getStartRow() {
-		return pagination.getStartRow();
-	}
-
-	public int getTotal() {
-		return pagination.getTotal();
-	}
-
-	public boolean isSearch() {
-		return pagination.isSearch();
-	}
-
-	public void setPage(int page) {
-		pagination.setPage(page);
-	}
-
-	public void setRecords(int records) {
-		pagination.setRecords(records);
-	}
-
-	public void setRows(int rows) {
-		pagination.setRows(rows);
-	}
-
-	public void setRowsByCustom(int customRows) {
-		pagination.setRowsByCustom(customRows);
-	}
-
-	public void setSearch(boolean search) {
-		pagination.setSearch(search);
-	}
-
-	public void setSidx(String sidx) {
-		pagination.setSidx(sidx);
-	}
-
-	public void setSord(String sord) {
-		pagination.setSord(sord);
-	}
-
-	public void setTotal(int total) {
-		pagination.setTotal(total);
-	}
-
 	public UserInfoDto getUserInfo() {
 		return userInfo;
 	}
@@ -224,4 +143,29 @@ public class ApprovalManagerRequest {
 	public void setVipLevel(VipLevelEnum vipLevel) {
 		this.userInfo.setVipLevel(vipLevel);
 	}
+
+	public DataTablesPagination getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(DataTablesPagination pagination) {
+		this.pagination = pagination;
+	}
+	public int getStart() {
+		return this.pagination.getStart();
+	}
+
+	public void setStart(int start) {
+		this.pagination.setStart(start);
+	}
+
+	public int getLength() {
+		return this.pagination.getLength();
+	}
+
+	public void setLength(int length) {
+		this.pagination.setLength(length);
+	}
+
+	
 }

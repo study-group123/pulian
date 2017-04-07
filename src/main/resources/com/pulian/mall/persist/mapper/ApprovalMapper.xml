@@ -112,7 +112,7 @@
    </select>
    
    <sql id="applicantConditions">
-		<if test="condition.vipLevel != null and condition.vipLevel.name != 'SILVER' ">
+		<if test="condition.vipLevel != null and condition.vipLevel.value!= 50 ">
 			AND user1.parent_id = #{condition.userId,jdbcType=Integer}
 		</if>
 		<if test="condition.applicantName != null and condition.applicantName != ''">
@@ -136,7 +136,7 @@
 		<if test="condition.approverId != null and condition.approverId != ''">
 			AND t.approver_id = #{condition.approverId,jdbcType=VARCHAR}
 		</if>
-		<if test="condition.approvalResult != null  and condition.approvalResult != ''">
+		<if test="condition.approvalResult != null ">
 			AND t.approval_result = #{condition.approvalResult,jdbcType=VARCHAR}
 		</if>
 	</sql>

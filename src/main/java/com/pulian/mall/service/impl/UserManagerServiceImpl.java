@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pulian.mall.dto.UserInfoDto;
-import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.UserInfoMapper;
 import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.util.ConstantUtil;
-import com.pulian.mall.util.JqGridPagination;
+import com.pulian.mall.util.DataTablesPagination;
 import com.pulian.mall.util.ServletUtil;
 /**
  * 
@@ -40,9 +39,8 @@ public class UserManagerServiceImpl {
 			
 			int count = userInfoMapper.count(userManagerRequest);
 			
-			JqGridPagination pagination = userManagerRequest.getPagination();
-			pagination.setRecords(count);
-			pagination.countRecords(count);			
+			DataTablesPagination pagination = userManagerRequest.getPagination();
+			pagination.setTotalCount(count);		
 			baseResultT.setResults(userList);
 			baseResultT.setPagination(pagination);
 		}catch(Exception e){

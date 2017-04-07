@@ -79,7 +79,8 @@ function searchAllData(){
 	searchAll = $('#myDataTable').dataTable({
 		"filter" : false,
 		"paginate": true,
-		
+		"retrieve": true,
+		"destroy": true,
 		/*"fnServerParams" : function(aoData) {
 			aoData = $.merge(aoData, selectFormArray);
 		},*/
@@ -151,6 +152,14 @@ function searchAllData(){
 			"data":getParams(),
 			"dataType" : 'json',
 			"type" : "POST",
+			"error" : function handleAjaxError(xhr,
+					textStatus, error) {
+				console.error("查询异常");
+			},
+			"success": function(data, textStatus){
+		           
+		           
+		       }
 		},
 		"renderer": "bootstrap", //渲染样式：Bootstrap和jquery-ui
 		"pagingType": "full_numbers", //分页样式：simple,simple_numbers,full,full_numbers
