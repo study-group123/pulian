@@ -24,6 +24,7 @@ import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.ApprovalManagerRequest;
 import com.pulian.mall.service.impl.ApprovalManagerServiceImpl;
+import com.pulian.mall.util.AjaxDataTableObj;
 import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.ServletUtil;
 import com.pulian.mall.util.UserDefaultFieldUtil;
@@ -59,7 +60,7 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/queryApprovalList")
 	@ResponseBody
-	public BaseResultT<ApprovalDto> queryApprovalList( ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public AjaxDataTableObj<ApprovalDto> queryApprovalList( ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<ApprovalDto> baseResultT = null;
 		try{
 			UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
@@ -82,7 +83,7 @@ public class ApprovalManagerControllerImpl {
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
-		return baseResultT;
+		return new AjaxDataTableObj<ApprovalDto>(1,baseResultT.getResults());
 	}
 	
 	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest ,UserInfoDto user) {

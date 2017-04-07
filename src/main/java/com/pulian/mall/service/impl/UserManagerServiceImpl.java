@@ -18,7 +18,7 @@ import com.pulian.mall.request.BaseResult;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.request.UserManagerRequest;
 import com.pulian.mall.util.ConstantUtil;
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
 import com.pulian.mall.util.ServletUtil;
 /**
  * 
@@ -40,7 +40,7 @@ public class UserManagerServiceImpl {
 			
 			int count = userInfoMapper.count(userManagerRequest);
 			
-			Pagination pagination = userManagerRequest.getPagination();
+			JqGridPagination pagination = userManagerRequest.getPagination();
 			pagination.setRecords(count);
 			pagination.countRecords(count);			
 			baseResultT.setResults(userList);

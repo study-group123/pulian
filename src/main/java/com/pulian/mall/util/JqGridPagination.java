@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author wangxiaoqiang
  * @date 2017-3-21
  */
-public class Pagination implements Serializable{
+public class JqGridPagination implements Serializable{
 	
 	/** serialVersionUID */
 	private static final long serialVersionUID = 6452434771972569248L;
@@ -33,7 +33,7 @@ public class Pagination implements Serializable{
 
     private boolean search = false;
 
-    public Pagination() {
+    public JqGridPagination() {
     }
     
     /**
@@ -41,7 +41,7 @@ public class Pagination implements Serializable{
      * @param page			当前页
      * @param customRows	自定义行数
      */
-    public Pagination(int page, int customRows)
+    public JqGridPagination(int page, int customRows)
     {
     	this.setPage(page);
     	this.setRowsByCustom(customRows);
@@ -53,7 +53,7 @@ public class Pagination implements Serializable{
      * @param sidx
      * @param sord
      */
-    public Pagination(int page, int rows, String sidx, String sord) {
+    public JqGridPagination(int page, int rows, String sidx, String sord) {
     	setPage(page);
         setRows(rows);
         setSidx(sidx);

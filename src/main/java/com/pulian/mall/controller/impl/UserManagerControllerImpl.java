@@ -32,7 +32,7 @@ import com.pulian.mall.util.CodeUtil;
 import com.pulian.mall.util.ConstantUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.MD5util;
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
 import com.pulian.mall.util.ServletUtil;
 import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
@@ -119,7 +119,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new Pagination(0,9999));
+		userManagerRequest.setPagination(new JqGridPagination(0,9999));
 		userManagerRequest.setActiveStatus(YesOrNoEnum.NO);
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
@@ -132,7 +132,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new Pagination(0,9999));
+		userManagerRequest.setPagination(new JqGridPagination(0,9999));
 		userManagerRequest.setFrozenStatus(YesOrNoEnum.YES);
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
@@ -157,7 +157,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new Pagination(0,9999));
+		userManagerRequest.setPagination(new JqGridPagination(0,9999));
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
 		List<UserInfoDto> sonList = baseResultT.getResults();

@@ -1,3 +1,8 @@
+	<!-- DataTables CSS -->
+    <link href="${request.contextPath}/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="${request.contextPath}/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 		   <div class="row">
                 <div class="col-lg-12">
                     <h3 class="page-header">silver to gold manager</h3>
@@ -26,12 +31,38 @@
 			  
 			 
 			</form>
-			<div class="jqGrid_wrapper">  
-			    <table id="jqGridList"></table>  
-			    <div id="jqGridPager"></div>  
-			</div> 
+			<div class="row" style="margin: 0">
+                <div class="col-md-12">
+                    <table id="myDataTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            	
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 			<form id="exportCsvForm" action="${request.contextPath}/vasProduct/exportVasCouponCsv" method="post" target="_blank">
 				<div id="exportCsvDiv" style="display:none;">
 				</div>
 			</form> 
-		<script src="${request.contextPath}/js/pulian/approment_manager.js"></script>
+		<!-- DataTables JavaScript -->
+    <script src="${request.contextPath}/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="${request.contextPath}/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="${request.contextPath}/vendor/datatables-responsive/dataTables.responsive.js"></script>
+	<script src="${request.contextPath}/js/pulian/approment_manager.js"></script>
+	
+	 <script>
+    $(document).ready(function() {
+       searchAllData();
+    });
+    </script>

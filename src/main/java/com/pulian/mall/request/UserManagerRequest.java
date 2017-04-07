@@ -8,13 +8,13 @@ import com.pulian.mall.dto.CardTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
 
 public class UserManagerRequest {
 
     private UserInfoDto userInfoDto = new UserInfoDto();
     
-    private Pagination pagination = new Pagination();
+    private JqGridPagination pagination = new JqGridPagination();
     
     private String parentCode;
     
@@ -240,11 +240,11 @@ public class UserManagerRequest {
 		this.userInfoDto.setUpdaterId(updaterId);
 	}
 	
-	public Pagination getPagination() {
+	public JqGridPagination getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(JqGridPagination pagination) {
 		this.pagination = pagination;
 	}
 	

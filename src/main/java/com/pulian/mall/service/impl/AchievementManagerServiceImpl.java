@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.pulian.mall.dto.AchievementDto;
 import com.pulian.mall.request.AchievementManagerRequest;
 import com.pulian.mall.request.BaseResultT;
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
  
 /*
  *  
@@ -17,7 +17,7 @@ import com.pulian.mall.util.Pagination;
 @Service
 public class AchievementManagerServiceImpl {
 
-	public BaseResultT<List<AchievementDto>> queryAchievementList(Pagination pagination,AchievementManagerRequest achievementManagerRequest) {
+	public BaseResultT<List<AchievementDto>> queryAchievementList(JqGridPagination pagination,AchievementManagerRequest achievementManagerRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

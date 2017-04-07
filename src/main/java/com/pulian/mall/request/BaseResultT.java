@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pulian.mall.dto.YesOrNoEnum;
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
 
 public class  BaseResultT<T> {
 
@@ -18,9 +18,9 @@ public class  BaseResultT<T> {
 	
 	private int count;
 
-	private Pagination pagination = new Pagination();
+	private JqGridPagination pagination = new JqGridPagination();
 
-	public BaseResultT(Pagination pagination, List<T> results) {
+	public BaseResultT(JqGridPagination pagination, List<T> results) {
 		this.pagination = pagination;
 		this.results = results;
 
@@ -60,11 +60,11 @@ public class  BaseResultT<T> {
 		this.results = results;
 	}
 
-	public Pagination getPagination() {
+	public JqGridPagination getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(JqGridPagination pagination) {
 		this.pagination = pagination;
 	}
 	

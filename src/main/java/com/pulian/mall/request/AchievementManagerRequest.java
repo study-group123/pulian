@@ -1,17 +1,17 @@
 package com.pulian.mall.request;
 
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
 
 public class AchievementManagerRequest {
 
-	private Pagination pagination = new Pagination();
+	private JqGridPagination pagination = new JqGridPagination();
 	
 	
-	public Pagination getPagination() {
+	public JqGridPagination getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination pagination) {
+	public void setPagination(JqGridPagination pagination) {
 		this.pagination = pagination;
 	}
 	

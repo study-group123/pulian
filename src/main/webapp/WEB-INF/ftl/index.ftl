@@ -7,8 +7,8 @@
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/metisMenu/metisMenu.min.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/dist/css/sb-admin-2.css"/>
 	<link type="text/css" rel="stylesheet" href="${request.contextPath}/vendor/font-awesome/css/font-awesome.min.css"/>
-	<link type="text/css" rel="stylesheet" href="${request.contextPath}/css/jqgrid/redmond/jquery-ui-1.8.16.custom.min.css">
-	<link type="text/css" rel="stylesheet" href="${request.contextPath}/css/jqgrid/ui.jqgrid.css"/>
+	<!--link type="text/css" rel="stylesheet" href="${request.contextPath}/css/jqgrid/redmond/jquery-ui-1.8.16.custom.min.css">
+	<link type="text/css" rel="stylesheet" href="${request.contextPath}/css/jqgrid/ui.jqgrid.css"/-->
     </head>   
     <script type="text/javascript">
 	     function showContent(url){

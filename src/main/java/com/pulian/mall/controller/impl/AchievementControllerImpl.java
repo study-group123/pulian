@@ -29,7 +29,7 @@ import com.pulian.mall.request.AchievementManagerRequest;
 import com.pulian.mall.request.BaseResultT;
 import com.pulian.mall.service.impl.AchievementManagerServiceImpl;
 import com.pulian.mall.util.DateUtil;
-import com.pulian.mall.util.Pagination;
+import com.pulian.mall.util.JqGridPagination;
 /**
  * 
  * @author wangxiaoqiang
@@ -57,7 +57,7 @@ public class AchievementControllerImpl {
 
 		try {
 			
-			baseResult = achievementManagerService.queryAchievementList(new Pagination(1, 9999),achievementManagerRequest);
+			baseResult = achievementManagerService.queryAchievementList(new JqGridPagination(1, 9999),achievementManagerRequest);
 			
 			String title = DateUtil.getCurrentDateByFormat(DateUtil.YYMMDD)+"_vas_coupon_order_list";
 			String[] headers = new String[]{"", "", "", "","","", "", "", "", "","", "", "", "",""};
