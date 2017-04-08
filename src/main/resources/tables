@@ -84,9 +84,15 @@ CREATE TABLE `t_menu` (
 
 # 菜单初始化
 INSERT INTO t_menu (menu_code, parent_code,vip_level, menu_path, menu_name, menu_disabled, menu_level, creater_id, updater_id, create_time, update_time) 
-VALUES ('index',NULL,'GOLD', '/index','首页','NO','ZERO', NULL, NULL, NULL, NULL)
- , ('goldCardManager','index','GOLD', '/goldCardManager','金卡管理','NO','ONE', NULL, NULL, NULL, NULL)
- , ('goldCardadd','goldCardManager','GOLD', '/goldCardadd','金卡新增','NO','TWO', NULL, NULL, NULL, NULL)
+VALUES ('index',NULL,'SILVER', '/index','首页','NO','ZERO', NULL, NULL, NULL, NULL)
+ , ('goldCardManager','index','SILVER', '/goldCardManager','1','NO','ONE', NULL, NULL, NULL, NULL)
+ , ('toUserProfile','goldCardManager','SILVER', '/user/profile','1-1','NO','TWO', NULL, NULL, NULL, NULL)
+, ('toSaveApprovalDto','goldCardManager','SILVER', '/approval/toSaveApprovalDto','1-2','NO','TWO', NULL, NULL, NULL, NULL)
+
+insert into t_user 
+	(user_name, user_code, pass_word, user_area, card_type, settlement_bank, vip_level, frozen_status, active_status, user_disable, parent_id)
+	values
+	('SYSTEM', 'SYSTEM','83nq88gxsE3hU0adG+w0Xg==','HB', 'ID', 'BOC', 'SYSTEM', 'NO', 'YES', 'NO', '-1');
   
  ---------------------------------------------------------------------------
 
