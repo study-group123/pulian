@@ -112,7 +112,7 @@
    
    <sql id="applicantConditions">
 		<if test="condition.vipLevel != null and condition.vipLevel.value!= 50 ">
-			AND user1.parent_id = #{condition.userId,jdbcType=Integer}
+			AND user1.parent_id = #{condition.userId,jdbcType=INTEGER}
 		</if>
 		<if test="condition.applicantName != null and condition.applicantName != ''">
 			AND user1.user_name = #{condition.applicantName,jdbcType=VARCHAR}

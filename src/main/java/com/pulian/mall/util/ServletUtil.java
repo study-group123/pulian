@@ -19,4 +19,11 @@ public class ServletUtil {
 		
 		return result;
 	}
+	
+	public static void removeSession(HttpServletRequest request, HttpServletResponse response, String key) {
+		HttpSession session = request.getSession(false);//防止创建Session  
+	    if(session!=null)session.removeAttribute(key);  
+		
+	}
+	
 }

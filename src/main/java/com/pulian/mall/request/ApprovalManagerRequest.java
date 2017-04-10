@@ -69,7 +69,7 @@ public class ApprovalManagerRequest {
 	}
 
 	public void setApprovalResult(YesOrNoEnum approvalResult) {
-		this.approvalDto.getApprovalResult();
+		this.approvalDto.setApprovalResult(approvalResult);
 	}
 
 	public String getApprovalResultDesc() {

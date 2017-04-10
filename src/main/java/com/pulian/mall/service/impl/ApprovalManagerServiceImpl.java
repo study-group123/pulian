@@ -71,6 +71,7 @@ public class ApprovalManagerServiceImpl {
     		if(!repeat){
     			approvalMapper.saveApprovalDto(approvalManagerRequest.getApprovalDto());
     		}else{
+    			baseResult.setSuccessStatus(YesOrNoEnum.NO);
     			baseResult.setMessage(ConstantUtil.APPROVAL_REPEAT);
     		}
     		

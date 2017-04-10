@@ -19,19 +19,22 @@ function saveApprovalDto(){
 }
 
 function updateApprovalStatus(approvalId,beforeThirtyAchievement,status){
+	
+	
 
 	Modal.confirm(
 			  {
 			    msg: "请填写理由</br><input type='textarea' id='desc'>"
 			  })
 			  .on( function (e,desc) {
-			    alert("返回结果：" + desc);
+				  
+				var dataStr = '{"approvalId":"'+approvalId+'","approvalResult":"'+status+'","approvalResultDesc":"'+desc+'"}';
 			    if(e){
 			    	$.ajax({
 						url : "/approval/updateApprovalStatus",
 						cache : false,
 						async : false,
-						data : "{}",
+						data : dataStr,
 						type : "POST",
 						datatype : "json",
 						contentType:"application/json",
@@ -88,6 +91,10 @@ function searchAllData(){
 			"bSortable" : false,
 			"sClass" : "txt-center",
 		},{
+			"mData" : "applicantPhone",
+			"bSortable" : false,
+			"sClass" : "txt-center",
+		},{
 			"mData" : "approverName",
 			"bSortable" : false,
 			"sClass" : "txt-center",
@@ -103,6 +110,16 @@ function searchAllData(){
 			"mData" : "approvalResult",
 			"bSortable" : false,
 			"sClass" : "txt-center",
+			"mRender" : function(data, type, full) {// 格式化数据
+				var str = '';
+   				if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
+   					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >apply</a>';
+   				}else{
+   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';
+   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'NO'"+')" >no</a>';
+   				} 
+                   return data==""?"init":data ;  
+			 }
 		},{
 			"mData" : "currentUserVipLevel",
 			"bSortable" : false,
@@ -110,10 +127,10 @@ function searchAllData(){
 			"mRender" : function(data, type, full) {// 格式化数据
 				var str = '';
    				if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
-   					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >申请</a>';
+   					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >apply</a>';
    				}else{
-   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >批准</a>    ';
-   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'NO'"+')" >拒绝</a>';
+   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';
+   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'NO'"+')" >no</a>';
    				} 
                    return str ;  
 			 }
@@ -157,5 +174,5 @@ function searchAllData(){
 function queryApprovalList() { 
 		
 	//selectFormArray = $("#appromentManagerForm").serializeArray();
-	searchAllData();
+	searchAll.search();
 }

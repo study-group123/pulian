@@ -90,4 +90,11 @@ public class UserDefaultFieldUtil {
     	approvalManagerRequest.getApprovalDto().setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     	approvalManagerRequest.getApprovalDto().setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     }
+    
+    //update默认属性
+    public static void setDefaultUpdateFields(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response){
+    	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+    	approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
+    	approvalManagerRequest.getApprovalDto().setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+    }
 }

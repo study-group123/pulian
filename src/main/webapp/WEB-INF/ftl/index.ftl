@@ -47,7 +47,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i>更新密码</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                        <li><a href="/login/loginOut"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -102,7 +102,6 @@
     <!-- /#wrapper -->
 
          <div id="page-wrapper">
-          
         </div>
     <#include "/common/modal_template.ftl">
 
@@ -123,6 +122,8 @@
 	<script src="${request.contextPath}/js/pulian/jquery_fn_extends.js"></script>
 	
 	<script src="${request.contextPath}/js/pulian/Modal.js"></script>
+	
+	
 	<script type="text/javascript">
 		$(function(){ 
 		　//　showContent("/user/profile");

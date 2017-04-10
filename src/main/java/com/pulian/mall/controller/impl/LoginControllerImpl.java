@@ -80,6 +80,14 @@ public class LoginControllerImpl {
 		
 		return baseResultT;
 	}
+	
+	@RequestMapping(value="/login/loginOut",method=RequestMethod.GET)  
+	public String loginOut(Model model,HttpServletRequest request,HttpServletResponse response) {
+		
+		ServletUtil.removeSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		
+		return "redirect:/login/toUserLogin";
+	}
 
 	@RequestMapping("/updatePassWord")
 	@ResponseBody

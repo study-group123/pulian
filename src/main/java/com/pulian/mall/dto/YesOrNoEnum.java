@@ -1,7 +1,8 @@
 package com.pulian.mall.dto;
 
 public enum YesOrNoEnum {
-   YES("是"),
+	DEFAULT(""),
+	YES("是"),
    NO("否");
    
    private String cnName;

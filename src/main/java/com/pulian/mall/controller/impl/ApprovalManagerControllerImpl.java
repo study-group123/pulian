@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,7 +46,7 @@ public class ApprovalManagerControllerImpl {
 	
 	@RequestMapping("/saveApprovalDto")
 	@ResponseBody
-	public BaseResult saveApprovalDto(@RequestBody ApprovalManagerRequest approvalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResult saveApprovalDto( ApprovalManagerRequest approvalManagerRequest,Model model,HttpServletRequest request, HttpServletResponse response) {
 		BaseResult baseResult = new BaseResult();
 		try{
 			buildSaveApprovalRequest(approvalManagerRequest,request,response);
@@ -70,7 +70,7 @@ public class ApprovalManagerControllerImpl {
 			baseResultT  = approvalManagerService.queryApprovalList(approvalManagerRequest);
 			//add new approvalDto
 			
-			if(user.getVipLevel()==VipLevelEnum.SILVER && baseResultT.getResults().size()==0){
+			if(user.getVipLevel()==VipLevelEnum.SILVER && baseResultT.getResults().size()==0 && StringUtils.isEmpty(baseResultT.getMessage())){
 				ApprovalDto approvalDto =  new ApprovalDto();
 				approvalDto.setApplicantName(user.getUserName());
 				approvalDto.setApplicantPhone(user.getUserPhone());
@@ -91,14 +91,15 @@ public class ApprovalManagerControllerImpl {
 	private void buildQueryApprovalListRequest(ApprovalManagerRequest approvalManagerRequest ,UserInfoDto user) {
 		approvalManagerRequest.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
 		approvalManagerRequest.setUserInfo(user);
+		
 	}
 
 	@RequestMapping("/updateApprovalStatus")
 	@ResponseBody
-	public BaseResultT<UserInfoDto> updateApprovalStatus(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<UserInfoDto> updateApprovalStatus( ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
 		try{
-			ApprovalManagerRequest cleanRequest = buildUpdateApprovalStatusRequest(approvalManagerRequest);
+			ApprovalManagerRequest cleanRequest = buildUpdateApprovalStatusRequest(approvalManagerRequest, request,  response);
 			baseResultT =  approvalManagerService.updateApprovalDtoByApprovalId(cleanRequest);
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.updateApprovalStatus",e);
@@ -108,11 +109,12 @@ public class ApprovalManagerControllerImpl {
 		return baseResultT;
 	}
 	
-	private ApprovalManagerRequest buildUpdateApprovalStatusRequest(@RequestBody ApprovalManagerRequest userRequest) {
+	private ApprovalManagerRequest buildUpdateApprovalStatusRequest( ApprovalManagerRequest userRequest, HttpServletRequest request, HttpServletResponse response) {
 		ApprovalManagerRequest cleanRequest = new ApprovalManagerRequest();
 		cleanRequest.setApprovalId(userRequest.getApprovalId());
 		cleanRequest.setApprovalResult(userRequest.getApprovalResult());
 		cleanRequest.setApprovalResultDesc(userRequest.getApprovalResultDesc());
+		UserDefaultFieldUtil.setDefaultUpdateFields(cleanRequest,  request,  response);
 		return cleanRequest;
 	}
 
@@ -133,6 +135,7 @@ public class ApprovalManagerControllerImpl {
 		UserDefaultFieldUtil.setApprovalDefaultFields(approvalManagerRequest, request, response);
 		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
 		approvalManagerRequest.setApplicantId(user.getUserId());
+		approvalManagerRequest.setApprovalResult(YesOrNoEnum.DEFAULT);
 	}
 
 	private String getBeforeThirtyAchievement() {
