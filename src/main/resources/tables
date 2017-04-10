@@ -92,7 +92,7 @@ VALUES ('index',NULL,'SILVER', '/index','首页','NO','ZERO', NULL, NULL, NULL, 
 insert into t_user 
 	(user_name, user_code, pass_word, user_area, card_type, settlement_bank, vip_level, frozen_status, active_status, user_disable, parent_id)
 	values
-	('SYSTEM', 'SYSTEM','83nq88gxsE3hU0adG+w0Xg==','HB', 'ID', 'BOC', 'SYSTEM', 'NO', 'YES', 'NO', '-1');
+	('SYSTEM', 'HB0000','83nq88gxsE3hU0adG+w0Xg==','HB', 'ID', 'BOC', 'SYSTEM', 'NO', 'YES', 'NO', '-1');
   
  ---------------------------------------------------------------------------
 

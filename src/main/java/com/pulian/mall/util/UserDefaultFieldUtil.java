@@ -20,6 +20,8 @@ public class UserDefaultFieldUtil {
 	
 	public static YesOrNoEnum DEFAULT_DISABLED = YesOrNoEnum.NO;
 	
+	public static int DEFAULT_PUBLISH_CARDS_SYSTEM = 1000;
+	
 	public static int DEFAULT_PUBLISH_CARDS_A = 60;
 	
 	public static int DEFAULT_PUBLISH_CARDS_B = 50;
@@ -51,6 +53,9 @@ public class UserDefaultFieldUtil {
 		case VipLevelEnum.GOLD_E_VALUE:
 			cards = DEFAULT_PUBLISH_CARDS_E;
 			break;
+		case VipLevelEnum.SYSTEM_VALUE:
+			cards = DEFAULT_PUBLISH_CARDS_SYSTEM;
+			break;
 		
 		}
 		return cards;
@@ -69,6 +74,7 @@ public class UserDefaultFieldUtil {
     	userManagerRequest.setUserDisable(DEFAULT_DISABLED);
     	userManagerRequest.setPassWord(generateDefaultPwd());
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+    	userManagerRequest.setParentId(user.getUserId());
     	userManagerRequest.setCreaterId(user.getUserId());
     	userManagerRequest.setUpdaterId(user.getUserId());
     	userManagerRequest.setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));

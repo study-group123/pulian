@@ -56,7 +56,8 @@ public class UserManagerControllerImpl {
 			//查询当前用户开过的银卡数
 			userManagerRequest.setVipLevel(VipLevelEnum.SILVER);
 			int silverSons = userManagerService.queryUserByParentIdAndVipLevel(userManagerRequest, request,  response);
-			int maxCards = UserDefaultFieldUtil.getDefaultPublicCardNumbers(userManagerRequest.getVipLevel());
+			UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+			int maxCards = UserDefaultFieldUtil.getDefaultPublicCardNumbers(user.getVipLevel());
 			if(silverSons < maxCards){
 				buildSaveUserRequest(userManagerRequest,silverSons,request, response);
 				baseResult = userManagerService.saveUserInfo(userManagerRequest);

@@ -94,7 +94,6 @@
 	    
 		    INNER JOIN t_user user1
 			ON t.applicant_id = user1.user_id
-			and 
 			<if test="condition != null">
 				<include refid="applicantConditions"></include>	
 			</if>
