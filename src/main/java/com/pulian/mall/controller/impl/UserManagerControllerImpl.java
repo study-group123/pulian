@@ -115,7 +115,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new DataTablesPagination(0,9999));
+		userManagerRequest.setPagination(new DataTablesPagination(0,9999,0));
 		userManagerRequest.setActiveStatus(YesOrNoEnum.NO);
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
@@ -128,7 +128,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new DataTablesPagination(0,9999));
+		userManagerRequest.setPagination(new DataTablesPagination(0,9999,0));
 		userManagerRequest.setFrozenStatus(YesOrNoEnum.YES);
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
@@ -153,7 +153,7 @@ public class UserManagerControllerImpl {
 		
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setParentId(user.getUserId());
-		userManagerRequest.setPagination(new DataTablesPagination(0,9999));
+		userManagerRequest.setPagination(new DataTablesPagination(0,9999,0));
 		BaseResultT<UserInfoDto> baseResultT   = userManagerService.queryUserInfo(userManagerRequest);
 		
 		List<UserInfoDto> sonList = baseResultT.getResults();

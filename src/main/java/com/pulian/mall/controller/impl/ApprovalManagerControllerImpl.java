@@ -26,6 +26,7 @@ import com.pulian.mall.request.ApprovalManagerRequest;
 import com.pulian.mall.service.impl.ApprovalManagerServiceImpl;
 import com.pulian.mall.util.AjaxDataTableObj;
 import com.pulian.mall.util.ConstantUtil;
+import com.pulian.mall.util.DataTablesPagination;
 import com.pulian.mall.util.ServletUtil;
 import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
@@ -77,6 +78,7 @@ public class ApprovalManagerControllerImpl {
 				List<ApprovalDto> results = new ArrayList<ApprovalDto>();
 				results.add(approvalDto);
 				baseResultT.setResults(results);
+				baseResultT.setPagination(new DataTablesPagination(0,1,1));
 			}
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.queryApprovalList",e);

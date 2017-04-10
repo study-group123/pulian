@@ -21,9 +21,10 @@ public class DataTablesPagination implements Serializable{
 	public DataTablesPagination() {
     }
 	
-	public DataTablesPagination(int start, int length) {
+	public DataTablesPagination(int start, int length,int totalCount) {
 		this.setStart(start);
 		this.setLength(length);
+		this.setTotalCount(totalCount);
     }
 
 	public int getStart() {
