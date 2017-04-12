@@ -86,7 +86,7 @@ CREATE TABLE `t_menu` (
 INSERT INTO t_menu (menu_code, parent_code,vip_level, menu_path, menu_name, menu_disabled, menu_level, creater_id, updater_id, create_time, update_time) 
 VALUES ('index',NULL,'SILVER', '/index','首页','NO','ZERO', NULL, NULL, NULL, NULL)
  , ('goldCardManager','index','SILVER', '/goldCardManager','1','NO','ONE', NULL, NULL, NULL, NULL)
- , ('toUserProfile','goldCardManager','SILVER', '/user/profile','1-1','NO','TWO', NULL, NULL, NULL, NULL)
+ , ('toSaveUser','goldCardManager','SILVER', '/user/toSaveUser','1-1','NO','TWO', NULL, NULL, NULL, NULL)
 , ('toSaveApprovalDto','goldCardManager','SILVER', '/approval/toSaveApprovalDto','1-2','NO','TWO', NULL, NULL, NULL, NULL)
 
 insert into t_user 
