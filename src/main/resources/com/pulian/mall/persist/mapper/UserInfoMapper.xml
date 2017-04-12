@@ -152,11 +152,14 @@
 			<if test="condition.userPhone != null and condition.userPhone != '' ">
 				phone = #{condition.userPhone},
 			</if>
+			<if test="condition.frozenStatus != null  ">
+				frozen_status = #{condition.frozenStatus},
+			</if>
 			<if test="condition.passWord != null and condition.passWord != '' ">
 				pass_word = #{condition.passWord},
 			</if>
 			update_time = #{condition.updateTime,jdbcType=VARCHAR},
-			update_id = #{condition.updateId,jdbcType=VARCHAR}
+			updater_id = #{condition.updaterId,jdbcType=VARCHAR}
 		</set>
 		where user_id = #{condition.userId}
    </update>

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pulian.mall.dto.ApprovalDto;
@@ -94,9 +96,9 @@ public class ApprovalManagerControllerImpl {
 		
 	}
 
-	@RequestMapping("/updateApprovalStatus")
+	@RequestMapping(value="/updateApprovalStatus",method=RequestMethod.POST) 
 	@ResponseBody
-	public BaseResultT<UserInfoDto> updateApprovalStatus( ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
+	public BaseResultT<UserInfoDto> updateApprovalStatus(@RequestBody ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response) {
 		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
 		try{
 			ApprovalManagerRequest cleanRequest = buildUpdateApprovalStatusRequest(approvalManagerRequest, request,  response);
@@ -114,6 +116,7 @@ public class ApprovalManagerControllerImpl {
 		cleanRequest.setApprovalId(userRequest.getApprovalId());
 		cleanRequest.setApprovalResult(userRequest.getApprovalResult());
 		cleanRequest.setApprovalResultDesc(userRequest.getApprovalResultDesc());
+		cleanRequest.setApplicantId(userRequest.getApplicantId());
 		UserDefaultFieldUtil.setDefaultUpdateFields(cleanRequest,  request,  response);
 		return cleanRequest;
 	}

@@ -145,7 +145,7 @@
 	<update id="updateApprovalDtoByApprovalId">
 		update t_approval 
 		<set>
-			<if test="condition.approvalResult != null and condition.approvalResult != '' ">
+			<if test="condition.approvalResult != null  ">
 				approval_result = #{condition.approvalResult},
 			</if>
 			<if test="condition.approvalResultDesc != null and condition.approvalResultDesc != '' ">

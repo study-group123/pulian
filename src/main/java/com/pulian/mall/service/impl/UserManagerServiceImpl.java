@@ -55,6 +55,7 @@ public class UserManagerServiceImpl {
     	BaseResultT<UserInfoDto> baseResult = new BaseResultT<UserInfoDto>();
     	try{
     		userInfoMapper.saveUserInfo(userManagerRequest.getUserInfoDto());
+    		
 		}catch(Exception e){
 			log.error("UserManagerServiceImpl.saveUserInfo",e);
 			baseResult.setSuccessStatus(YesOrNoEnum.NO);

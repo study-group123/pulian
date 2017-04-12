@@ -116,6 +116,7 @@ public class ApprovalManagerServiceImpl {
 	private void frozenOlderUser(ApprovalDto approvalDto) {
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
 		userManagerRequest.setFrozenStatus(YesOrNoEnum.YES);
+		userManagerRequest.setUserId(approvalDto.getApplicantId());
 		userManagerService.updateUserByUserId(userManagerRequest);
 	}
 
