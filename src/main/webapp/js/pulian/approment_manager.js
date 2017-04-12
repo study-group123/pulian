@@ -26,35 +26,18 @@ function saveApprovalDto(){
 			    }
 			  });
 	
-	   /*$.ajax({
-			url : "/approval/saveApprovalDto",
-			cache : false,
-			async : false,
-			data : "",
-			type : "POST",
-			datatype : "json",
-			contentType:"application/json",
-			success: function(data){
-			 if(data!="" && data.successStatus=="YES"){
-		            Modal.alert({msg: "申请成功",title: '标题', btnok: '确定',btncl:'取消'});
-			 }else{
-			      Modal.alert({msg: data.message,title: '标题', btnok: '确定',btncl:'取消'});
-			 }
-   		  }
-	    });*/
 }
 
 function updateApprovalStatus(applicantId,approvalId,beforeThirtyAchievement,status){
 	
 	
-
 	Modal.confirm(
 			  {
 			    msg: "请填写审批理由</br><input type='textarea' id='desc'>"
 			  })
 			  .on( function (e,desc) {
 				  
-				var dataStr = '{"approvalId":"'+approvalId+'","applicantId":"'applicantId+'","approvalResult":"'+status+'","approvalResultDesc":"'+desc+'"}';
+				var dataStr = '{"approvalId":"'+approvalId+'","applicantId":"'+applicantId+'","approvalResult":"'+status+'","approvalResultDesc":"'+desc+'"}';
 			    if(e){
 			    	$.ajax({
 						url : "/approval/updateApprovalStatus",
@@ -66,7 +49,8 @@ function updateApprovalStatus(applicantId,approvalId,beforeThirtyAchievement,sta
 						contentType:"application/json",
 						success: function(data){
 						 if(data!="" && data.successStatus=="YES"){
-					            Modal.alert({msg: "审批成功",title: '标题', btnok: '确定',btncl:'取消'});
+							    var userMessage = "新CODE:"+data.result.userCode+",新账号:"+data.result.userAccount;
+					            Modal.alert({msg:userMessage,title: '标题', btnok: '确定',btncl:'取消'});
 						 }else{
 						      Modal.alert({msg: "审批失败",title: '标题', btnok: '确定',btncl:'取消'});
 						 }
@@ -137,13 +121,7 @@ function searchAllData(){
 			"bSortable" : false,
 			"sClass" : "txt-center",
 			"mRender" : function(data, type, full) {// 格式化数据
-				var str = '';
-   				if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
-   					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >apply</a>';
-   				}else{
-   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';
-   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'NO'"+')" >no</a>';
-   				} 
+				
                    return data==""?"init":data ;  
 			 }
 		},{
@@ -155,8 +133,8 @@ function searchAllData(){
    				if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
    					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >apply</a>';
    				}else{
-   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.applicantId+"' ,'"+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';
-   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.applicantId+"' ,'"+"'"+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'NO'"+')" >no</a>';
+   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.applicantId+"' ,'"+""+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';
+   					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.applicantId+"' ,'"+""+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'NO'"+')" >no</a>';
    				} 
                    return str ;  
 			 }

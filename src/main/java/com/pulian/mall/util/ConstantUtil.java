@@ -20,4 +20,7 @@ public class ConstantUtil {
     
     public static final String APPROVAL_SILVER_TO_GOLD_ERROR = "申请银升金失败！";
     
+    /////////////////////////////字典相关的////////////////////////////////////////////
+    public static final String DIC_QUERY_ERROR = "字典查询失败！";
+    
 }

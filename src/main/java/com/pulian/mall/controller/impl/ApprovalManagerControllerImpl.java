@@ -102,7 +102,7 @@ public class ApprovalManagerControllerImpl {
 		BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
 		try{
 			ApprovalManagerRequest cleanRequest = buildUpdateApprovalStatusRequest(approvalManagerRequest, request,  response);
-			baseResultT =  approvalManagerService.updateApprovalDtoByApprovalId(cleanRequest);
+			baseResultT =  approvalManagerService.updateApprovalDtoByApprovalId(cleanRequest, request,  response);
 		}catch(Exception e){
 			log.error("ApprovalManagerControllerImpl.updateApprovalStatus",e);
 			baseResultT.setSuccessStatus(YesOrNoEnum.NO);

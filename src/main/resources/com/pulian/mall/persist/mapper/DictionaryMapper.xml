@@ -32,7 +32,7 @@
 		)
 		values
 		(
-		#{condition.valueType,jdbcType=INTEGER},
+		#{condition.valueType,jdbcType=VARCHAR},
 		#{condition.value,jdbcType=VARCHAR},
 		#{condition.createrId,jdbcType=INTEGER},
 		#{condition.updaterId,jdbcType=INTEGER},
@@ -76,8 +76,8 @@
 		<if test="condition.dicId != null and condition.dicId != ''">
 			AND t.dic_id = #{condition.dicId,jdbcType=INTEGER}
 		</if>
-		<if test="condition.valueType != null and condition.valueType != ''">
-			AND t.value_type = #{condition.valueType,jdbcType=INTEGER}
+		<if test="condition.valueType != null ">
+			AND t.value_type = #{condition.valueType,jdbcType=VARCHAR}
 		</if>
 		<if test="condition.value != null and condition.value != ''">
 			AND t.value = #{condition.value,jdbcType=VARCHAR}
@@ -89,14 +89,14 @@
 	<update id="updateDictionaryDtoByDictionaryId">
 		update t_dic 
 		<set>
-			<if test="condition.valueType != null and condition.valueType != '' ">
-				value_type = #{condition.valueType},
+			<if test="condition.valueType != null  ">
+				value_type = #{condition.valueType,jdbcType=VARCHAR},
 			</if>
 			<if test="condition.value != null and condition.value != '' ">
-				value = #{condition.value},
+				value = #{condition.value,jdbcType=VARCHAR},
 			</if>
-			update_time = #{condition.updateTime,jdbcType=VARCHAR},
-			update_id = #{condition.updateId,jdbcType=VARCHAR}
+			update_time = #{condition.updateTime,jdbcType=TIMESTAMP},
+			updater_id = #{condition.updaterId,jdbcType=INTEGER}
 		</set>
 		where dic_id = #{condition.dicId}
    </update>

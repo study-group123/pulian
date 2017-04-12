@@ -12,6 +12,7 @@ import com.pulian.mall.dto.DictionaryDto;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.DictionaryMapper;
 import com.pulian.mall.request.BaseResult;
+import com.pulian.mall.request.BaseResultT;
 /**
  *字典相关服务
  * 
@@ -26,15 +27,17 @@ public class DictionaryManagerServiceImpl {
 	
 	private static final Log log = LogFactory.getLog(DictionaryManagerServiceImpl.class);
 	
-	public List<DictionaryDto> queryDictionaryList(DictionaryDto dictionaryDto){
-		List<DictionaryDto> approvalList = new ArrayList<DictionaryDto>();
+	public BaseResultT<DictionaryDto> queryDictionaryList(DictionaryDto dictionaryDto){
+		BaseResultT<DictionaryDto> result = new BaseResultT<DictionaryDto>();
 		try{
-			approvalList = dictionaryMapper.queryDictionaryList(dictionaryDto);
+			List<DictionaryDto> approvalList = dictionaryMapper.queryDictionaryList(dictionaryDto);
+			result.setResults(approvalList);
 		}catch(Exception e){
 			log.error("DictionaryManagerServiceImpl.queryDictionaryList",e);
+			result.setSuccessStatus(YesOrNoEnum.NO);
 		}
 		
-		return approvalList;
+		return result;
 	}
 	
     public BaseResult saveDictionaryDto(DictionaryDto dictionaryDto){

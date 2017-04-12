@@ -2,6 +2,9 @@ package com.pulian.mall.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import com.pulian.mall.dto.AreasEnum;
 import com.pulian.mall.dto.DictionaryDto;
 import com.pulian.mall.dto.DictionaryValueTypeEnum;
 import com.pulian.mall.dto.UserInfoDto;
+import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
 import com.pulian.mall.persist.mapper.ApprovalMapper;
 import com.pulian.mall.request.ApprovalManagerRequest;
@@ -27,6 +31,7 @@ import com.pulian.mall.util.DataTablesPagination;
 import com.pulian.mall.util.DateUtil;
 import com.pulian.mall.util.FirstLetterUtil;
 import com.pulian.mall.util.JqGridPagination;
+import com.pulian.mall.util.UserDefaultFieldUtil;
 /**
  * 
  * @author wangxiaoqiang
@@ -94,14 +99,14 @@ public class ApprovalManagerServiceImpl {
 	}
 
 	@Transactional
-    public BaseResultT<UserInfoDto> updateApprovalDtoByApprovalId(ApprovalManagerRequest approvalManagerRequest){
+    public BaseResultT<UserInfoDto> updateApprovalDtoByApprovalId(ApprovalManagerRequest approvalManagerRequest,HttpServletRequest request, HttpServletResponse response){
     	BaseResultT<UserInfoDto> baseResultT = new BaseResultT<UserInfoDto>();
     	try{
     		ApprovalDto approvalDto = approvalManagerRequest.getApprovalDto();
-    		approvalMapper.updateApprovalDtoByApprovalId(approvalDto);
+    		int updateCount = approvalMapper.updateApprovalDtoByApprovalId(approvalDto);
     		//银升金审批成功，新增一个金卡权限给申请人
-    		if(approvalDto.getApprovalResult() == YesOrNoEnum.YES){
-    		  UserInfoDto newUser= addNewGoldCard(approvalDto);
+    		if(approvalDto.getApprovalResult() == YesOrNoEnum.YES && updateCount>0){
+    		  UserInfoDto newUser= addNewGoldCard(approvalDto, request,  response);
     		  baseResultT.setResult(newUser);
     		  frozenOlderUser(approvalDto);
     		}
@@ -120,7 +125,7 @@ public class ApprovalManagerServiceImpl {
 		userManagerService.updateUserByUserId(userManagerRequest);
 	}
 
-	private UserInfoDto addNewGoldCard(ApprovalDto approvalDto) {
+	private UserInfoDto addNewGoldCard(ApprovalDto approvalDto,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		//查询银卡用户信息
 		UserManagerRequest userManagerRequest = new UserManagerRequest();
@@ -131,37 +136,39 @@ public class ApprovalManagerServiceImpl {
 		UserInfoDto userInfoDto  = resultT.getResults().get(0);
 		
 		//在所属大区下生成一个未使用过的code
-		String newCode = getUnUsedUserCode(userInfoDto.getUserArea());
-		String newAccount = FirstLetterUtil.getFirstLetter(userInfoDto.getUserName())+"_"+getUnUsedUserCode(userInfoDto.getUserArea());
+		String newCode = getUnUsedUserCode(userInfoDto.getUserArea(), request,  response);
+		String newAccount = FirstLetterUtil.getFirstLetter(userInfoDto.getUserName())+"_"+newCode;
 		userInfoDto.setUserCode(newCode);
 		userInfoDto.setUserAccount(newAccount);
-		
+		userInfoDto.setVipLevel(VipLevelEnum.GOLD_E);
 		userManagerRequest.setUserInfoDto(userInfoDto);
 		userManagerService.saveUserInfo(userManagerRequest);
 		
 		return userInfoDto;
 	}
 
-	private String getUnUsedUserCode(AreasEnum userArea) {
+	private String getUnUsedUserCode(AreasEnum userArea,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String newCode = userArea.name()+CodeUtil.getRandomFourDigits();
 		
 		//查询是否已经存在
 		DictionaryDto queryConditon  = new DictionaryDto();
 		queryConditon.setValueType(DictionaryValueTypeEnum.USERCODE);
 		queryConditon.setValue(newCode);
-		List<DictionaryDto> list = dictionaryManagerService.queryDictionaryList(queryConditon);
+		BaseResultT<DictionaryDto> resultDics = dictionaryManagerService.queryDictionaryList(queryConditon);
+		List<DictionaryDto> list = resultDics.getResults();
 		
 		//之前没用过，将新code插入字典，并返回使用
+		if(resultDics.getSuccessStatus()==YesOrNoEnum.NO){
+			throw new Exception(ConstantUtil.DIC_QUERY_ERROR);
+		}
 		if(CollectionUtils.isEmpty(list)){
-			
-			queryConditon.setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
-			queryConditon.setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+			UserDefaultFieldUtil.setDefaultUpdateFields(queryConditon, request, response);
 			dictionaryManagerService.saveDictionaryDto(queryConditon);
 			return newCode;
 			
 		}else{
 			
-			getUnUsedUserCode(userArea);
+			getUnUsedUserCode(userArea, request, response);
 		}
 		
 		return newCode;

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pulian.mall.dto.ApprovalTypeEnum;
+import com.pulian.mall.dto.DictionaryDto;
 import com.pulian.mall.dto.UserInfoDto;
 import com.pulian.mall.dto.VipLevelEnum;
 import com.pulian.mall.dto.YesOrNoEnum;
@@ -76,9 +77,9 @@ public class UserDefaultFieldUtil {
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
     	userManagerRequest.setParentId(user.getUserId());
     	userManagerRequest.setCreaterId(user.getUserId());
-    	userManagerRequest.setUpdaterId(user.getUserId());
+    	//userManagerRequest.setUpdaterId(user.getUserId());
     	userManagerRequest.setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
-    	userManagerRequest.setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+    	//userManagerRequest.setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     }
     
     //新增审批默认属性
@@ -86,9 +87,9 @@ public class UserDefaultFieldUtil {
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
     	approvalManagerRequest.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
     	approvalManagerRequest.getApprovalDto().setCreaterId(user.getUserId());
-    	approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
+    	//approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
-    	approvalManagerRequest.getApprovalDto().setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+    	//approvalManagerRequest.getApprovalDto().setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     }
     
     //update默认属性
@@ -97,4 +98,11 @@ public class UserDefaultFieldUtil {
     	approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
     }
+
+	public static void setDefaultUpdateFields(DictionaryDto queryConditon,HttpServletRequest request, HttpServletResponse response) {
+		UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
+		queryConditon.setCreaterId(user.getUserId());
+		queryConditon.setCreateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+		
+	}
 }

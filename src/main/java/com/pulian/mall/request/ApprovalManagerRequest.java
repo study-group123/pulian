@@ -25,7 +25,7 @@ public class ApprovalManagerRequest {
 	}
     
 	public int getApprovalId() {
-		return this.approvalDto.getApplicantId();
+		return this.approvalDto.getApprovalId();
 	}
 
 	public void setApprovalId(int approvalId) {

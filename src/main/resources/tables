@@ -55,7 +55,7 @@ CREATE TABLE `t_approval` (
 ---------------------------------------------------------------------------
 # 字典表
 CREATE TABLE `t_dic` (
-  `dic_id` INT(11) NOT NULL AUTO_INCREMENT  COMMENT '主键',
+  `dic_id` INT(11) unsigned NOT NULL AUTO_INCREMENT  COMMENT '主键',
   `value_type` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '值类型',
   `value` VARCHAR(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '值',
   `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
