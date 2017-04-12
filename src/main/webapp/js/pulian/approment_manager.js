@@ -48,9 +48,14 @@ function updateApprovalStatus(applicantId,approvalId,beforeThirtyAchievement,sta
 						datatype : "json",
 						contentType:"application/json",
 						success: function(data){
-						 if(data!="" && data.successStatus=="YES"){
-							    var userMessage = "新CODE:"+data.result.userCode+",新账号:"+data.result.userAccount;
-					            Modal.alert({msg:userMessage,title: '标题', btnok: '确定',btncl:'取消'});
+						 if(data!="" && data.successStatus=="YES" ){
+							 if(data.result!=""){
+								 var userMessage = "新CODE:"+data.result.userCode+",新账号:"+data.result.userAccount;
+						         Modal.alert({msg:userMessage,title: '标题', btnok: '确定',btncl:'取消'});
+							 }else{
+						         Modal.alert({msg:"审批成功",title: '标题', btnok: '确定',btncl:'取消'});
+							 }
+							    
 						 }else{
 						      Modal.alert({msg: "审批失败",title: '标题', btnok: '确定',btncl:'取消'});
 						 }
@@ -130,7 +135,9 @@ function searchAllData(){
 			"sClass" : "txt-center",
 			"mRender" : function(data, type, full) {// 格式化数据
 				var str = '';
-   				if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
+				if(full.approvalId!="null"){
+					str+='<a href="javascript:;" style="color:blue"  >applied</a>';
+				}else if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
    					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >apply</a>';
    				}else{
    					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.applicantId+"' ,'"+""+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';

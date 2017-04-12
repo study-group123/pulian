@@ -97,6 +97,7 @@ public class UserDefaultFieldUtil {
     	UserInfoDto user = (UserInfoDto) ServletUtil.getSession(request, response, ConstantUtil.USER_SESSION_KEY);
     	approvalManagerRequest.getApprovalDto().setUpdaterId(user.getUserId());
     	approvalManagerRequest.getApprovalDto().setUpdateTime(DateUtil.getCurrentDateByFormat(DateUtil.YYMMDDHHMMSS));
+    	approvalManagerRequest.getApprovalDto().setApproverId(user.getUserId());
     }
 
 	public static void setDefaultUpdateFields(DictionaryDto queryConditon,HttpServletRequest request, HttpServletResponse response) {
