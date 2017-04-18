@@ -137,7 +137,7 @@ function searchAllData(){
 				var str = '';
 				if(full.approvalId!="null"){
 					str+='<a href="javascript:;" style="color:blue"  >applied</a>';
-				}else if($('input[name="currentUserVipLevel"]').val() == 'SILVER'){
+				}else if($('input[name="currentUserVipLevel"]').val() == 'SILVER' || $('input[name="currentUserVipLevel"]').val() == 'GOLD'){
    					str+='<a href="javascript:;" style="color:blue" onclick="saveApprovalDto()" >apply</a>';
    				}else{
    					str+='<a href="javascript:;" style="color:blue" onclick="updateApprovalStatus('+"'"+full.applicantId+"' ,'"+""+full.approvalId+"' ,'"+ full.beforeThirtyAchievement+"' ,'YES'"+')" >yes</a>    ';

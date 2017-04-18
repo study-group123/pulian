@@ -26,6 +26,7 @@
     <result column="active_status" property="activeStatus" jdbcType="VARCHAR" /> 
     <result column="user_disable" property="userDisable" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />  
+    <result column="clan_code" property="clanCode" jdbcType="VARCHAR" />
     <result column="creater_id" property="createrId" jdbcType="INTEGER" />
     <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -37,7 +38,7 @@
   <sql id="queryColumns"> 
   	user_id, user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, user_email,
   	settlement_bank, bank_branch_name, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
-  	parent_id, creater_id, updater_id, create_time, update_time
+  	parent_id, clan_code,creater_id, updater_id, create_time, update_time
   </sql>
   
   
@@ -45,7 +46,7 @@
   <sql id="insertColumns">
   	 user_name, phone, user_code, account, pass_word, user_area, address, card_type,card_no, we_chat_no, user_email,
   	settlement_bank, bank_branch_name, bank_no, bank_serial_no, vip_level, frozen_status,active_status,user_disable,
-  	parent_id, creater_id, updater_id, create_time, update_time
+  	parent_id, clan_code,creater_id, updater_id, create_time, update_time
   </sql>
   
   <insert id="saveUserInfo"  parameterType="com.pulian.mall.dto.UserInfoDto" >
@@ -74,6 +75,7 @@
 		#{condition.activeStatus,jdbcType=VARCHAR},
 		#{condition.userDisable,jdbcType=VARCHAR},
 		#{condition.parentId,jdbcType=INTEGER},
+		#{condition.clanCode,jdbcType=VARCHAR},
 		#{condition.createrId,jdbcType=INTEGER},
 		#{condition.updaterId,jdbcType=INTEGER},
 		#{condition.createTime,jdbcType=TIMESTAMP},
@@ -141,6 +143,9 @@
 		</if>
 		<if test="condition.userDisable != null ">
 			AND t.user_disable = #{condition.userDisable,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.clanCode != null and condition.clanCode != ''">
+			AND t.clan_code  like  CONCAT('%',#{condition.clanCode,jdbcType=VARCHAR},'%')	
 		</if>
 	</sql>
 	

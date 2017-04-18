@@ -28,6 +28,7 @@ CREATE TABLE `t_user` (
   `active_status` VARCHAR(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '激活状态',
   `user_disable` VARCHAR(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '是否销户',
   `parent_id` INT(11) NOT NULL COMMENT '父id',
+  `clan_code` VARCHAR(512) CHARACTER SET utf8 DEFAULT NULL COMMENT '家族code',
   `create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
   `creater_id` INT(11) DEFAULT NULL COMMENT '创建人',
   `update_time` TIMESTAMP NULL DEFAULT NULL COMMENT '更新时间',

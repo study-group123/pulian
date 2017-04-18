@@ -76,6 +76,18 @@ public class ApprovalManagerControllerImpl {
 				ApprovalDto approvalDto =  new ApprovalDto();
 				approvalDto.setApplicantName(user.getUserName());
 				approvalDto.setApplicantPhone(user.getUserPhone());
+				approvalDto.setApprovalType(ApprovalTypeEnum.SILVER_TO_GOLD);
+				approvalDto.setBeforeThirtyAchievement(getBeforeThirtyAchievement());
+				List<ApprovalDto> results = new ArrayList<ApprovalDto>();
+				results.add(approvalDto);
+				baseResultT.setResults(results);
+				baseResultT.setPagination(new DataTablesPagination(0,1,1));
+			}
+			if(user.getVipLevel()==VipLevelEnum.GOLD && baseResultT.getResults().size()==0 && StringUtils.isEmpty(baseResultT.getMessage())){
+				ApprovalDto approvalDto =  new ApprovalDto();
+				approvalDto.setApplicantName(user.getUserName());
+				approvalDto.setApplicantPhone(user.getUserPhone());
+				approvalDto.setApprovalType(ApprovalTypeEnum.GOLD_TO_FAMILY);
 				approvalDto.setBeforeThirtyAchievement(getBeforeThirtyAchievement());
 				List<ApprovalDto> results = new ArrayList<ApprovalDto>();
 				results.add(approvalDto);

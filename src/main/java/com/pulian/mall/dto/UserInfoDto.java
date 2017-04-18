@@ -51,6 +51,8 @@ public class UserInfoDto extends BaseDto{
 	 private YesOrNoEnum userDisable;//是否销户
 	 
 	 private int parentId;//父id
+	 
+	 private String clanCode;//家族code
 	 ///////////////////////////上面是数据库属性///////////////////////////////////////
 	 
 	 private int remainingCardsNum;//剩余开卡数
@@ -291,6 +293,14 @@ public class UserInfoDto extends BaseDto{
 		this.userEmail = userEmail;
 	}
 
+	public String getClanCode() {
+		return clanCode;
+	}
+
+	public void setClanCode(String clanCode) {
+		this.clanCode = clanCode;
+	}
+    
 	 
 	 
 	 
